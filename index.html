@@ -1,57 +1,471 @@
 <!doctype html>
+
 <html lang="ja">
 <head>
   <meta charset="utf-8">
   <title>Hakumai studio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Hakumai studio is an independent app development studio based in Japan. We create gentle, practical mobile apps for iOS.">
   <style>
+    :root {
+      --bg: #fbf7ef;
+      --paper: #fffdf8;
+      --ink: #24211d;
+      --muted: #756f66;
+      --line: #e6ded2;
+      --accent: #8f7355;
+      --accent-dark: #5f4630;
+      --soft: #f1e8dc;
+      --green: #8aa084;
+      --shadow: 0 24px 60px rgba(75, 55, 35, 0.10);
+      --radius: 28px;
+    }
+    * {
+      box-sizing: border-box;
+    }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
-      max-width: 720px;
-      margin: 64px auto;
-      padding: 0 24px;
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, #fffaf0 0, transparent 34%),
+        radial-gradient(circle at top right, #efe3d1 0, transparent 30%),
+        var(--bg);
+      color: var(--ink);
       line-height: 1.8;
-      color: #222;
-      background: #fffdf8;
-    }
-    h1 {
-      font-size: 34px;
-      margin-bottom: 8px;
-    }
-    .sub {
-      color: #666;
-      margin-bottom: 32px;
-    }
-    section {
-      margin-top: 32px;
+      letter-spacing: 0.02em;
     }
     a {
-      color: #3366cc;
+      color: inherit;
+      text-decoration: none;
+    }
+    .wrap {
+      width: min(1080px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+    header {
+      padding: 28px 0;
+    }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+    .brand {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .hero {
+      padding: 80px 0 72px;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 253, 248, 0.7);
+      color: var(--accent-dark);
+      font-size: 13px;
+      font-weight: 600;
+    }
+    h1 {
+      margin: 24px 0 20px;
+      font-size: clamp(44px, 7vw, 86px);
+      line-height: 1.02;
+      letter-spacing: -0.06em;
+    }
+    .lead {
+      max-width: 620px;
+      color: var(--muted);
+      font-size: clamp(17px, 2vw, 20px);
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 14px;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .button.primary {
+      background: var(--ink);
+      color: #fff;
+      box-shadow: 0 12px 28px rgba(36, 33, 29, 0.18);
+    }
+    .button.secondary {
+      background: rgba(255, 253, 248, 0.72);
+      border: 1px solid var(--line);
+      color: var(--ink);
+    }
+    .button:hover {
+      transform: translateY(-2px);
+    }
+    .studio-card {
+      position: relative;
+      min-height: 420px;
+      border-radius: 36px;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.70), rgba(242,232,218,0.86)),
+        radial-gradient(circle at 30% 20%, #fff 0, transparent 34%);
+      border: 1px solid rgba(230, 222, 210, 0.9);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      padding: 34px;
+    }
+    .studio-card::before {
+      content: "";
+      position: absolute;
+      inset: auto -60px -90px auto;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: rgba(143, 115, 85, 0.16);
+    }
+    .studio-mark {
+      position: relative;
+      z-index: 1;
+      width: 108px;
+      height: 108px;
+      border-radius: 30px;
+      display: grid;
+      place-items: center;
+      background: var(--paper);
+      box-shadow: 0 16px 34px rgba(95, 70, 48, 0.12);
+      font-size: 44px;
+      font-weight: 800;
+      color: var(--accent-dark);
+    }
+    .studio-card p {
+      position: relative;
+      z-index: 1;
+      margin-top: 120px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    section {
+      padding: 72px 0;
+    }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+    h2 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.15;
+      letter-spacing: -0.04em;
+    }
+    .section-note {
+      max-width: 420px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .apps {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+    .app-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 360px;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 253, 248, 0.78);
+      box-shadow: 0 18px 45px rgba(75, 55, 35, 0.07);
+    }
+    .app-top {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+    .app-icon {
+      flex: 0 0 auto;
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      font-size: 28px;
+      background: var(--soft);
+      box-shadow: inset 0 0 0 1px rgba(143, 115, 85, 0.08);
+    }
+    .app-card:nth-child(2) .app-icon {
+      background: #e8efe5;
+    }
+    .app-name {
+      margin: 0;
+      font-size: 25px;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+    }
+    .app-tag {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .app-desc {
+      color: var(--muted);
+      margin: 0 0 22px;
+      font-size: 15px;
+    }
+    .features {
+      display: grid;
+      gap: 10px;
+      margin: 0 0 26px;
+      padding: 0;
+      list-style: none;
+      color: var(--ink);
+      font-size: 14px;
+    }
+    .features li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .features li::before {
+      content: "•";
+      color: var(--accent);
+      font-weight: 900;
+    }
+    .app-actions {
+      margin-top: auto;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .app-store {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 16px;
+      border-radius: 14px;
+      background: var(--ink);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .about {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 28px;
+      align-items: start;
+    }
+    .about-box {
+      padding: 28px;
+      border-radius: var(--radius);
+      background: rgba(255, 253, 248, 0.72);
+      border: 1px solid var(--line);
+    }
+    .about-box p {
+      margin: 0;
+      color: var(--muted);
+    }
+    .contact-card {
+      padding: 34px;
+      border-radius: 36px;
+      background: var(--ink);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+    .contact-card h2 {
+      color: #fff;
+    }
+    .contact-card p {
+      color: rgba(255, 255, 255, 0.72);
+    }
+    .contact-card a {
+      color: #fff;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+    footer {
+      padding: 38px 0 48px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    @media (max-width: 820px) {
+      .hero {
+        padding-top: 48px;
+      }
+      .hero-grid,
+      .apps,
+      .about {
+        grid-template-columns: 1fr;
+      }
+      .studio-card {
+        min-height: 280px;
+      }
+      .studio-card p {
+        margin-top: 72px;
+      }
+      .section-head {
+        display: block;
+      }
+      .section-note {
+        margin-top: 14px;
+      }
+      .nav-links {
+        display: none;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Hakumai studio</h1>
-  <p class="sub">Independent app development studio based in Japan.</p>
-
-  <section>
-    <p>
-      Hakumai studio develops mobile apps and digital tools for iOS and Android.
-    </p>
-  </section>
-
-  <section>
-    <h2>Apps</h2>
-    <ul>
-      <li>そっとノート</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Contact</h2>
-    <p>
-      <a href="mailto:contact@hakumai-studio.com">contact@hakumai-studio.com</a>
-    </p>
-  </section>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#">Hakumai studio</a>
+      <nav class="nav-links">
+        <a href="#apps">Apps</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="eyebrow">Independent app studio in Japan</span>
+          <h1>Small apps,<br>quietly useful.</h1>
+          <p class="lead">
+            Hakumai studio creates gentle, practical mobile apps for everyday records,
+            self-care, and personal habits.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#apps">View apps</a>
+            <a class="button secondary" href="mailto:contact@hakumai-studio.com">Contact</a>
+          </div>
+        </div>
+    <div class="studio-card" aria-label="Hakumai studio visual">
+      <div class="studio-mark">白</div>
+      <p>
+        Designed and developed with a calm, simple, and human-centered approach.
+      </p>
+    </div>
+  </div>
+</section>
+<section id="apps">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Apps</h2>
+      <p class="section-note">
+        iOS apps developed by Hakumai studio.
+      </p>
+    </div>
+    <div class="apps">
+      <article class="app-card">
+        <div class="app-top">
+          <div class="app-icon">🌿</div>
+          <div>
+            <h3 class="app-name">Sotto Note</h3>
+            <div class="app-tag">爪噛み・肌いじりの記録アプリ</div>
+          </div>
+        </div>
+        <p class="app-desc">
+          爪噛みや肌いじりを責めずに、そっと記録するためのアプリです。
+          気づいたタイミングや状態を残し、自分の変化を見つめやすくします。
+        </p>
+        <ul class="features">
+          <li>日々の状態をシンプルに記録</li>
+          <li>振り返りやすいログ管理</li>
+          <li>やさしい雰囲気のセルフケア設計</li>
+        </ul>
+        <div class="app-actions">
+          <a class="app-store" href="https://apps.apple.com/jp/app/sotto-note-%E7%88%AA%E5%99%9B%E3%81%BF-%E8%82%8C%E3%81%84%E3%81%98%E3%82%8A/id6760551009" target="_blank" rel="noopener">
+            View on App Store
+          </a>
+        </div>
+      </article>
+      <article class="app-card">
+        <div class="app-top">
+          <div class="app-icon">🌱</div>
+          <div>
+            <h3 class="app-name">Seedly</h3>
+            <div class="app-tag">男性妊活ログ</div>
+          </div>
+        </div>
+        <p class="app-desc">
+          男性側の妊活に関する日々の記録を、シンプルに残すためのアプリです。
+          体調や習慣を見える化し、無理なく振り返れるログ体験を目指しています。
+        </p>
+        <ul class="features">
+          <li>男性妊活に関する記録をまとめて管理</li>
+          <li>日々の習慣やコンディションを振り返り</li>
+          <li>落ち着いたデザインで続けやすい</li>
+        </ul>
+        <div class="app-actions">
+          <a class="app-store" href="https://apps.apple.com/jp/app/seedly-%E7%94%B7%E6%80%A7%E5%A6%8A%E6%B4%BB%E3%83%AD%E3%82%B0/id6760891530" target="_blank" rel="noopener">
+            View on App Store
+          </a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+<section id="about">
+  <div class="wrap about">
+    <div>
+      <h2>About</h2>
+    </div>
+    <div class="about-box">
+      <p>
+        Hakumai studio is an independent app development studio based in Japan.
+        We design and develop mobile apps and digital tools for iOS and Android.
+        Our focus is on simple interfaces, gentle experiences, and practical tools
+        that can be used quietly in everyday life.
+      </p>
+    </div>
+  </div>
+</section>
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-card">
+      <h2>Contact</h2>
+      <p>
+        For support, business inquiries, or questions about our apps, please contact us by email.
+      </p>
+      <p>
+        <a href="mailto:contact@hakumai-studio.com">contact@hakumai-studio.com</a>
+      </p>
+    </div>
+  </div>
+</section>
+  </main>
+  <footer>
+    <div class="wrap">
+      © 2026 Hakumai studio. All rights reserved.
+    </div>
+  </footer>
 </body>
 </html>
