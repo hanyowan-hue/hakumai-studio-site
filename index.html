@@ -267,21 +267,14 @@
       border-color: rgba(20, 54, 40, 0.42);
     }
 
-    .letter-icon {
-      width: 74px;
-      height: 74px;
-      display: grid;
-      place-items: center;
-      border-radius: 8px;
-      color: #fff;
-      background: var(--forest);
-      font-size: 32px;
-      font-weight: 900;
-      letter-spacing: 0;
+    .app-visual img.app-icon {
+      width: 92px;
+      height: 92px;
+      object-fit: cover;
+      filter: drop-shadow(0 12px 20px rgba(19, 38, 28, 0.22));
     }
 
-    .letter-icon.seedly { background: #617d45; }
-    .letter-icon.sotto { background: #665348; }
+    .app-visual img.app-icon.sotto { border-radius: 22.4%; }
 
     .status {
       display: inline-flex;
@@ -525,7 +518,7 @@
 
           <article class="app-card">
             <div class="app-visual">
-              <span class="letter-icon sotto" aria-hidden="true">S</span>
+              <img class="app-icon sotto" src="assets/sottonote/icon.png" alt="Sotto Note app icon">
             </div>
             <span class="status">Available on App Store</span>
             <h3>Sotto Note</h3>
@@ -540,7 +533,7 @@
 
           <article class="app-card">
             <div class="app-visual">
-              <span class="letter-icon seedly" aria-hidden="true">Se</span>
+              <img class="app-icon" src="assets/seedly/icon.png" alt="Seedly app icon">
             </div>
             <span class="status">Available on App Store</span>
             <h3>Seedly</h3>
