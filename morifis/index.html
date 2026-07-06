@@ -279,6 +279,7 @@
     .step-body p { margin: 0; color: var(--muted); font-size: 15px; }
 
     /* ---------- Screens gallery ---------- */
+    .screens { background: var(--bg-2); border-block: 1px solid var(--line); }
     .shots {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -422,6 +423,7 @@
         <a class="navmid" href="#opening">Opening</a>
         <a class="navmid" href="#howto">Play</a>
         <a class="navmid" href="#game">Game</a>
+        <a class="navmid" href="#worlds">Worlds</a>
         <a class="navmid" href="#screens">Screens</a>
         <a class="home" href="/">← Studio</a>
       </nav>
@@ -493,27 +495,27 @@
             <div class="step-body">
               <span class="step-num serif">01</span>
               <h3>森をひらく</h3>
-              <p>はじまりは、閉じた森。マナを使って森をひらくと、その跡が敵の通る道になる。どこをひらくかが、そのまま戦いの地形になります。</p>
+              <p>はじまりは、閉じた森。マナを使って森をひらくと、その跡が敵の通る道になる。肥えた土をひらくほど、こけむしや花粉虫——森の仲間も目覚めます。</p>
             </div>
           </article>
           <article class="step reverse">
             <div class="step-media">
-              <img src="../assets/morifis/gp-battle.jpg" alt="ひらいた道に森の仲間を配し、迫る敵を迎え撃つ戦闘画面" loading="lazy">
+              <img src="../assets/morifis/gp-place.jpg" alt="ひらいた道に、こもれび石を置く場所を選んでいる画面" loading="lazy">
             </div>
             <div class="step-body">
               <span class="step-num serif">02</span>
-              <h3>仲間が目覚める</h3>
-              <p>肥えた土をひらくほど、こけむしや花粉虫——森の仲間が目覚める。はなとねっこも咲かせて、迫る侵入者を迎え撃ちます。</p>
+              <h3>こもれび石を、隠す</h3>
+              <p>ひらいた道のどこかに「こもれび石」を置く。入口から遠く、見つかりにくい場所に隠すほど、敵に気づかれにくく、守りやすくなります。</p>
             </div>
           </article>
           <article class="step">
             <div class="step-media">
-              <img src="../assets/morifis/gp-defend.jpg" alt="こもれび石を守りぬき、敵が残りわずかになった場面" loading="lazy">
+              <img src="../assets/morifis/gp-battle.jpg" alt="迫る敵を、森の仲間とはな・ねっこで迎え撃つ戦闘画面" loading="lazy">
             </div>
             <div class="step-body">
               <span class="step-num serif">03</span>
-              <h3>こもれび石を守る</h3>
-              <p>敵の狙いは「こもれび石」。奪って入口へ持ち帰られたら負け。急かすタイマーはなく、一手ずつ考えて、敵をすべて森へ還せば勝ちです。</p>
+              <h3>迎え撃つ</h3>
+              <p>敵は入口から侵入し、こもれび石を狙う。はな・ねっこと目覚めた仲間で迎え撃ち、石を持ち帰られる前に、すべて森へ還せば勝ちです。</p>
             </div>
           </article>
         </div>
@@ -550,6 +552,36 @@
             <h3>集めて、五つの森へ <span>Journey</span></h3>
             <p>出会った仲間は図鑑に。ひだまりの森から霜のかがやく奥地まで、表情のちがう五つの森をめぐる。</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Worlds ===== -->
+    <section id="worlds">
+      <div class="wrap">
+        <span class="section-eyebrow">Five forests</span>
+        <h2 class="serif">森ごとに、風がちがう。</h2>
+        <p class="section-lead">
+          陽だまりの森から、水辺、こかげの奥、雪の森まで。ワールドごとに地形も、
+          咲く草木も、攻めてくる相手も変わります。
+        </p>
+        <div class="shots">
+          <figure class="shot">
+            <img src="../assets/morifis/biome-w1.jpg" alt="ひだまりの森のバトル画面。緑あふれる明るい森" loading="lazy">
+            <figcaption><b>ひだまりの森 · World 1</b>陽だまりの、はじまりの森</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="../assets/morifis/biome-w2.jpg" alt="しずくの水辺のバトル画面。池とせせらぎのある森" loading="lazy">
+            <figcaption><b>しずくの水辺 · World 2</b>せせらぎと、水辺の森</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="../assets/morifis/biome-w3.jpg" alt="こかげの深森のバトル画面。ほのかに光る幻想的な夜の森" loading="lazy">
+            <figcaption><b>こかげの深森 · World 3</b>光ほのかな、こかげの奥</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="../assets/morifis/biome-w5.jpg" alt="白銀の森のバトル画面。雪と氷におおわれた森" loading="lazy">
+            <figcaption><b>白銀の森 · World 5</b>雪と氷に、しずまる森</figcaption>
+          </figure>
         </div>
       </div>
     </section>
