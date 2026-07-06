@@ -248,14 +248,44 @@
       font-size: 14px;
     }
 
-    /* ---------- Story stills ---------- */
-    .story-grid {
+    /* ---------- How to play (steps) ---------- */
+    .steps { display: grid; gap: 30px; margin-top: 48px; }
+    .step {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 34px;
+      align-items: center;
+    }
+    .step.reverse .step-media { order: 2; }
+    .step-media {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--line-strong);
+      box-shadow: var(--shadow);
+      background: #000;
+    }
+    .step-media img {
+      display: block; width: 100%;
+      aspect-ratio: 1280 / 589;
+      object-fit: cover;
+    }
+    .step-num {
+      display: block;
+      font-size: 42px; line-height: 1;
+      color: var(--forest);
+      margin-bottom: 12px;
+    }
+    .step-body h3 { margin: 0 0 10px; font-size: 24px; font-weight: 800; letter-spacing: 0.01em; }
+    .step-body p { margin: 0; color: var(--muted); font-size: 15px; }
+
+    /* ---------- Screens gallery ---------- */
+    .shots {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 18px;
       margin-top: 46px;
     }
-    figure.still {
+    figure.shot {
       margin: 0;
       border-radius: var(--radius);
       overflow: hidden;
@@ -263,21 +293,22 @@
       background: var(--panel);
       position: relative;
     }
-    figure.still img {
-      display: block; width: 100%; aspect-ratio: 16 / 9;
+    figure.shot img {
+      display: block; width: 100%;
+      aspect-ratio: 1280 / 589;
       object-fit: cover;
       transition: transform .6s ease;
     }
-    figure.still:hover img { transform: scale(1.04); }
-    figure.still figcaption {
+    figure.shot:hover img { transform: scale(1.03); }
+    figure.shot figcaption {
       position: absolute; left: 0; right: 0; bottom: 0;
-      padding: 40px 18px 16px;
-      background: linear-gradient(180deg, transparent, rgba(6, 12, 8, 0.9));
+      padding: 44px 18px 16px;
+      background: linear-gradient(180deg, transparent, rgba(6, 12, 8, 0.92));
       font-size: 13.5px; font-weight: 700;
       color: rgba(255, 255, 255, 0.94);
       letter-spacing: 0.01em;
     }
-    figure.still figcaption b {
+    figure.shot figcaption b {
       display: block;
       color: var(--moss);
       font-size: 11px; font-weight: 800;
@@ -359,7 +390,10 @@
       .nav-links { gap: 16px; }
       .nav-links .navmid { display: none; }
       section { padding: 78px 0; }
-      .story-grid, .features { grid-template-columns: 1fr; }
+      .shots, .features { grid-template-columns: 1fr; }
+      .step { grid-template-columns: 1fr; gap: 18px; }
+      .step.reverse .step-media { order: 0; }
+      .step-num { font-size: 34px; margin-bottom: 8px; }
       .subtitle { letter-spacing: 0.36em; }
       .hero .wrap { padding: 132px 0 88px; }
       .eyebrow { letter-spacing: 0.1em; font-size: 10.5px; max-width: 100%; overflow-wrap: anywhere; }
@@ -386,8 +420,9 @@
       </a>
       <nav class="nav-links" aria-label="Main navigation">
         <a class="navmid" href="#opening">Opening</a>
-        <a class="navmid" href="#story">Story</a>
+        <a class="navmid" href="#howto">Play</a>
         <a class="navmid" href="#game">Game</a>
+        <a class="navmid" href="#screens">Screens</a>
         <a class="home" href="/">← Studio</a>
       </nav>
     </div>
@@ -407,8 +442,8 @@
         <div class="rule"></div>
         <p class="lead">
           しずかな森に、影が近づく。<br class="brk">
-          小さな守り手たちと、いきものと。<br class="brk">
-          森の「よりしろ」を守りぬく、やさしい防衛ストラテジー。
+          森をひらき、小さな仲間とともに。<br class="brk">
+          森の「こもれび石」を守りぬく、やさしい防衛ストラテジー。
         </p>
         <div class="hero-actions">
           <a class="button primary" href="#opening" id="watch">
@@ -441,31 +476,46 @@
       </div>
     </section>
 
-    <!-- ===== Story stills ===== -->
-    <section id="story">
+    <!-- ===== How to play ===== -->
+    <section id="howto">
       <div class="wrap">
-        <span class="section-eyebrow">Story</span>
-        <h2 class="serif">森が、守るものを選ぶまで</h2>
+        <span class="section-eyebrow">How to play</span>
+        <h2 class="serif">森をひらいて、守る。</h2>
         <p class="section-lead">
-          おだやかな王国のかたわらで、森はいきものたちとともに息づいていた。
+          閉じた森をマナでひらき、道をつくる。こもれび石を守りぬき、敵を森へ還す。
+          ——ルールはシンプル。でも「どこをひらくか」で、戦いはまるで変わります。
         </p>
-        <div class="story-grid">
-          <figure class="still">
-            <img src="../assets/morifis/still-1.jpg" alt="平和な王国と、そのそばに広がる森">
-            <figcaption><b>Prologue</b>おだやかな王国と、そのそばの森</figcaption>
-          </figure>
-          <figure class="still">
-            <img src="../assets/morifis/still-2.jpg" alt="旗をかかげ、森の外へ向かう守り手たち">
-            <figcaption><b>The march</b>旗をかかげ、森の守り手が動きだす</figcaption>
-          </figure>
-          <figure class="still">
-            <img src="../assets/morifis/still-3.jpg" alt="よりしろの結晶を囲む森のいきものたち">
-            <figcaption><b>Yorishiro</b>「よりしろ」を囲む、森のいきものたち</figcaption>
-          </figure>
-          <figure class="still">
-            <img src="../assets/morifis/still-4.jpg" alt="木もれ日の森を進む守り手たちのシルエット">
-            <figcaption><b>Guardians</b>木もれ日の森を、守り手が往く</figcaption>
-          </figure>
+        <div class="steps">
+          <article class="step">
+            <div class="step-media">
+              <img src="../assets/morifis/gp-start.jpg" alt="閉じた森とマナ。ステージ開始の画面" loading="lazy">
+            </div>
+            <div class="step-body">
+              <span class="step-num serif">01</span>
+              <h3>森をひらく</h3>
+              <p>はじまりは、閉じた森。マナを使って森をひらくと、その跡が敵の通る道になる。どこをひらくかが、そのまま戦いの地形になります。</p>
+            </div>
+          </article>
+          <article class="step reverse">
+            <div class="step-media">
+              <img src="../assets/morifis/gp-battle.jpg" alt="ひらいた道に森の仲間を配し、迫る敵を迎え撃つ戦闘画面" loading="lazy">
+            </div>
+            <div class="step-body">
+              <span class="step-num serif">02</span>
+              <h3>仲間が目覚める</h3>
+              <p>肥えた土をひらくほど、こけむしや花粉虫——森の仲間が目覚める。はなとねっこも咲かせて、迫る侵入者を迎え撃ちます。</p>
+            </div>
+          </article>
+          <article class="step">
+            <div class="step-media">
+              <img src="../assets/morifis/gp-defend.jpg" alt="こもれび石を守りぬき、敵が残りわずかになった場面" loading="lazy">
+            </div>
+            <div class="step-body">
+              <span class="step-num serif">03</span>
+              <h3>こもれび石を守る</h3>
+              <p>敵の狙いは「こもれび石」。奪って入口へ持ち帰られたら負け。急かすタイマーはなく、一手ずつ考えて、敵をすべて森へ還せば勝ちです。</p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -476,30 +526,59 @@
         <span class="section-eyebrow">The game</span>
         <h2 class="serif">やさしく、じっくり。<br>森を守るストラテジー。</h2>
         <p class="section-lead">
-          道をたどって迫る影から、森のいのち「よりしろ」を守りぬく。
-          急かすタイマーはない。一手ずつ、落ち着いて考えるゲームです。
+          マナで森をひらき、こもれび石を守る。リアルタイムに介入しながら、
+          急かされずに一手ずつ考える——そんな防衛ストラテジーです。
         </p>
         <div class="features">
           <div class="feature">
-            <div class="glyph" aria-hidden="true">🌳</div>
-            <h3>森を守る <span>Defense</span></h3>
-            <p>道を通って近づく影に合わせて守り手を配置し、森の「よりしろ」を守りぬく。地形を読むほど、守りは強くなる。</p>
+            <div class="glyph" aria-hidden="true">🌱</div>
+            <h3>森をひらく <span>Open</span></h3>
+            <p>マナで閉じた森をひらいて道をつくる。ひらいた場所が、そのまま敵の通り道に。地形づくりから戦いは始まる。</p>
           </div>
           <div class="feature">
-            <div class="glyph" aria-hidden="true">🦌</div>
-            <h3>小さな守り手たち <span>Guardians</span></h3>
-            <p>個性ゆたかな守り手と、森のいきものたち。役割を組み合わせて、それぞれの森に合った布陣を整えていく。</p>
+            <div class="glyph" aria-hidden="true">🍄</div>
+            <h3>仲間が目覚める <span>Awaken</span></h3>
+            <p>肥えた土をひらくと森の仲間が目覚める。はな・ねっこと組み合わせ、置きどころで守りの形を変えていく。</p>
           </div>
           <div class="feature">
             <div class="glyph" aria-hidden="true">💠</div>
             <h3>考える楽しさ <span>Tactics</span></h3>
-            <p>使えるマナは決められた予算だけ。リアルタイムに急かされない、パズルのように落ち着いた戦略性。</p>
+            <p>使えるマナは決められた予算だけ。ひと手で流れが変わる、パズルのように落ち着いた戦略性。</p>
           </div>
           <div class="feature">
             <div class="glyph" aria-hidden="true">🍃</div>
-            <h3>五つの森をめぐる <span>Journey</span></h3>
-            <p>ひだまりの森から、霜のかがやく奥地まで。表情のちがう五つの森を、たくさんのステージでめぐる旅。</p>
+            <h3>集めて、五つの森へ <span>Journey</span></h3>
+            <p>出会った仲間は図鑑に。ひだまりの森から霜のかがやく奥地まで、表情のちがう五つの森をめぐる。</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Screens ===== -->
+    <section id="screens" class="screens">
+      <div class="wrap">
+        <span class="section-eyebrow">Screens</span>
+        <h2 class="serif">画面をのぞく</h2>
+        <p class="section-lead">
+          ワールドを選び、挑む前に相手を読み、出会った仲間を図鑑に集める。
+        </p>
+        <div class="shots">
+          <figure class="shot">
+            <img src="../assets/morifis/ui-worlds.jpg" alt="五つのワールドを選ぶワールド選択画面" loading="lazy">
+            <figcaption><b>World select</b>五つの森から、次の舞台を選ぶ</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="../assets/morifis/ui-stages.jpg" alt="星3条件と攻めてくる相手が並ぶステージ選択画面" loading="lazy">
+            <figcaption><b>Stage select</b>攻めてくる相手と★条件を読んで、挑む</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="../assets/morifis/ui-zukan.jpg" alt="仲間の進化ラインを集める図鑑画面" loading="lazy">
+            <figcaption><b>Encyclopedia</b>出会った仲間と、その進化を図鑑に</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="../assets/morifis/gp-combat.jpg" alt="森伐りたちと接近戦になっている戦闘画面" loading="lazy">
+            <figcaption><b>Battle</b>ひらいた道の上で、迫る侵入者と対峙する</figcaption>
+          </figure>
         </div>
       </div>
     </section>
