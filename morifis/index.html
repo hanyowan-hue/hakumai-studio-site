@@ -9,6 +9,14 @@
   <meta property="og:description" content="しずかな森を守る、やさしい防衛ストラテジー。iOS / Android 近日配信。">
   <meta property="og:image" content="https://hakumai-studio.com/assets/morifis/intro-poster.jpg">
   <meta property="og:type" content="website">
+  <link rel="canonical" href="https://hakumai-studio.com/morifis/">
+  <meta property="og:url" content="https://hakumai-studio.com/morifis/">
+  <meta property="og:site_name" content="Hakumai studio">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Morifis / 森守り">
+  <meta name="twitter:description" content="しずかな森を守る、やさしい防衛ストラテジー。iOS / Android 近日配信。">
+  <meta name="twitter:image" content="https://hakumai-studio.com/assets/morifis/intro-poster.jpg">
   <meta name="theme-color" content="#0d1812">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%F0%9F%8C%BF%3C/text%3E%3C/svg%3E">
   <style>
@@ -349,6 +357,77 @@
     .feature h3 span { color: var(--muted-2); font-weight: 700; font-size: 12.5px; margin-left: 8px; letter-spacing: 0.06em; }
     .feature p { margin: 0; color: var(--muted); font-size: 14.5px; }
 
+    /* ---------- Forest friends ---------- */
+    .friends-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 46px;
+    }
+    .friend-card {
+      padding: 26px 20px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      text-align: center;
+    }
+    .friend-card img {
+      display: block;
+      width: 72%;
+      max-width: 180px;
+      margin: 0 auto 18px;
+      filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.35));
+      transition: transform .4s ease;
+    }
+    .friend-card:hover img { transform: translateY(-4px); }
+    .friend-tag {
+      display: block;
+      color: var(--moss);
+      font-size: 11px; font-weight: 800;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .friend-name {
+      margin: 0 0 8px;
+      font-size: 18px; font-weight: 800;
+      letter-spacing: 0.01em;
+    }
+    .friend-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13.5px;
+      line-height: 1.8;
+    }
+    .friends-note {
+      margin: 34px auto 0;
+      color: var(--muted-2);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    /* ---------- Product info ---------- */
+    .spec-table {
+      max-width: 720px;
+      margin: 40px auto 0;
+      text-align: left;
+    }
+    .spec-row {
+      display: flex;
+      gap: 24px;
+      padding: 16px 0;
+      border-top: 1px solid var(--line);
+    }
+    .spec-row:last-child { border-bottom: 1px solid var(--line); }
+    .spec-term {
+      flex: 0 0 180px;
+      color: var(--muted-2);
+      font-size: 13px; font-weight: 800;
+    }
+    .spec-value {
+      color: var(--ink);
+      font-size: 15px;
+    }
+
     /* ---------- Coming soon / CTA ---------- */
     .cta { text-align: center; }
     .cta .badges {
@@ -392,6 +471,7 @@
       .nav-links .navmid { display: none; }
       section { padding: 78px 0; }
       .shots, .features { grid-template-columns: 1fr; }
+      .friends-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .step { grid-template-columns: 1fr; gap: 18px; }
       .step.reverse .step-media { order: 0; }
       .step-num { font-size: 34px; margin-bottom: 8px; }
@@ -403,14 +483,35 @@
       .hero-actions { flex-direction: column; align-items: stretch; max-width: 100%; }
       .hero-actions .button { width: 100%; }
       .feature { padding: 26px 22px; min-height: 0; }
+      .spec-row { flex-direction: column; gap: 6px; }
+      .spec-term { flex-basis: auto; }
     }
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .scroll-hint { animation: none; }
       figure.still img { transition: none; }
+      .friend-card img { transition: none; }
     }
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "Morifis",
+    "alternateName": ["森守り", "もりふぃす"],
+    "description": "しずかな森を守る、やさしい防衛ストラテジー。マナで森をひらき、目覚めた仲間とともに「こもれび石」を守りぬく。",
+    "genre": "防衛ストラテジー",
+    "gamePlatform": ["iOS", "Android"],
+    "operatingSystem": ["iOS", "Android"],
+    "applicationCategory": "GameApplication",
+    "inLanguage": ["ja", "en", "zh-Hant"],
+    "url": "https://hakumai-studio.com/morifis/",
+    "image": "https://hakumai-studio.com/assets/morifis/intro-poster.jpg",
+    "author": {"@type": "Organization", "name": "Hakumai studio"},
+    "publisher": {"@type": "Organization", "name": "Hakumai studio"}
+  }
+  </script>
 </head>
 <body>
   <header>
@@ -423,6 +524,7 @@
         <a class="navmid" href="#opening">Opening</a>
         <a class="navmid" href="#howto">Play</a>
         <a class="navmid" href="#game">Game</a>
+        <a class="navmid" href="#friends">Friends</a>
         <a class="navmid" href="#worlds">Worlds</a>
         <a class="navmid" href="#screens">Screens</a>
         <a class="home" href="/">← Studio</a>
@@ -556,6 +658,56 @@
       </div>
     </section>
 
+    <!-- ===== Forest friends ===== -->
+    <section id="friends">
+      <div class="wrap">
+        <span class="section-eyebrow">Forest friends</span>
+        <h2 class="serif">目覚める、森の仲間たち。</h2>
+        <p class="section-lead">
+          肥えた土をひらくと、森の仲間「いぶき」が目覚める。出会ったいぶきは図鑑に集まり、育つとすがたを変えていく。ここでは、ほんの一部だけ。
+        </p>
+        <div class="friends-grid">
+          <div class="friend-card">
+            <img src="../assets/morifis/friends/mokoke.png" alt="モコケ — こけのいぶき" loading="lazy" width="512" height="512">
+            <span class="friend-tag">こけのいぶき</span>
+            <h3 class="friend-name">モコケ</h3>
+            <p>肥えた土からいちばんに目覚める、もこもこのこけのこ。せっせと養分をはこぶ働きもの。</p>
+          </div>
+          <div class="friend-card">
+            <img src="../assets/morifis/friends/hotari.png" alt="ホタリ — はねむしのいぶき" loading="lazy" width="512" height="512">
+            <span class="friend-tag">はねむしのいぶき</span>
+            <h3 class="friend-name">ホタリ</h3>
+            <p>ひらいた道を、ふわりふわり。森でいちばんちいさな羽。</p>
+          </div>
+          <div class="friend-card">
+            <img src="../assets/morifis/friends/leafin.png" alt="リーフィン — ひだまりの守り手" loading="lazy" width="512" height="512">
+            <span class="friend-tag">ひだまりの守り手</span>
+            <h3 class="friend-name">リーフィン</h3>
+            <p>葉をまとった、ひだまりのけもの。育つほど、緑はあざやかに。</p>
+          </div>
+          <div class="friend-card">
+            <img src="../assets/morifis/friends/hasunoko.png" alt="ハスノコ — 水辺の守り手" loading="lazy" width="512" height="512">
+            <span class="friend-tag">水辺の守り手</span>
+            <h3 class="friend-name">ハスノコ</h3>
+            <p>葉っぱの上にぽつん。しずくの水辺を見守るこども。</p>
+          </div>
+          <div class="friend-card">
+            <img src="../assets/morifis/friends/pikari.png" alt="ピカリ — 月明かりのきのこ" loading="lazy" width="512" height="512">
+            <span class="friend-tag">月明かりのきのこ</span>
+            <h3 class="friend-name">ピカリ</h3>
+            <p>夜の森に、ぽっ、ぽっ。ほのかな月明かりの道しるべ。</p>
+          </div>
+          <div class="friend-card">
+            <img src="../assets/morifis/friends/yukipon.png" alt="ユキポン — しらゆきの精" loading="lazy" width="512" height="512">
+            <span class="friend-tag">しらゆきの精</span>
+            <h3 class="friend-name">ユキポン</h3>
+            <p>白銀の森にまう、こおりのしずく。きらきら、結晶をまとう。</p>
+          </div>
+        </div>
+        <p class="friends-note">——出会えるいぶきは30種類以上。育てると、すがたも変わる。</p>
+      </div>
+    </section>
+
     <!-- ===== Worlds ===== -->
     <section id="worlds">
       <div class="wrap">
@@ -611,6 +763,44 @@
             <img src="../assets/morifis/gp-combat.jpg" alt="森伐りたちと接近戦になっている戦闘画面" loading="lazy">
             <figcaption><b>Battle</b>ひらいた道の上で、迫る侵入者と対峙する</figcaption>
           </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Product info ===== -->
+    <section id="info">
+      <div class="wrap center">
+        <span class="section-eyebrow">Product info</span>
+        <h2 class="serif">製品情報</h2>
+        <div class="spec-table">
+          <div class="spec-row">
+            <span class="spec-term">タイトル</span>
+            <span class="spec-value">Morifis（森守り／もりふぃす）</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-term">ジャンル</span>
+            <span class="spec-value">森を守る、やさしい防衛ストラテジー</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-term">対応プラットフォーム</span>
+            <span class="spec-value">iOS / Android</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-term">価格</span>
+            <span class="spec-value">基本プレイ無料（一部アプリ内課金あり）</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-term">対応言語</span>
+            <span class="spec-value">日本語・English・繁體中文</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-term">開発</span>
+            <span class="spec-value">Hakumai studio</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-term">配信時期</span>
+            <span class="spec-value">近日配信予定</span>
+          </div>
         </div>
       </div>
     </section>
