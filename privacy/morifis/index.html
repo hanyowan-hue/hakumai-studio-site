@@ -125,7 +125,7 @@
     <h1>Morifis Privacy Policy</h1>
     <p class="lead">This page explains how Morifis / 森守り handles player data.</p>
     <div class="meta">
-      <span>Effective date: June 30, 2026</span>
+      <span>Effective date: July 26, 2026</span>
       <span>App: Morifis / 森守り</span>
     </div>
 
@@ -133,6 +133,8 @@
       <a href="#ja">日本語</a>
       <a href="#en">English</a>
       <a href="#zh-hant">繁體中文</a>
+      <a href="#zh-hans">简体中文</a>
+      <a href="#ko">한국어</a>
     </nav>
 
     <section id="ja" class="section" lang="ja">
@@ -145,9 +147,12 @@
         <li>Game Center または Google Play Games Services で利用されるランキング・実績情報</li>
         <li>iCloud または Google Play Games Saved Games によるセーブデータ保護・復元に必要な情報</li>
         <li>アプリ内購入に関する商品ID、購入結果、取引ID、付与済み状態などの情報。決済情報そのものは Apple または Google が処理します</li>
-        <li>リワード広告を表示する場合、広告の読み込み・表示・報酬付与に必要な情報</li>
+        <li>リワード広告を表示する場合、広告の読み込み・表示・報酬付与に必要な情報。広告配信は Unity LevelPlay（ironSource）のメディエーションを通じて行われ、Unity Ads などの広告ネットワークが利用されます</li>
         <li>紹介機能を利用する場合、紹介コード、匿名ユーザーID、報酬付与状態などの情報</li>
         <li>問い合わせ・フィードバックを送る場合、入力内容、アプリの状態、端末情報、アプリバージョンなど、調査に必要な情報</li>
+        <li>アカウント連携機能を利用する場合、匿名ユーザーID、メールアドレス、認証トークンなど、本人確認とアカウント復元に必要な情報（Firebase Authentication）</li>
+        <li>サーバー保存機能を利用する場合、ゲーム進行状況、ユーザーID、インストール識別子など、セーブデータの保存・同期・復元に必要な情報（Firebase）</li>
+        <li>アプリがランダムに生成するインストール識別子（広告識別子ではありません）。クラウドセーブの同期元の判別、利用状況の集計、不具合・問い合わせの調査に利用します</li>
         <li>クラッシュや不具合調査に必要な診断情報。ただし、Unity Cloud Diagnostics は本ポリシー作成時点ではプロジェクト設定上無効です</li>
       </ul>
 
@@ -160,20 +165,63 @@
         <li>不正利用の防止、問い合わせ対応、不具合調査、サービス改善</li>
       </ul>
 
+      <h3>事業者情報（データ管理者）</h3>
+      <p>本アプリの提供事業者およびデータ管理者は次のとおりです。</p>
+      <ul>
+        <li>事業者名：Hakumai Studio</li>
+        <li>所在地：〒103-0026 東京都中央区日本橋兜町 17-2 兜町第 6 葉山ビル 4F</li>
+        <li>連絡先：<a href="mailto:support@hakumai-studio.com">support@hakumai-studio.com</a></li>
+      </ul>
+
+      <h3>処理の法的根拠（EEA・英国のプレイヤー向け）</h3>
+      <p>EEA および英国にお住まいの方について、当社は以下の法的根拠に基づいて情報を処理します。</p>
+      <ul>
+        <li>ゲーム進行の保存・復元・同期、アプリ内購入の処理、問い合わせ対応：サービス提供のための契約の履行、および円滑な運営という正当な利益に基づきます</li>
+        <li>リワード広告の表示：あなたの同意に基づきます。同意はアプリ内の設定画面からいつでも撤回できます。撤回しても、それまでの処理の適法性には影響しません</li>
+        <li>法令の遵守が必要な場合：法的義務の履行に基づきます</li>
+      </ul>
+
       <h3>第三者サービス</h3>
       <p>本アプリは、以下の第三者サービスを利用する場合があります。各サービスで処理される情報は、それぞれのプライバシーポリシーにも従います。</p>
       <ul>
         <li>Apple Game Center、App Store、iCloud</li>
         <li>Google Play Games Services、Google Play Billing、Google Play Saved Games</li>
         <li>Unity Ads、Unity In-App Purchasing</li>
+        <li>Unity LevelPlay（ironSource）および同メディエーション経由の広告ネットワーク</li>
+        <li>Google Firebase（Authentication / データベース）</li>
         <li>プレイヤーが共有機能で選択したSNS・メッセージアプリ等</li>
       </ul>
 
       <h3>共有機能について</h3>
       <p>本アプリは、プレイ結果などの共有画像や共有文を端末上で作成することがあります。実際の投稿・送信は、プレイヤーが選んだ外部アプリまたはサービス上で行われます。</p>
 
+      <h3>データの越境移転</h3>
+      <p>本アプリが利用する一部の第三者サービス（Google Firebase、Unity、Unity LevelPlay／ironSource など）は、米国をはじめとする EEA 域外で情報を処理する場合があります。こうした移転は、標準契約条項（SCC）などの適切な保護措置、または各サービスのデータ処理条件に基づいて行われます。</p>
+
+      <h3>データの保存期間</h3>
+      <ul>
+        <li>クラウド保護・サーバー保存を利用した場合のセーブデータ：アカウントが有効な間、または削除のご依頼があるまで保存します</li>
+        <li>問い合わせ・フィードバックの内容：対応および記録に必要な期間、保存します</li>
+        <li>広告の表示に伴い広告ネットワークが処理する情報：各ネットワークのポリシーに従います</li>
+        <li>端末内に保存されるデータ：アプリを削除するまで端末内に残ります</li>
+      </ul>
+      <p>不要になった情報は、合理的な期間内に削除または匿名化します。</p>
+
       <h3>データの保存と削除</h3>
-      <p>プレイデータは端末内に保存されます。クラウド保護機能を利用した場合は、iCloud または Google Play Games Saved Games に保存される場合があります。アプリを削除すると端末内のデータは削除される場合がありますが、クラウド側やストア側に保存されたデータは各サービスの仕組みに従います。</p>
+      <p>プレイデータは端末内に保存されます。クラウド保護機能を利用した場合は、iCloud または Google Play Games Saved Games に保存される場合があります。アプリを削除すると端末内のデータは削除される場合がありますが、クラウド側やストア側に保存されたデータは各サービスの仕組みに従います。サーバー保存機能を利用した場合、Firebase 上にセーブデータが保存されます。削除をご希望の場合はサポート窓口からご連絡ください。</p>
+
+      <h3>あなたの権利</h3>
+      <p>EEA・英国その他の適用法域にお住まいの方は、ご自身の個人データについて次の権利を有します。</p>
+      <ul>
+        <li>アクセス（開示）、訂正、削除、処理の制限、処理への異議、データポータビリティ、および同意の撤回</li>
+      </ul>
+      <p>これらの行使をご希望の場合は <a href="mailto:support@hakumai-studio.com">support@hakumai-studio.com</a> までご連絡ください。あわせて、お住まいの国／地域のデータ保護監督機関に苦情を申し立てる権利があります。</p>
+
+      <h3>自動意思決定・広告のパーソナライズについて</h3>
+      <p>本アプリは、法的効果や重大な影響を伴う自動化された意思決定やプロファイリングを行いません。広告はあなたの興味に基づいてパーソナライズされることはなく、文脈に応じた広告のみを表示します。</p>
+
+      <h3>お子さまについて</h3>
+      <p>本アプリは、特定の低年齢層を対象として個人データを収集することを意図していません。お子さまの情報が保護者の同意なく提供されたと思われる場合は、<a href="mailto:support@hakumai-studio.com">support@hakumai-studio.com</a> までご連絡ください。確認のうえ削除します。</p>
 
       <h3>お問い合わせ</h3>
       <p>プライバシーに関するお問い合わせやデータ削除に関するご相談は、ストアページに掲載されているサポート窓口からご連絡ください。</p>
@@ -192,9 +240,12 @@
         <li>Leaderboard and achievement data used by Apple Game Center or Google Play Games Services</li>
         <li>Information needed for save protection and restoration through iCloud or Google Play Games Saved Games</li>
         <li>In-app purchase information such as product IDs, purchase results, transaction IDs, and grant status. Payment details are processed by Apple or Google</li>
-        <li>Information needed to load, show, and reward rewarded ads, if rewarded ads are available</li>
+        <li>Information needed to load, show, and reward rewarded ads, if rewarded ads are available. Ads are delivered through Unity LevelPlay (ironSource) mediation, which may use ad networks such as Unity Ads</li>
         <li>Referral codes, anonymous user IDs, and reward status if the referral feature is used</li>
         <li>Feedback or support information, including the text submitted, app state, device information, and app version when needed for investigation</li>
+        <li>Anonymous user ID, email address, and authentication tokens needed for identity verification and account recovery, if the account linking feature is used (Firebase Authentication)</li>
+        <li>Game progress, user ID, and install identifier needed to save, sync, and restore save data, if the server save feature is used (Firebase)</li>
+        <li>A randomly generated install identifier created by the App (not an advertising identifier). Used to identify the source of cloud save syncing, aggregate usage statistics, and investigate issues and support inquiries</li>
         <li>Diagnostic information needed to investigate crashes or issues. Unity Cloud Diagnostics is disabled in the project settings at the time this policy was prepared</li>
       </ul>
 
@@ -207,20 +258,63 @@
         <li>To prevent misuse, answer support requests, investigate issues, and improve the App</li>
       </ul>
 
+      <h3>Business Information (Data Controller)</h3>
+      <p>The provider and data controller of the App is:</p>
+      <ul>
+        <li>Company: Hakumai Studio</li>
+        <li>Address: 4F Kabutocho No. 6 Hayama Building, 17-2 Nihonbashi Kabutocho, Chuo-ku, Tokyo 103-0026, Japan</li>
+        <li>Contact: <a href="mailto:support@hakumai-studio.com">support@hakumai-studio.com</a></li>
+      </ul>
+
+      <h3>Legal Bases for Processing (for players in the EEA and UK)</h3>
+      <p>For players in the EEA and the UK, we process information on the following legal bases:</p>
+      <ul>
+        <li>Saving, restoring, and syncing game progress, processing in-app purchases, and responding to inquiries: performance of a contract to provide the service, and our legitimate interest in operating it smoothly</li>
+        <li>Showing rewarded ads: your consent. You can withdraw consent at any time from the in-app settings screen. Withdrawal does not affect the lawfulness of processing before it</li>
+        <li>Where required to comply with law: compliance with a legal obligation</li>
+      </ul>
+
       <h3>Third-Party Services</h3>
       <p>The App may use the following third-party services. Data processed by those services is also subject to their privacy policies.</p>
       <ul>
         <li>Apple Game Center, App Store, and iCloud</li>
         <li>Google Play Games Services, Google Play Billing, and Google Play Saved Games</li>
         <li>Unity Ads and Unity In-App Purchasing</li>
+        <li>Unity LevelPlay (ironSource) and ad networks reached through its mediation</li>
+        <li>Google Firebase (Authentication / database)</li>
         <li>Social networks, messaging apps, or other services selected by the player through the sharing feature</li>
       </ul>
 
       <h3>Sharing Feature</h3>
       <p>The App may create share images or share text on the device. Actual posting or sending is performed through the external app or service selected by the player.</p>
 
+      <h3>International Data Transfers</h3>
+      <p>Some third-party services used by the App (such as Google Firebase, Unity, and Unity LevelPlay / ironSource) may process information outside the EEA, including in the United States. Such transfers rely on appropriate safeguards such as Standard Contractual Clauses (SCCs), or on the data-processing terms of each service.</p>
+
+      <h3>Data Retention</h3>
+      <ul>
+        <li>Save data when cloud protection or server save is used: kept while your account is active, or until you request deletion</li>
+        <li>Support and feedback content: kept for as long as needed to respond and keep records</li>
+        <li>Information processed by ad networks when ads are shown: handled according to each network's policy</li>
+        <li>Data stored on the device: remains on the device until you delete the App</li>
+      </ul>
+      <p>We delete or anonymize information that is no longer needed within a reasonable period.</p>
+
       <h3>Storage and Deletion</h3>
-      <p>Gameplay data is stored on the device. If cloud protection is used, data may also be stored in iCloud or Google Play Games Saved Games. Deleting the App may delete local data, while data stored by cloud or store services is handled according to each service.</p>
+      <p>Gameplay data is stored on the device. If cloud protection is used, data may also be stored in iCloud or Google Play Games Saved Games. Deleting the App may delete local data, while data stored by cloud or store services is handled according to each service. If the server save feature is used, save data is stored on Firebase. Please contact support if you wish to have this data deleted.</p>
+
+      <h3>Your Rights</h3>
+      <p>If you live in the EEA, the UK, or another applicable jurisdiction, you have the following rights regarding your personal data:</p>
+      <ul>
+        <li>Access, rectification, erasure, restriction of processing, objection to processing, data portability, and withdrawal of consent</li>
+      </ul>
+      <p>To exercise these rights, contact <a href="mailto:support@hakumai-studio.com">support@hakumai-studio.com</a>. You also have the right to lodge a complaint with the data protection supervisory authority in your country or region.</p>
+
+      <h3>Automated Decisions and Ad Personalization</h3>
+      <p>The App does not carry out automated decision-making or profiling that produces legal or similarly significant effects. Ads are not personalized based on your interests; only contextual ads are shown.</p>
+
+      <h3>Children</h3>
+      <p>The App is not intended to collect personal data from young children specifically. If you believe a child's information was provided without a guardian's consent, please contact <a href="mailto:support@hakumai-studio.com">support@hakumai-studio.com</a> and we will verify and delete it.</p>
 
       <h3>Contact</h3>
       <p>For privacy questions or data deletion requests, please contact us through the support contact listed on the app store page.</p>
@@ -239,9 +333,12 @@
         <li>Apple Game Center 或 Google Play Games Services 使用的排行榜與成就資料</li>
         <li>透過 iCloud 或 Google Play Games Saved Games 保護與還原存檔所需的資料</li>
         <li>應用程式內購買相關的商品ID、購買結果、交易ID與發放狀態。付款資料由 Apple 或 Google 處理</li>
-        <li>若提供獎勵廣告，載入、顯示與發放獎勵所需的資料</li>
+        <li>若提供獎勵廣告，載入、顯示與發放獎勵所需的資料。廣告透過 Unity LevelPlay（ironSource）進行媒合發送，可能使用 Unity Ads 等廣告聯播網</li>
         <li>使用邀請功能時的邀請碼、匿名使用者ID與獎勵發放狀態</li>
         <li>提交意見或支援請求時，為調查所需的輸入內容、應用程式狀態、裝置資訊與應用程式版本</li>
+        <li>使用帳號連結功能時，用於身分驗證與帳號復原所需的匿名使用者ID、電子郵件地址、驗證權杖等資料（Firebase Authentication）</li>
+        <li>使用伺服器保存功能時，用於存檔的儲存、同步與還原所需的遊戲進度、使用者ID、安裝識別碼等資料（Firebase）</li>
+        <li>應用程式隨機產生的安裝識別碼（並非廣告識別碼）。用於判別雲端存檔的同步來源、彙整使用狀況統計，以及調查問題與支援請求</li>
         <li>調查當機或問題所需的診斷資訊。本政策製作時，專案設定中的 Unity Cloud Diagnostics 為停用狀態</li>
       </ul>
 
@@ -254,26 +351,255 @@
         <li>防止不當使用、回覆支援請求、調查問題並改善本應用程式</li>
       </ul>
 
+      <h3>事業者資訊（資料管理者）</h3>
+      <p>本應用程式的提供事業者及資料管理者如下：</p>
+      <ul>
+        <li>事業者名稱：Hakumai Studio</li>
+        <li>所在地：日本東京都中央區日本橋兜町 17-2 兜町第 6 葉山大樓 4F，郵遞區號 103-0026</li>
+        <li>聯絡方式：<a href="mailto:support@hakumai-studio.com">support@hakumai-studio.com</a></li>
+      </ul>
+
+      <h3>處理的法律依據（適用於 EEA 及英國玩家）</h3>
+      <p>針對居住於歐洲經濟區（EEA）及英國的玩家，我們依據以下法律依據處理您的資訊。</p>
+      <ul>
+        <li>遊戲進度的保存、還原與同步、應用程式內購買的處理、詢問回覆：基於提供服務之契約履行，以及順利營運本應用程式之正當利益</li>
+        <li>顯示獎勵廣告：基於您的同意。您可隨時透過應用程式內的設定畫面撤回同意。撤回同意不影響撤回前處理行為之合法性</li>
+        <li>為遵循法令而有必要時：基於法律義務之履行</li>
+      </ul>
+
       <h3>第三方服務</h3>
       <p>本應用程式可能使用以下第三方服務。這些服務處理的資料亦適用其各自的隱私權政策。</p>
       <ul>
         <li>Apple Game Center、App Store、iCloud</li>
         <li>Google Play Games Services、Google Play Billing、Google Play Saved Games</li>
         <li>Unity Ads、Unity In-App Purchasing</li>
+        <li>Unity LevelPlay（ironSource）及其媒合管道所涉及的廣告聯播網</li>
+        <li>Google Firebase（Authentication／資料庫）</li>
         <li>玩家透過分享功能選擇的社群網路、訊息應用程式或其他服務</li>
       </ul>
 
       <h3>分享功能</h3>
       <p>本應用程式可能在裝置上產生分享圖片或分享文字。實際發布或傳送會透過玩家選擇的外部應用程式或服務進行。</p>
 
+      <h3>資料的跨境傳輸</h3>
+      <p>本應用程式使用的部分第三方服務（例如 Google Firebase、Unity、Unity LevelPlay／ironSource 等）可能會在 EEA 以外地區（包括美國）處理資訊。此類傳輸將依據標準合約條款（SCC）等適當保護措施，或各服務之資料處理條款進行。</p>
+
+      <h3>資料的保存期限</h3>
+      <ul>
+        <li>使用雲端保護或伺服器保存功能時的存檔資料：於帳號有效期間內保存，或直到您提出刪除請求為止</li>
+        <li>詢問與意見回饋內容：於回覆及紀錄所需的期間內保存</li>
+        <li>因顯示廣告而由廣告聯播網處理的資訊：依各聯播網之政策處理</li>
+        <li>保存於裝置內的資料：於您刪除本應用程式前，將保留在裝置內</li>
+      </ul>
+      <p>不再需要的資訊，我們將於合理期間內刪除或匿名化。</p>
+
       <h3>資料保存與刪除</h3>
-      <p>遊玩資料會保存於裝置內。若使用雲端保護功能，資料也可能保存於 iCloud 或 Google Play Games Saved Games。刪除本應用程式可能會刪除本機資料；雲端或商店服務保存的資料則依各服務的機制處理。</p>
+      <p>遊玩資料會保存於裝置內。若使用雲端保護功能，資料也可能保存於 iCloud 或 Google Play Games Saved Games。刪除本應用程式可能會刪除本機資料；雲端或商店服務保存的資料則依各服務的機制處理。若使用伺服器保存功能，存檔資料將保存於 Firebase。如需刪除，請透過支援窗口聯絡我們。</p>
+
+      <h3>您的權利</h3>
+      <p>若您居住於 EEA、英國或其他適用法域，您就自身個人資料享有下列權利：</p>
+      <ul>
+        <li>查閱（揭露）、更正、刪除、限制處理、反對處理、資料可攜性，以及撤回同意</li>
+      </ul>
+      <p>如欲行使上述權利，請透過 <a href="mailto:support@hakumai-studio.com">support@hakumai-studio.com</a> 與我們聯絡。您亦有權向您所在國家／地區的資料保護監督機關提出申訴。</p>
+
+      <h3>關於自動化決策與廣告個人化</h3>
+      <p>本應用程式不會進行具有法律效果或類似重大影響之自動化決策或剖析（Profiling）。廣告不會依您的興趣進行個人化，僅顯示與內容情境相關的廣告。</p>
+
+      <h3>關於兒童</h3>
+      <p>本應用程式並非以特定低齡兒童為對象蒐集個人資料。如您認為兒童資訊在未經監護人同意下被提供，請透過 <a href="mailto:support@hakumai-studio.com">support@hakumai-studio.com</a> 與我們聯絡，我們將於確認後予以刪除。</p>
 
       <h3>聯絡方式</h3>
       <p>如有隱私權相關問題或資料刪除請求，請透過應用程式商店頁面所列的支援窗口聯絡我們。</p>
 
       <h3>政策變更</h3>
       <p>當功能、法令或商店要求有所變更時，本政策可能更新。重要變更將於本頁面公布。</p>
+    </section>
+
+    <section id="zh-hans" class="section" lang="zh-Hans">
+      <h2>简体中文</h2>
+      <p>Morifis / 森守り（以下称「本应用程序」）仅在提供与改善游戏所需的范围内处理数据。本政策说明本应用程序如何处理玩家数据。</p>
+
+      <h3>可能处理的数据</h3>
+      <ul>
+        <li>游戏进度、通关状态、持有道具、游戏内货币、设置、成就、排行榜分数与个人记录等游玩数据</li>
+        <li>Apple Game Center 或 Google Play Games Services 使用的排行榜与成就数据</li>
+        <li>通过 iCloud 或 Google Play Games Saved Games 保护与还原存档所需的数据</li>
+        <li>应用程序内购买相关的商品ID、购买结果、交易ID与发放状态。付款数据由 Apple 或 Google 处理</li>
+        <li>若提供奖励广告，加载、显示与发放奖励所需的数据。广告通过 Unity LevelPlay（ironSource）进行聚合分发，可能使用 Unity Ads 等广告网络</li>
+        <li>使用邀请功能时的邀请码、匿名用户ID与奖励发放状态</li>
+        <li>提交意见或支持请求时，为调查所需的输入内容、应用程序状态、设备信息与应用程序版本</li>
+        <li>使用账号关联功能时，用于身份验证与账号恢复所需的匿名用户ID、电子邮件地址、身份验证令牌等数据（Firebase Authentication）</li>
+        <li>使用服务器保存功能时，用于保存数据的存储、同步与还原所需的游戏进度、用户ID、安装标识符等数据（Firebase）</li>
+        <li>应用程序随机生成的安装标识符（并非广告标识符）。用于判断云端存档的同步来源、汇总使用情况统计，以及调查问题与支持请求</li>
+        <li>调查崩溃或问题所需的诊断信息。本政策制作时，项目设置中的 Unity Cloud Diagnostics 为停用状态</li>
+      </ul>
+
+      <h3>数据用途</h3>
+      <ul>
+        <li>保存、还原与同步游戏进度</li>
+        <li>提供排行榜、成就、个人记录与奖励</li>
+        <li>处理应用程序内购买、发放购买内容并防止重复发放</li>
+        <li>发放奖励广告奖励并维持广告功能稳定</li>
+        <li>防止不当使用、回复支持请求、调查问题并改善本应用程序</li>
+      </ul>
+
+      <h3>经营者信息（数据管理者）</h3>
+      <p>本应用程序的提供者及数据管理者如下：</p>
+      <ul>
+        <li>经营者名称：Hakumai Studio</li>
+        <li>所在地：日本东京都中央区日本桥兜町 17-2 兜町第 6 叶山大楼 4F，邮编 103-0026</li>
+        <li>联系方式：<a href="mailto:support@hakumai-studio.com">support@hakumai-studio.com</a></li>
+      </ul>
+
+      <h3>处理的法律依据（适用于 EEA 及英国玩家）</h3>
+      <p>针对居住在欧洲经济区（EEA）及英国的玩家，我们依据以下法律依据处理您的信息。</p>
+      <ul>
+        <li>游戏进度的保存、还原与同步、应用程序内购买的处理、咨询回复：基于提供服务的合同履行，以及顺利运营本应用程序的合法利益</li>
+        <li>展示奖励广告：基于您的同意。您可随时通过应用程序内的设置界面撤回同意。撤回同意不影响撤回前处理行为的合法性</li>
+        <li>因遵守法律法规而有必要时：基于法律义务的履行</li>
+      </ul>
+
+      <h3>第三方服务</h3>
+      <p>本应用程序可能使用以下第三方服务。这些服务处理的数据也适用其各自的隐私政策。</p>
+      <ul>
+        <li>Apple Game Center、App Store、iCloud</li>
+        <li>Google Play Games Services、Google Play Billing、Google Play Saved Games</li>
+        <li>Unity Ads、Unity In-App Purchasing</li>
+        <li>Unity LevelPlay（ironSource）及其聚合渠道涉及的广告网络</li>
+        <li>Google Firebase（Authentication／数据库）</li>
+        <li>玩家通过分享功能选择的社交网络、消息应用程序或其他服务</li>
+      </ul>
+
+      <h3>分享功能</h3>
+      <p>本应用程序可能在设备上生成分享图片或分享文字。实际发布或发送会通过玩家选择的外部应用程序或服务进行。</p>
+
+      <h3>数据的跨境传输</h3>
+      <p>本应用程序使用的部分第三方服务（例如 Google Firebase、Unity、Unity LevelPlay／ironSource 等）可能会在 EEA 以外地区（包括美国）处理信息。此类传输将依据标准合同条款（SCC）等适当保护措施，或各服务的数据处理条款进行。</p>
+
+      <h3>数据的保存期限</h3>
+      <ul>
+        <li>使用云端保护或服务器保存功能时的存档数据：于账号有效期间内保存，或直至您提出删除请求为止</li>
+        <li>咨询与反馈内容：于回复及记录所需的期间内保存</li>
+        <li>因展示广告而由广告网络处理的信息：依各网络的政策处理</li>
+        <li>保存于设备内的数据：于您删除本应用程序前，将保留在设备内</li>
+      </ul>
+      <p>不再需要的信息，我们将于合理期间内删除或匿名化。</p>
+
+      <h3>数据保存与删除</h3>
+      <p>游玩数据会保存于设备内。若使用云端保护功能，数据也可能保存于 iCloud 或 Google Play Games Saved Games。删除本应用程序可能会删除本机数据；云端或商店服务保存的数据则依各服务的机制处理。若使用服务器保存功能，存档数据将保存于 Firebase。如需删除，请通过支持窗口联系我们。</p>
+
+      <h3>您的权利</h3>
+      <p>若您居住在 EEA、英国或其他适用法域，您就自身个人数据享有下列权利：</p>
+      <ul>
+        <li>访问（披露）、更正、删除、限制处理、反对处理、数据可携带权，以及撤回同意</li>
+      </ul>
+      <p>如欲行使上述权利，请通过 <a href="mailto:support@hakumai-studio.com">support@hakumai-studio.com</a> 与我们联系。您也有权向您所在国家／地区的数据保护监管机构提出投诉。</p>
+
+      <h3>关于自动化决策与广告个性化</h3>
+      <p>本应用程序不会进行具有法律效力或类似重大影响的自动化决策或用户画像分析（Profiling）。广告不会依据您的兴趣进行个性化，仅展示与内容情境相关的广告。</p>
+
+      <h3>关于儿童</h3>
+      <p>本应用程序并非以特定低龄儿童为对象收集个人数据。如您认为儿童信息在未经监护人同意的情况下被提供，请通过 <a href="mailto:support@hakumai-studio.com">support@hakumai-studio.com</a> 与我们联系，我们将在核实后予以删除。</p>
+
+      <h3>联系方式</h3>
+      <p>如有隐私相关问题或数据删除请求，请通过应用程序商店页面所列的支持窗口联系我们。</p>
+
+      <h3>政策变更</h3>
+      <p>当功能、法律法规或商店要求有所变更时，本政策可能更新。重要变更将于本页面公布。</p>
+    </section>
+
+    <section id="ko" class="section" lang="ko">
+      <h2>한국어</h2>
+      <p>Morifis / 森守り(이하 "본 앱")는 게임 제공 및 개선에 필요한 범위로 데이터 처리를 한정합니다. 본 정책은 본 앱이 플레이어 데이터를 어떻게 처리하는지 설명합니다.</p>
+
+      <h3>수집·이용할 수 있는 정보</h3>
+      <ul>
+        <li>게임 진행 상황, 스테이지 클리어 현황, 보유 아이템, 게임 내 화폐, 설정, 업적, 리더보드 점수 등의 플레이 데이터</li>
+        <li>Apple Game Center 또는 Google Play Games Services에서 사용되는 리더보드·업적 정보</li>
+        <li>iCloud 또는 Google Play Games Saved Games를 통한 저장 데이터 보호 및 복원에 필요한 정보</li>
+        <li>인앱 구매와 관련된 상품ID, 구매 결과, 거래ID, 지급 상태 등의 정보. 결제 정보 자체는 Apple 또는 Google이 처리합니다</li>
+        <li>보상형 광고를 제공하는 경우, 광고의 로드·표시·보상 지급에 필요한 정보. 광고는 Unity LevelPlay(ironSource) 미디에이션을 통해 제공되며, Unity Ads 등의 광고 네트워크가 사용됩니다</li>
+        <li>추천 기능을 이용하는 경우, 추천 코드, 익명 사용자ID, 보상 지급 상태 등의 정보</li>
+        <li>문의·피드백을 보내는 경우, 입력 내용, 앱 상태, 기기 정보, 앱 버전 등 조사에 필요한 정보</li>
+        <li>계정 연동 기능을 이용하는 경우, 본인 확인과 계정 복원에 필요한 익명 사용자ID, 이메일 주소, 인증 토큰 등의 정보(Firebase Authentication)</li>
+        <li>서버 저장 기능을 이용하는 경우, 저장 데이터의 저장·동기화·복원에 필요한 게임 진행 상황, 사용자ID, 설치 식별자 등의 정보(Firebase)</li>
+        <li>앱이 무작위로 생성하는 설치 식별자(광고 식별자가 아닙니다). 클라우드 세이브의 동기화 출처 판별, 이용 현황 집계, 오류·문의 조사에 이용합니다</li>
+        <li>앱 충돌이나 오류를 조사하는 데 필요한 진단 정보. 단, Unity Cloud Diagnostics는 본 정책 작성 시점 기준 프로젝트 설정상 비활성화되어 있습니다</li>
+      </ul>
+
+      <h3>이용 목적</h3>
+      <ul>
+        <li>게임 진행 상황의 저장, 복원, 동기화</li>
+        <li>리더보드, 업적, 개인 최고 기록, 보상의 제공</li>
+        <li>인앱 구매 처리, 구매 내용 지급, 중복 지급 방지</li>
+        <li>광고 시청 보상 지급, 광고 표시 안정화</li>
+        <li>부정 이용 방지, 문의 대응, 오류 조사, 서비스 개선</li>
+      </ul>
+
+      <h3>사업자 정보(개인정보 처리자)</h3>
+      <p>본 앱의 제공 사업자 및 개인정보 처리자는 다음과 같습니다.</p>
+      <ul>
+        <li>사업자명: Hakumai Studio</li>
+        <li>소재지: 일본 도쿄도 주오구 니혼바시 카부토초 17-2 카부토초 다이 6 하야마 빌딩 4F, 우편번호 103-0026</li>
+        <li>연락처: <a href="mailto:support@hakumai-studio.com">support@hakumai-studio.com</a></li>
+      </ul>
+
+      <h3>처리의 법적 근거(EEA·영국 플레이어 대상)</h3>
+      <p>EEA(유럽경제지역) 및 영국에 거주하시는 분에 대해, 당사는 다음의 법적 근거에 따라 정보를 처리합니다.</p>
+      <ul>
+        <li>게임 진행 상황의 저장·복원·동기화, 인앱 구매 처리, 문의 대응: 서비스 제공을 위한 계약 이행, 그리고 원활한 운영이라는 정당한 이익에 근거합니다</li>
+        <li>보상형 광고 표시: 귀하의 동의에 근거합니다. 동의는 앱 내 설정 화면에서 언제든지 철회할 수 있습니다. 철회하더라도 그 이전에 이루어진 처리의 적법성에는 영향을 미치지 않습니다</li>
+        <li>법령 준수가 필요한 경우: 법적 의무의 이행에 근거합니다</li>
+      </ul>
+
+      <h3>제3자 서비스</h3>
+      <p>본 앱은 다음의 제3자 서비스를 이용할 수 있습니다. 각 서비스에서 처리되는 정보는 해당 서비스의 개인정보 처리방침도 함께 적용됩니다.</p>
+      <ul>
+        <li>Apple Game Center, App Store, iCloud</li>
+        <li>Google Play Games Services, Google Play Billing, Google Play Saved Games</li>
+        <li>Unity Ads, Unity In-App Purchasing</li>
+        <li>Unity LevelPlay(ironSource) 및 해당 미디에이션을 통한 광고 네트워크</li>
+        <li>Google Firebase(Authentication / 데이터베이스)</li>
+        <li>플레이어가 공유 기능으로 선택한 SNS·메시지 앱 등</li>
+      </ul>
+
+      <h3>공유 기능에 관하여</h3>
+      <p>본 앱은 플레이 결과 등의 공유 이미지나 공유 문구를 기기 내에서 생성하는 경우가 있습니다. 실제 게시·전송은 플레이어가 선택한 외부 앱 또는 서비스에서 이루어집니다.</p>
+
+      <h3>데이터의 국외 이전</h3>
+      <p>본 앱이 이용하는 일부 제3자 서비스(Google Firebase, Unity, Unity LevelPlay/ironSource 등)는 미국을 비롯한 EEA 역외에서 정보를 처리할 수 있습니다. 이러한 이전은 표준계약조항(SCC) 등 적절한 보호조치, 또는 각 서비스의 데이터 처리 조건에 근거하여 이루어집니다.</p>
+
+      <h3>데이터 보관 기간</h3>
+      <ul>
+        <li>클라우드 보호·서버 저장 기능을 이용한 경우의 저장 데이터: 계정이 유효한 동안, 또는 삭제를 요청하실 때까지 보관합니다</li>
+        <li>문의·피드백 내용: 대응 및 기록에 필요한 기간 동안 보관합니다</li>
+        <li>광고 표시에 따라 광고 네트워크가 처리하는 정보: 각 네트워크의 정책에 따릅니다</li>
+        <li>기기 내에 저장되는 데이터: 앱을 삭제할 때까지 기기 내에 남아 있습니다</li>
+      </ul>
+      <p>더 이상 필요하지 않은 정보는 합리적인 기간 내에 삭제 또는 익명화합니다.</p>
+
+      <h3>데이터의 보관과 삭제</h3>
+      <p>플레이 데이터는 기기 내에 저장됩니다. 클라우드 보호 기능을 이용한 경우에는 iCloud 또는 Google Play Games Saved Games에 저장될 수 있습니다. 앱을 삭제하면 기기 내 데이터는 삭제될 수 있으나, 클라우드 측 또는 스토어 측에 저장된 데이터는 각 서비스의 방식에 따릅니다. 서버 저장 기능을 이용한 경우, Firebase에 저장 데이터가 보관됩니다. 삭제를 원하시면 지원 창구로 연락해 주시기 바랍니다.</p>
+
+      <h3>귀하의 권리</h3>
+      <p>EEA·영국 및 그 밖의 적용 법역에 거주하시는 분은 자신의 개인정보에 관하여 다음의 권리를 가집니다.</p>
+      <ul>
+        <li>열람(공개), 정정, 삭제, 처리 제한, 처리에 대한 이의 제기, 데이터 이동권, 그리고 동의 철회</li>
+      </ul>
+      <p>이러한 권리를 행사하시려면 <a href="mailto:support@hakumai-studio.com">support@hakumai-studio.com</a> 으로 연락해 주십시오. 아울러 거주 국가·지역의 개인정보 감독기관에 민원을 제기할 권리도 있습니다.</p>
+
+      <h3>자동화된 의사결정·광고 개인화에 관하여</h3>
+      <p>본 앱은 법적 효과나 중대한 영향을 수반하는 자동화된 의사결정이나 프로파일링을 실시하지 않습니다. 광고는 귀하의 관심사에 기반하여 개인화되지 않으며, 맥락에 따른 광고만 표시됩니다.</p>
+
+      <h3>아동에 관하여</h3>
+      <p>본 앱은 특정 저연령층을 대상으로 개인정보를 수집하는 것을 의도하지 않습니다. 보호자의 동의 없이 아동의 정보가 제공되었다고 생각되는 경우, <a href="mailto:support@hakumai-studio.com">support@hakumai-studio.com</a> 으로 연락해 주시기 바랍니다. 확인 후 삭제하겠습니다.</p>
+
+      <h3>문의처</h3>
+      <p>개인정보에 관한 문의나 데이터 삭제에 관한 요청은 스토어 페이지에 게재된 지원 창구로 연락해 주시기 바랍니다.</p>
+
+      <h3>개정</h3>
+      <p>본 정책은 기능 추가, 법령, 스토어 요건의 변경에 따라 갱신될 수 있습니다. 중요한 변경 사항이 있는 경우 본 페이지의 갱신을 통해 안내합니다.</p>
     </section>
 
     <footer>
