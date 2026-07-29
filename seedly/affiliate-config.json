@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "offers": {
+    "JP": {
+      "semenTest": {
+        "id": "jp-mens-loupe",
+        "url": "https://www.amazon.co.jp/dp/B01EV0Q0SA?tag=hanyowan-22",
+        "text": {
+          "ja": {
+            "title": "自宅で精子を観察できるキット",
+            "body": "スマートフォンのカメラに取り付けて、自宅で精子の様子を観察できるキットです。医療機関の検査に代わるものではありませんが、まず自分の状態を見てみたいときの選択肢になります。",
+            "cta": "Amazonで見る",
+            "disclosure": "Amazonのアソシエイトとして、Seedlyは適格販売により収入を得ています。"
+          },
+          "en": {
+            "title": "A kit for observing sperm at home",
+            "body": "This kit attaches to your smartphone camera so you can observe sperm at home. It is not a substitute for a clinical test, but it is one option when you want a first look at your own condition.",
+            "cta": "View on Amazon",
+            "disclosure": "As an Amazon Associate, Seedly earns from qualifying purchases."
+          }
+        }
+      }
+    }
+  }
+}
