@@ -12,6 +12,15 @@ const SOURCES = {
   appfiguresSpend: 'https://appfigures.com/resources/insights/20241018/amp?f=1',
 };
 
+// スマホOSの利用シェア(%)。出典: StatCounter Global Stats 月間データ。
+// 更新するときは SOURCES.japanShare / SOURCES.worldShare の数字を見て
+// asOf と数値を書き換えるだけでOK。
+const SHARE = {
+  asOf: '2026年7月',
+  japan: { ios: 63.6, android: 36.4 },
+  world: { ios: 31.6, android: 68.4 },
+};
+
 const NOTE_SECTIONS = {
   compare: [1, 'App StoreとGoogle Play、どちらに出す？'],
   accountTypes: [2, '個人アカウントと組織アカウントの違い'],
@@ -55,15 +64,42 @@ function source(href, label = '公式情報') {
 function info(title, body, tone='neutral') {
   return `<div class="info-card ${tone}"><div class="info-card-title">${title}</div><div class="info-card-body">${body}</div></div>`;
 }
-function choice(title, desc='', action='', icon='›', recommended=false) {
-  return `<button class="choice" data-action="${action}"><div class="choice-icon">${icon}</div><div class="choice-copy"><div class="choice-title-row"><strong>${title}</strong>${recommended?'<span class="pill">おすすめ</span>':''}</div>${desc?`<span>${desc}</span>`:''}</div><div>›</div></button>`;
+function choice(title, desc='', action='', recommended=false) {
+  return `<button class="choice" data-action="${action}"><div class="choice-copy"><div class="choice-title-row"><strong>${title}</strong>${recommended?'<span class="pill">おすすめ</span>':''}</div>${desc?`<span>${desc}</span>`:''}</div><div class="choice-arrow">›</div></button>`;
 }
+
+function shareRow(label, ios, android) {
+  const i = Math.round(ios), a = Math.round(android);
+  return `<div class="share-row">
+    <div class="share-row-head"><span class="share-region">${label}</span><span class="share-values"><span class="share-value"><i class="dot dot-ios"></i>iPhone(iOS) <strong>${i}%</strong></span><span class="share-value"><i class="dot dot-android"></i>Android <strong>${a}%</strong></span></span></div>
+    <div class="share-bar" role="img" aria-label="${label}のスマホOSシェア: iOS ${i}%、Android ${a}%"><div class="seg seg-ios" style="width:${ios}%"></div><div class="seg seg-android" style="width:${android}%"></div></div>
+  </div>`;
+}
+
 function comparison() {
   return `<div class="comparison-wrap">
-    <div class="comparison-card apple-card"><div class="comparison-heading"> App Store</div><dl><div><dt>登録料</dt><dd>年99米ドル</dd></div><div><dt>日本</dt><dd>iOSが強い市場</dd></div><div><dt>世界</dt><dd>Androidより端末シェアは小さい</dd></div><div><dt>課金</dt><dd>消費者支出が強い傾向</dd></div></dl></div>
-    <div class="comparison-card google-card"><div class="comparison-heading">▶ Google Play</div><dl><div><dt>登録料</dt><dd>25米ドル・一度限り</dd></div><div><dt>日本</dt><dd>Androidも大きな利用層</dd></div><div><dt>世界</dt><dd>Androidが大きなシェア</dd></div><div><dt>課金</dt><dd>DL・世界リーチに強い</dd></div></dl></div>
-    <p class="fineprint">OSシェアは時期・集計方法で変動します。課金傾向もカテゴリや国で異なるため、ここでは選択の目安として表示しています。</p>
-    <div class="source-row">${source(SOURCES.appleFee,'Apple登録料')}${source(SOURCES.googleFee,'Google登録料')}${source(SOURCES.japanShare,'日本OSシェア')}${source(SOURCES.worldShare,'世界OSシェア')}${source(SOURCES.appfiguresSpend,'課金市場の参考')}</div>
+    <div class="share-block">
+      <div class="share-block-title">スマホのOSシェア</div>
+      <div class="share-block-sub">${SHARE.asOf}時点・StatCounter調べ(月間データ)</div>
+      ${shareRow('日本', SHARE.japan.ios, SHARE.japan.android)}
+      ${shareRow('世界', SHARE.world.ios, SHARE.world.android)}
+    </div>
+    <div class="comparison-card apple-card"><div class="comparison-heading">App Store</div><dl>
+      <div><dt>対象</dt><dd>iPhone / iPad</dd></div>
+      <div><dt>登録料</dt><dd>年99米ドル(毎年)</dd></div>
+      <div><dt>日本のシェア</dt><dd>iOS ${Math.round(SHARE.japan.ios)}%</dd></div>
+      <div><dt>世界のシェア</dt><dd>iOS ${Math.round(SHARE.world.ios)}%</dd></div>
+      <div><dt>課金の傾向</dt><dd>利用者の課金額が高め</dd></div>
+    </dl></div>
+    <div class="comparison-card google-card"><div class="comparison-heading">Google Play</div><dl>
+      <div><dt>対象</dt><dd>Android</dd></div>
+      <div><dt>登録料</dt><dd>25米ドル(最初の1回だけ)</dd></div>
+      <div><dt>日本のシェア</dt><dd>Android ${Math.round(SHARE.japan.android)}%</dd></div>
+      <div><dt>世界のシェア</dt><dd>Android ${Math.round(SHARE.world.android)}%</dd></div>
+      <div><dt>課金の傾向</dt><dd>DL数と世界への広がりに強い</dd></div>
+    </dl></div>
+    <p class="fineprint">シェアは「スマホ端末のOS利用シェア」で、アプリ売上のシェアではありません。数字は毎月変わります。「課金の傾向」はAppfigures(2024年)などの調査を参考にした大まかな傾向で、アプリの種類や国によって変わります。</p>
+    <div class="source-row">${source(SOURCES.japanShare,'日本のシェア(StatCounter)')}${source(SOURCES.worldShare,'世界のシェア(StatCounter)')}${source(SOURCES.appleFee,'Apple登録料')}${source(SOURCES.googleFee,'Google登録料')}${source(SOURCES.appfiguresSpend,'課金市場の参考')}</div>
   </div>`;
 }
 
@@ -131,9 +167,9 @@ function resultHtml() {
   const appleText = ['apple','both'].includes(state.platform) ? (state.appleStatus==='organization'?'組織アカウント登録済み':state.appleDesired==='organization'?(state.appleStatus==='individual'?'個人 → 組織への変更ルート':'組織で新規登録するルート'):'個人アカウントを使うルート') : null;
   const googleText = ['google','both'].includes(state.platform) ? (state.googleStatus==='organization'?'組織アカウント登録済み':state.googleDesired==='organization'?(state.googleStatus==='individual'?'個人 → 組織への変更ルート':'組織で新規登録するルート'):'個人アカウントを使うルート') : null;
   return `<div class="eyebrow">診断結果</div><h1>あなたが読むべきところを整理しました</h1><p class="lead">不要な章は飛ばしてOKです。実際の手続き前には各公式情報も確認してください。</p>
-    <div class="result-grid">${appleText?`<div class="result-platform"><div></div><div><span>App Store</span><strong>${appleText}</strong></div></div>`:''}${googleText?`<div class="result-platform"><div>▶</div><div><span>Google Play</span><strong>${googleText}</strong></div></div>`:''}</div>
+    <div class="result-grid">${appleText?`<div class="result-platform"><div><span>App Store</span><strong>${appleText}</strong></div></div>`:''}${googleText?`<div class="result-platform"><div><span>Google Play</span><strong>${googleText}</strong></div></div>`:''}</div>
     ${route.cautions.length?`<section class="result-section"><h2>⚠ 先に知っておきたい注意点</h2><ul>${route.cautions.map(c=>`<li>${c}</li>`).join('')}</ul></section>`:''}
-    <section class="result-section"><h2>✓ あなたの手続き</h2><ol>${route.steps.map(s=>`<li>${s}</li>`).join('')}</ol></section>
+    <section class="result-section"><h2>✓ やることリスト</h2><ol>${route.steps.map(s=>`<li>${s}</li>`).join('')}</ol></section>
     <section class="result-section note-section"><h2>📖 noteではこの章を読めばOK</h2><div class="chapter-list">${route.sections.map(s=>`<div class="chapter"><span>第${s.num}章</span><strong>${s.title}</strong></div>`).join('')}</div><p class="fineprint">公開後にnoteの各見出しURLが確定したら、この結果から該当見出しへ直接ジャンプするリンクを設定します。</p></section>
     ${state.wantSeparateAddress===true?info('事業用住所を分けたい人へ','レンタルオフィス等を使う予定なら、開業届・D‑U‑N‑S・ストア登録を進める前に住所を決めておくと、あとから住所変更を繰り返す手間を減らしやすくなります。','soft'):''}
     <div class="result-actions"><button class="primary-button" data-action="notePlaceholder">詳しい手順をnoteで読む ↗</button><button class="secondary-button" data-action="reset">↻ もう一度診断する</button></div>`;
@@ -144,22 +180,22 @@ function page(body, eyebrow='', title='', lead='') { return `${historyStack.leng
 function render() {
   resetTop.classList.toggle('hidden', screen==='platform' || screen==='result');
   let html='';
-  if (screen==='platform') html = page(`${comparison()}<div class="choices">${choice('App Storeだけ','iPhone / iPadを中心に公開したい','platformApple','')}${choice('Google Playだけ','Android向けに公開したい','platformGoogle','▶')}${choice('両方','iOSとAndroidの両方へ届けたい','platformBoth','◎',true)}</div>`,'STEP 1','どこでアプリを公開したいですか？','まだ決めていなくても大丈夫。費用・利用者の広さ・課金傾向を見て選べます。');
-  else if (screen==='appleStatus') html = page(`<div class="choices">${choice('まだ登録していない','','appleNone','＋')}${choice('個人で登録済み','','appleIndividual','人')}${choice('組織で登録済み','組織化手続きは基本的に不要','appleOrganization','社')}</div>`,'APPLE','Apple Developer Programの現在の状態は？','「登録済み」の人にも、個人・組織それぞれのルートがあります。');
-  else if (screen==='appleDesired') html = page(`${info('登録料',`Apple Developer Programは<strong>年99米ドル</strong>。毎年更新が必要です。 ${source(SOURCES.appleFee)}`,'soft')}<div class="choices">${choice('個人で登録したい','','appleWantIndividual','人')}${choice('組織で登録したい','D‑U‑N‑Sなど組織確認が必要','appleWantOrg','社')}${choice('まだ分からない','個人と組織の違いを先に確認する','appleHelp','?')}</div>`,'APPLE / 新規','個人と組織、どちらで登録したいですか？');
-  else if (screen==='appleDecisionHelp') html = page(`${info('個人',`App Store上のデベロッパ名は、原則として<strong>本人の法的な正式氏名</strong>になります。 ${source(SOURCES.appleDeveloperName)}`,'warning')}${info('組織',`組織登録には、Appleが求める組織要件、D‑U‑N‑S番号、契約権限、Webサイト等が必要です。 ${source(SOURCES.appleEnrollment)}`,'soft')}<div class="choices">${choice('本名表示で問題ない → 個人','','appleWantIndividual')}${choice('組織要件を確認して進みたい → 組織','','appleWantOrg')}</div>`,'APPLE / 比較','迷ったら、まず「本名表示」を確認');
-  else if (screen==='appleNameWarning') html = page(`${info('個人登録の注意点',`Appleの個人登録では、App Store上のデベロッパ名が原則として<strong>あなたの法的な正式氏名</strong>になります。 ${source(SOURCES.appleDeveloperName)}`,'warning')}<div class="choices">${choice('問題ない','','appleNameOk')}${choice('本名は出したくない','組織登録の条件を確認する','appleNameNg')}</div>`,'APPLE / 重要確認','本名がApp Store上に表示されても大丈夫ですか？');
-  else if (screen==='appleOrgWarning') html = page(`${info('先に確認',`AppleのOrganizationは単に「屋号がある」「開業届を出した」というだけで自動的に選べるものではありません。D‑U‑N‑S番号や法的主体としての要件等を確認してください。 ${source(SOURCES.appleEnrollment)}`,'warning')}<div class="choices">${choice('理解した。組織ルートで進む','','appleOrgContinue')}</div>`,'APPLE / 組織','Appleの組織登録には条件があります','組織登録を希望する場合は「D‑U‑N‑Sと事業情報を整える章」も案内します。');
-  else if (screen==='appleExistingIndividual') html = page(`${info('個人のまま使う場合',`App Store上のデベロッパ名は原則として法的な正式氏名です。 ${source(SOURCES.appleDeveloperName)}`,'warning')}<div class="choices">${choice('個人のまま使う','','appleKeep')}${choice('組織へ変更したい','変更要件・D‑U‑N‑Sを確認','appleConvert')}</div>`,'APPLE / 登録済み','今の個人アカウントをどうしたいですか？');
-  else if (screen==='googleStatus') html = page(`<div class="choices">${choice('まだ登録していない','','googleNone','＋')}${choice('個人で登録済み','','googleIndividual','人')}${choice('組織で登録済み','個人→組織変更の章は不要','googleOrganization','社')}</div>`,'GOOGLE PLAY','Google Play Consoleの現在の状態は？');
-  else if (screen==='googleDesired') html = page(`${info('登録料',`Google Play Consoleは<strong>25米ドルの一度限りの登録料</strong>です。 ${source(SOURCES.googleFee)}`,'soft')}<div class="choices">${choice('個人で登録したい','','googleWantIndividual','人')}${choice('組織で登録したい','D‑U‑N‑Sや組織確認が必要','googleWantOrg','社')}${choice('まだ分からない','注意点を比較して決める','googleHelp','?')}</div>`,'GOOGLE PLAY / 新規','個人と組織、どちらで登録したいですか？');
-  else if (screen==='googleDecisionHelp') html = page(`${info('新しい個人アカウント',`2023年11月13日以降に作成された新しい個人アカウントでは、原則として<strong>12人以上のテスターが14日間連続で参加するクローズドテスト</strong>を完了してから、本番アクセスを申請します。通常のアップデートごとに毎回12人必要、という意味ではありません。 ${source(SOURCES.googleTesting)}`,'warning')}${info('組織アカウント',`組織ではD‑U‑N‑S番号、組織名・住所、Webサイトなどの確認が増えます。 ${source(SOURCES.googleAccountType)}`,'soft')}<div class="choices">${choice('12人×14日のテストを用意できる → 個人','','googleWantIndividual')}${choice('組織の準備をして進みたい → 組織','','googleWantOrg')}</div>`,'GOOGLE PLAY / 比較','個人は簡単そうに見えて、公開前テストが大きなポイント');
-  else if (screen==='googleTesterWarning') html = page(`${info('新規個人アカウントの本番公開要件',`対象となる新しい個人アカウントでは、新規アプリの本番公開前に、12人以上が14日間連続で参加するクローズドテストと本番アクセス申請が必要です。 ${source(SOURCES.googleTesting)}`,'warning')}<div class="choices">${choice('できる / 問題ない','','googleTesterOk')}${choice('かなり大変そう','組織アカウントの要件も見る','googleTesterNg')}</div>`,'GOOGLE PLAY / 重要確認 1','12人以上のテスターを14日間用意できそうですか？');
-  else if (screen==='googlePublicWarning') html = page(`${info('個人アカウントでも公開情報があります',`Google Playでは、個人アカウントでも法的氏名・国・デベロッパーメール等が公開対象になります。収益化する場合は完全な住所が表示されるケースもあるため、公開情報を事前に公式ヘルプで確認してください。 ${source(SOURCES.googlePublicInfo)}`,'warning')}<div class="choices">${choice('確認した。問題ない','','googlePublicOk')}${choice('公開情報が気になる','組織アカウントの要件も比較する','googlePublicNg')}</div>`,'GOOGLE PLAY / 重要確認 2','Google Playで公開される情報も確認しましたか？');
-  else if (screen==='googleOrgWarning') html = page(`${info('主な準備',`D‑U‑N‑S番号、組織名・住所、電話番号、Webサイト、Google Paymentsの組織情報、組織確認などが必要になります。 ${source(SOURCES.googleAccountType)}`,'soft')}<p class="lead">すでに個人アカウントを持っている場合は、条件を満たせば個人→組織への変更フローがあります。 ${source(SOURCES.googleChangeType,'変更手順')}</p><div class="choices">${choice('理解した。組織ルートで進む','','googleOrgContinue')}</div>`,'GOOGLE PLAY / 組織','Google Playの組織登録は準備が少し増えます');
-  else if (screen==='googleExistingIndividual') html = page(`<div class="choices">${choice('個人のまま使う','公開前テスト・公開情報の該当有無を確認','googleKeep')}${choice('組織へ変更したい','既存アカウントから変更できる場合があります','googleConvert')}</div>`,'GOOGLE PLAY / 登録済み','今の個人アカウントをどうしたいですか？');
-  else if (screen==='googleExistingKeep') html = page(`${info('作成時期を確認',`2023年11月13日以降に作成された新しい個人アカウントでは、新規アプリの本番公開前テスト要件があります。 ${source(SOURCES.googleTesting)}`,'warning')}${info('公開情報',`個人アカウントでも公開される法的情報があります。収益化時の住所表示も含め、現在の公式案内を確認してください。 ${source(SOURCES.googlePublicInfo)}`,'warning')}<div class="choices">${choice('確認した。個人のまま進む','','googleKeepContinue')}</div>`,'GOOGLE PLAY / 個人継続','そのまま使う場合の確認ポイント');
-  else if (screen==='address') html = page(`<div class="choices">${choice('はい。事業用住所を分けたい','開業届やD‑U‑N‑Sを整える前に決めると二度手間を減らせます','addressYes','社')}${choice('いいえ。自宅住所で問題ない','','addressNo','✓')}${choice('まだ分からない','結果に「検討ポイント」として残す','addressMaybe','?')}</div>`,'事業情報','事業で使う住所を、自宅と分けたいですか？','全員にレンタルオフィスが必要なわけではありません。住所を分けたい人だけ検討します。');
+  if (screen==='platform') html = page(`${comparison()}<div class="choices">${choice('App Storeだけ','iPhone / iPad向け。日本はiPhone利用者が多め','platformApple')}${choice('Google Playだけ','Android向け。世界全体ではAndroid利用者が多め','platformGoogle')}${choice('両方','iPhoneとAndroidの両方に届けたい','platformBoth',true)}</div>`,'STEP 1','どこでアプリを公開したいですか？','まだ決めていなくても大丈夫。上の数字を、選ぶときの目安にしてください。');
+  else if (screen==='appleStatus') html = page(`<div class="choices">${choice('まだ登録していない','','appleNone')}${choice('個人として登録済み','','appleIndividual')}${choice('会社・組織として登録済み','組織向けの手続きはほぼ完了しています','appleOrganization')}</div>`,'APPLE','Appleの開発者登録は、いまどの状態ですか？','App Storeでアプリを出すには「Apple Developer Program」というAppleの開発者アカウントが必要です。');
+  else if (screen==='appleDesired') html = page(`${info('登録料',`Apple Developer Programは<strong>年99米ドル</strong>。毎年更新が必要です。 ${source(SOURCES.appleFee)}`,'soft')}<div class="choices">${choice('個人で登録する','手続きは簡単。ただし本名が公開されます(次の画面で説明)','appleWantIndividual')}${choice('組織で登録する','会社・団体向け。D‑U‑N‑S番号(会社を識別する国際的な番号)などの確認が必要','appleWantOrg')}${choice('まだ決められない','個人と組織の違いを先に見る','appleHelp')}</div>`,'APPLE / 新規登録','個人と組織、どちらで登録しますか？');
+  else if (screen==='appleDecisionHelp') html = page(`${info('個人で登録すると',`App Storeの開発者名の欄に、原則として<strong>あなたの戸籍上の本名</strong>が表示されます。ニックネームや屋号にはできません。 ${source(SOURCES.appleDeveloperName)}`,'warning')}${info('組織で登録するには',`D‑U‑N‑S番号(会社を識別する国際的な番号)、契約できる権限、Webサイトなど、Appleが定める組織の条件を満たす必要があります。 ${source(SOURCES.appleEnrollment)}`,'soft')}<div class="choices">${choice('本名が表示されても問題ない','個人で登録する','appleWantIndividual')}${choice('条件を確認して組織で登録したい','組織で登録する','appleWantOrg')}</div>`,'APPLE / 個人と組織の違い','迷ったら「本名が表示されてもいいか」で考えるのが近道です');
+  else if (screen==='appleNameWarning') html = page(`${info('個人登録の注意点',`Appleに個人で登録すると、App Store上の開発者名が原則として<strong>あなたの戸籍上の本名</strong>になります。 ${source(SOURCES.appleDeveloperName)}`,'warning')}<div class="choices">${choice('本名が表示されても問題ない','','appleNameOk')}${choice('本名は出したくない','組織で登録する場合の条件を確認します','appleNameNg')}</div>`,'APPLE / 大事な確認','App Storeにあなたの本名が表示されます。大丈夫ですか？');
+  else if (screen==='appleOrgWarning') html = page(`${info('先に確認',`「開業届を出した」「屋号がある」だけでは、組織として登録できるとは限りません。D‑U‑N‑S番号(会社を識別する国際的な番号)や、契約できる法的な実体かどうかの確認が必要です。 ${source(SOURCES.appleEnrollment)}`,'warning')}<div class="choices">${choice('わかった。組織ルートで進む','','appleOrgContinue')}</div>`,'APPLE / 組織登録','Appleの組織登録には条件があります','組織登録を希望する場合は「D‑U‑N‑Sと事業情報を整える章」も案内します。');
+  else if (screen==='appleExistingIndividual') html = page(`${info('個人のまま使う場合',`App Store上の開発者名は、原則としてあなたの戸籍上の本名のままです。 ${source(SOURCES.appleDeveloperName)}`,'warning')}<div class="choices">${choice('個人のまま使う','','appleKeep')}${choice('組織へ変更したい','変更の条件とD‑U‑N‑S番号を確認します','appleConvert')}</div>`,'APPLE / 登録済み','いまの個人アカウントを、どうしたいですか？');
+  else if (screen==='googleStatus') html = page(`<div class="choices">${choice('まだ登録していない','','googleNone')}${choice('個人として登録済み','','googleIndividual')}${choice('会社・組織として登録済み','個人→組織の変更手続きは不要です','googleOrganization')}</div>`,'GOOGLE PLAY','Google Playの開発者登録は、いまどの状態ですか？','Google Playでアプリを出すには「Google Play Console」の開発者アカウントが必要です。');
+  else if (screen==='googleDesired') html = page(`${info('登録料',`Google Play Consoleの登録料は<strong>25米ドル・最初の1回だけ</strong>です。 ${source(SOURCES.googleFee)}`,'soft')}<div class="choices">${choice('個人で登録する','手軽。ただし公開前テストと公開される情報に注意(次の画面で説明)','googleWantIndividual')}${choice('組織で登録する','会社・団体向け。D‑U‑N‑S番号(会社を識別する国際的な番号)などの確認が必要','googleWantOrg')}${choice('まだ決められない','個人と組織の注意点を比べて決める','googleHelp')}</div>`,'GOOGLE PLAY / 新規登録','個人と組織、どちらで登録しますか？');
+  else if (screen==='googleDecisionHelp') html = page(`${info('個人で登録すると',`2023年11月13日より後に作られた新しい個人アカウントでは、初めてのアプリを公開する前に、原則として<strong>12人以上のテスターが14日間連続で参加するテスト</strong>が必要です。アップデートのたびに毎回必要になるわけではありません。 ${source(SOURCES.googleTesting)}`,'warning')}${info('組織で登録すると',`D‑U‑N‑S番号(会社を識別する国際的な番号)や、組織名・住所・Webサイトなどの確認が増えます。 ${source(SOURCES.googleAccountType)}`,'soft')}<div class="choices">${choice('テスターを12人集められそう','個人で登録する','googleWantIndividual')}${choice('組織の準備をして進めたい','組織で登録する','googleWantOrg')}</div>`,'GOOGLE PLAY / 個人と組織の違い','個人は手軽に見えて、「公開前テスト」が一番のハードルです');
+  else if (screen==='googleTesterWarning') html = page(`${info('新しい個人アカウントの公開条件',`対象となる新しい個人アカウントでは、初めてのアプリを本番公開する前に、12人以上が14日間連続で参加するクローズドテストと、本番公開の申請が必要です。 ${source(SOURCES.googleTesting)}`,'warning')}<div class="choices">${choice('できそう / 問題ない','','googleTesterOk')}${choice('かなり大変そう…','組織で登録する場合の条件も見てみる','googleTesterNg')}</div>`,'GOOGLE PLAY / 確認 1','12人以上のテスターを、14日間続けて集められそうですか？');
+  else if (screen==='googlePublicWarning') html = page(`${info('個人アカウントでも公開される情報があります',`Google Playでは、個人アカウントでも本名・国・連絡用メールアドレスなどが公開されます。さらに課金など収益化をする場合、住所が表示されるケースもあります。何が公開されるかを、事前に公式ヘルプで確認してください。 ${source(SOURCES.googlePublicInfo)}`,'warning')}<div class="choices">${choice('確認した。問題ない','','googlePublicOk')}${choice('公開される情報が気になる','組織で登録する場合の条件も見てみる','googlePublicNg')}</div>`,'GOOGLE PLAY / 確認 2','Google Playで公開されるあなたの情報も確認しましたか？');
+  else if (screen==='googleOrgWarning') html = page(`${info('主な準備',`D‑U‑N‑S番号(会社を識別する国際的な番号)、組織名・住所、電話番号、Webサイト、Google Paymentsの組織情報などの確認が必要になります。 ${source(SOURCES.googleAccountType)}`,'soft')}<p class="lead">すでに個人アカウントを持っている場合は、条件を満たせば個人→組織への変更手続きがあります。 ${source(SOURCES.googleChangeType,'変更手順')}</p><div class="choices">${choice('わかった。組織ルートで進む','','googleOrgContinue')}</div>`,'GOOGLE PLAY / 組織登録','Google Playの組織登録は、準備するものが少し増えます');
+  else if (screen==='googleExistingIndividual') html = page(`<div class="choices">${choice('個人のまま使う','公開前テストと公開される情報が自分に当てはまるか確認します','googleKeep')}${choice('組織へ変更したい','いまのアカウントから変更できる場合があります','googleConvert')}</div>`,'GOOGLE PLAY / 登録済み','いまの個人アカウントを、どうしたいですか？');
+  else if (screen==='googleExistingKeep') html = page(`${info('アカウントを作った時期を確認',`2023年11月13日より後に作った個人アカウントには、初めてのアプリを本番公開する前のテスト条件(12人×14日間)があります。 ${source(SOURCES.googleTesting)}`,'warning')}${info('公開される情報',`個人アカウントでも公開される情報(本名など)があります。収益化する場合の住所表示も含めて、現在の公式案内を確認してください。 ${source(SOURCES.googlePublicInfo)}`,'warning')}<div class="choices">${choice('確認した。個人のまま進む','','googleKeepContinue')}</div>`,'GOOGLE PLAY / 個人のまま使う','そのまま使う場合の確認ポイント');
+  else if (screen==='address') html = page(`<div class="choices">${choice('はい。自宅とは別の住所を使いたい','開業届やD‑U‑N‑Sの前に決めておくと、あとで住所変更する二度手間を減らせます','addressYes')}${choice('いいえ。自宅の住所で問題ない','','addressNo')}${choice('まだ分からない','診断結果に「検討ポイント」として残します','addressMaybe')}</div>`,'最後の質問','事業用の住所を、自宅の住所と分けたいですか？','ストアやD‑U‑N‑Sに登録する住所の話です。全員にレンタルオフィスが必要なわけではありません。');
   else if (screen==='result') html = resultHtml();
   app.innerHTML = html;
 }
