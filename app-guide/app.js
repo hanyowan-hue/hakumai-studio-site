@@ -64,8 +64,8 @@ function source(href, label = '公式情報') {
 function info(title, body, tone='neutral') {
   return `<div class="info-card ${tone}"><div class="info-card-title">${title}</div><div class="info-card-body">${body}</div></div>`;
 }
-function choice(title, desc='', action='', recommended=false) {
-  return `<button class="choice" data-action="${action}"><div class="choice-copy"><div class="choice-title-row"><strong>${title}</strong>${recommended?'<span class="pill">おすすめ</span>':''}</div>${desc?`<span>${desc}</span>`:''}</div><div class="choice-arrow">›</div></button>`;
+function choice(title, desc='', action='') {
+  return `<button class="choice" data-action="${action}"><div class="choice-copy"><strong>${title}</strong>${desc?`<span>${desc}</span>`:''}</div><div class="choice-arrow">›</div></button>`;
 }
 
 function shareRow(label, ios, android) {
@@ -85,7 +85,7 @@ function comparison() {
       ${shareRow('世界', SHARE.world.ios, SHARE.world.android)}
     </div>
     <div class="comparison-card apple-card"><div class="comparison-heading">App Store</div><dl>
-      <div><dt>対象</dt><dd>iPhone / iPad</dd></div>
+      <div><dt>対象</dt><dd>iPhone / iPad / Mac など</dd></div>
       <div><dt>登録料</dt><dd>年99米ドル(毎年)</dd></div>
       <div><dt>日本のシェア</dt><dd>iOS ${Math.round(SHARE.japan.ios)}%</dd></div>
       <div><dt>世界のシェア</dt><dd>iOS ${Math.round(SHARE.world.ios)}%</dd></div>
@@ -166,7 +166,7 @@ function resultHtml() {
   const route = buildRoute();
   const appleText = ['apple','both'].includes(state.platform) ? (state.appleStatus==='organization'?'組織アカウント登録済み':state.appleDesired==='organization'?(state.appleStatus==='individual'?'個人 → 組織への変更ルート':'組織で新規登録するルート'):'個人アカウントを使うルート') : null;
   const googleText = ['google','both'].includes(state.platform) ? (state.googleStatus==='organization'?'組織アカウント登録済み':state.googleDesired==='organization'?(state.googleStatus==='individual'?'個人 → 組織への変更ルート':'組織で新規登録するルート'):'個人アカウントを使うルート') : null;
-  return `<div class="eyebrow">診断結果</div><h1>あなたが読むべきところを整理しました</h1><p class="lead">不要な章は飛ばしてOKです。実際の手続き前には各公式情報も確認してください。</p>
+  return `${progressRow()}<div class="eyebrow">診断結果</div><h1>あなたが読むべきところを整理しました</h1><p class="lead">不要な章は飛ばしてOKです。実際の手続き前には各公式情報も確認してください。</p>
     <div class="result-grid">${appleText?`<div class="result-platform"><div><span>App Store</span><strong>${appleText}</strong></div></div>`:''}${googleText?`<div class="result-platform"><div><span>Google Play</span><strong>${googleText}</strong></div></div>`:''}</div>
     ${route.cautions.length?`<section class="result-section"><h2>⚠ 先に知っておきたい注意点</h2><ul>${route.cautions.map(c=>`<li>${c}</li>`).join('')}</ul></section>`:''}
     <section class="result-section"><h2>✓ やることリスト</h2><ol>${route.steps.map(s=>`<li>${s}</li>`).join('')}</ol></section>
@@ -175,12 +175,33 @@ function resultHtml() {
     <div class="result-actions"><button class="primary-button" data-action="notePlaceholder">詳しい手順をnoteで読む ↗</button><button class="secondary-button" data-action="reset">↻ もう一度診断する</button></div>`;
 }
 
-function page(body, eyebrow='', title='', lead='') { return `${historyStack.length && screen!=='result'?'<button class="back-button" data-action="back">← 戻る</button>':''}${eyebrow?`<div class="eyebrow">${eyebrow}</div>`:''}${title?`<h1>${title}</h1>`:''}${lead?`<p class="lead">${lead}</p>`:''}${body}`; }
+// 進み具合のざっくり計算。分岐で質問数が変わるため正確な%ではなく、
+// フェーズ(Apple区間/Google区間/住所)ごとの目安配分で出す。
+function progressPercent() {
+  if (screen === 'platform') return 5;
+  if (screen === 'address') return 90;
+  if (screen === 'result') return 100;
+  const frac = {
+    appleStatus:.15, appleExistingIndividual:.5, appleDesired:.45, appleDecisionHelp:.6, appleNameWarning:.8, appleOrgWarning:.8,
+    googleStatus:.15, googleExistingIndividual:.5, googleDesired:.45, googleDecisionHelp:.6, googleTesterWarning:.65, googlePublicWarning:.85, googleOrgWarning:.8, googleExistingKeep:.8,
+  };
+  const isApple = screen.startsWith('apple');
+  let lo = 10, hi = 85;
+  if (state.platform === 'both') { if (isApple) { lo = 10; hi = 45; } else { lo = 45; hi = 85; } }
+  return Math.round(lo + (hi - lo) * (frac[screen] ?? .5));
+}
+function progressRow() {
+  const p = progressPercent();
+  const label = p === 100 ? '完了! 100%' : `進み具合 だいたい${p}%`;
+  return `<div class="progress-row"><div class="progress-track"><div class="progress-fill" style="width:${p}%"></div></div><span>${label}</span></div>`;
+}
+
+function page(body, eyebrow='', title='', lead='') { return `${progressRow()}${historyStack.length && screen!=='result'?'<button class="back-button" data-action="back">← 戻る</button>':''}${eyebrow?`<div class="eyebrow">${eyebrow}</div>`:''}${title?`<h1>${title}</h1>`:''}${lead?`<p class="lead">${lead}</p>`:''}${body}`; }
 
 function render() {
   resetTop.classList.toggle('hidden', screen==='platform' || screen==='result');
   let html='';
-  if (screen==='platform') html = page(`${comparison()}<div class="choices">${choice('App Storeだけ','iPhone / iPad向け。日本はiPhone利用者が多め','platformApple')}${choice('Google Playだけ','Android向け。世界全体ではAndroid利用者が多め','platformGoogle')}${choice('両方','iPhoneとAndroidの両方に届けたい','platformBoth',true)}</div>`,'STEP 1','どこでアプリを公開したいですか？','まだ決めていなくても大丈夫。上の数字を、選ぶときの目安にしてください。');
+  if (screen==='platform') html = page(`${comparison()}<div class="choices">${choice('App Storeだけ','iPhone / iPad / Macなど向け。日本はiPhone利用者が多め','platformApple')}${choice('Google Playだけ','Android向け。世界全体ではAndroid利用者が多め','platformGoogle')}${choice('両方','iPhoneとAndroidの両方に届けたい','platformBoth')}</div>`,'STEP 1','どこでアプリを公開したいですか？','まだ決めていなくても大丈夫。下の数字を、選ぶときの目安にしてください。');
   else if (screen==='appleStatus') html = page(`<div class="choices">${choice('まだ登録していない','','appleNone')}${choice('個人として登録済み','','appleIndividual')}${choice('会社・組織として登録済み','組織向けの手続きはほぼ完了しています','appleOrganization')}</div>`,'APPLE','Appleの開発者登録は、いまどの状態ですか？','App Storeでアプリを出すには「Apple Developer Program」というAppleの開発者アカウントが必要です。');
   else if (screen==='appleDesired') html = page(`${info('登録料',`Apple Developer Programは<strong>年99米ドル</strong>。毎年更新が必要です。 ${source(SOURCES.appleFee)}`,'soft')}<div class="choices">${choice('個人で登録する','手続きは簡単。ただし本名が公開されます(次の画面で説明)','appleWantIndividual')}${choice('組織で登録する','会社・団体向け。D‑U‑N‑S番号(会社を識別する国際的な番号)などの確認が必要','appleWantOrg')}${choice('まだ決められない','個人と組織の違いを先に見る','appleHelp')}</div>`,'APPLE / 新規登録','個人と組織、どちらで登録しますか？');
   else if (screen==='appleDecisionHelp') html = page(`${info('個人で登録すると',`App Storeの開発者名の欄に、原則として<strong>あなたの戸籍上の本名</strong>が表示されます。ニックネームや屋号にはできません。 ${source(SOURCES.appleDeveloperName)}`,'warning')}${info('組織で登録するには',`D‑U‑N‑S番号(会社を識別する国際的な番号)、契約できる権限、Webサイトなど、Appleが定める組織の条件を満たす必要があります。 ${source(SOURCES.appleEnrollment)}`,'soft')}<div class="choices">${choice('本名が表示されても問題ない','個人で登録する','appleWantIndividual')}${choice('条件を確認して組織で登録したい','組織で登録する','appleWantOrg')}</div>`,'APPLE / 個人と組織の違い','迷ったら「本名が表示されてもいいか」で考えるのが近道です');
