@@ -21,6 +21,25 @@ const SHARE = {
   world: { ios: 31.6, android: 68.4 },
 };
 
+// 表示名・料金目安・リンク先。affiliate-config.json が読めたらそちらで上書きされる
+// (アフィリエイトURLへの差し替えは affiliate-config.json を編集するだけでOK)
+const AFFILIATE = {
+  virtualOffice: { name: 'METSバーチャルオフィス', url: 'https://vo-metsoffice.jp/', priceNote: '月270円〜(住所利用のみのライトプラン)' },
+  phone: { name: 'povo2.0', url: 'https://povo.jp/', priceNote: '基本料0円。半年に1回の少額トッピング(250円〜)で維持でき、月あたり数十円ほど' },
+  disclosure: '※リンクには広告(PR)を含む場合があります。',
+};
+fetch('./affiliate-config.json')
+  .then(r => r.ok ? r.json() : null)
+  .then(cfg => {
+    const jp = cfg?.offers?.JP;
+    if (!jp) return;
+    if (jp.virtualOffice) Object.assign(AFFILIATE.virtualOffice, jp.virtualOffice);
+    if (jp.phone) Object.assign(AFFILIATE.phone, jp.phone);
+    if (typeof jp.disclosure === 'string') AFFILIATE.disclosure = jp.disclosure;
+    if (screen === 'googleOrgWarning') render();
+  })
+  .catch(() => {});
+
 const NOTE_SECTIONS = {
   compare: [1, 'App StoreとGoogle Play、どちらに出す？'],
   accountTypes: [2, '個人アカウントと組織アカウントの違い'],
@@ -220,7 +239,7 @@ function render() {
   else if (screen==='googleDecisionHelp') html = page(`${info('個人で登録すると',`2023年11月13日より後に作られた新しい個人アカウントでは、初めてのアプリを公開する前に、原則として<strong>12人以上のテスターが14日間連続で参加するテスト</strong>が必要です。アップデートのたびに毎回必要になるわけではありません。 ${source(SOURCES.googleTesting)}`,'warning')}${info('組織で登録すると',`D‑U‑N‑S番号(会社を識別する国際的な番号)や、組織名・住所・Webサイトなどの確認が増えます。 ${source(SOURCES.googleAccountType)}`,'soft')}<div class="choices">${choice('テスターを12人集められそう','個人で登録する','googleWantIndividual')}${choice('組織の準備をして進めたい','組織で登録する','googleWantOrg')}</div>`,'GOOGLE PLAY / 個人と組織の違い','個人は手軽に見えて、「公開前テスト」が一番のハードルです');
   else if (screen==='googleTesterWarning') html = page(`${info('新しい個人アカウントの公開条件',`対象となる新しい個人アカウントでは、初めてのアプリを本番公開する前に、12人以上が14日間連続で参加するクローズドテストと、本番公開の申請が必要です。 ${source(SOURCES.googleTesting)}`,'warning')}<div class="choices">${choice('できそう / 問題ない','','googleTesterOk')}${choice('かなり大変そう…','組織で登録する場合の条件も見てみる','googleTesterNg')}</div>`,'GOOGLE PLAY / 確認 1','12人以上のテスターを、14日間続けて集められそうですか？');
   else if (screen==='googlePublicWarning') html = page(`${info('個人アカウントでも公開される情報があります',`Google Playでは、個人アカウントでも本名・国・連絡用メールアドレスなどが公開されます。さらに課金など収益化をする場合、住所が表示されるケースもあります。何が公開されるかを、事前に公式ヘルプで確認してください。 ${source(SOURCES.googlePublicInfo)}`,'warning')}<div class="choices">${choice('確認した。問題ない','','googlePublicOk')}${choice('公開される情報が気になる','組織で登録する場合の条件も見てみる','googlePublicNg')}</div>`,'GOOGLE PLAY / 確認 2','Google Playで公開されるあなたの情報も確認しましたか？');
-  else if (screen==='googleOrgWarning') html = page(`${info('主な準備',`D‑U‑N‑S番号(会社を識別する国際的な番号)、組織名・住所、電話番号、Webサイト、Google Paymentsの組織情報などの確認が必要になります。 ${source(SOURCES.googleAccountType)}`,'soft')}<p class="lead">すでに個人アカウントを持っている場合は、条件を満たせば個人→組織への変更手続きがあります。 ${source(SOURCES.googleChangeType,'変更手順')}</p><div class="choices">${choice('わかった。組織ルートで進む','','googleOrgContinue')}</div>`,'GOOGLE PLAY / 組織登録','Google Playの組織登録は、準備するものが少し増えます');
+  else if (screen==='googleOrgWarning') html = page(`${info('主な準備',`D‑U‑N‑S番号(会社を識別する国際的な番号)、組織名・住所、電話番号、Webサイト、Google Paymentsの組織情報などの確認が必要になります。 ${source(SOURCES.googleAccountType)}`,'soft')}${info('住所・電話番号などが公開されます',`組織アカウントでは、Google Play上の開発者情報として組織名・住所・電話番号などの連絡先が公開されます。自宅の住所や個人の電話番号をそのまま出したくない場合は、住所レンタル(バーチャルオフィス)や事業用の電話番号を用意する方法があります。 ${source(SOURCES.googlePublicInfo)}`,'warning')}${info('自宅住所・個人の電話を出したくない場合の費用の目安',`<ul class="cost-list"><li><strong>住所レンタル</strong> … ${AFFILIATE.virtualOffice.priceNote}。例: <a class="source-link" href="${AFFILIATE.virtualOffice.url}" target="_blank" rel="noreferrer sponsored">${AFFILIATE.virtualOffice.name} ↗</a></li><li><strong>電話番号</strong> … ${AFFILIATE.phone.priceNote}。例: <a class="source-link" href="${AFFILIATE.phone.url}" target="_blank" rel="noreferrer sponsored">${AFFILIATE.phone.name} ↗</a></li></ul>プランによって郵便物の受け取りや法人登記の可否が違うので、契約前に各サービスの内容を確認してください。<span class="disclosure">${AFFILIATE.disclosure}</span>`,'soft')}<p class="lead">すでに個人アカウントを持っている場合は、条件を満たせば個人→組織への変更手続きがあります。 ${source(SOURCES.googleChangeType,'変更手順')}</p><div class="choices">${choice('わかった。組織ルートで進む','','googleOrgContinue')}</div>`,'GOOGLE PLAY / 組織登録','Google Playの組織登録は、準備するものが少し増えます');
   else if (screen==='googleExistingIndividual') html = page(`<div class="choices">${choice('個人のまま使う','公開前テストと公開される情報が自分に当てはまるか確認します','googleKeep')}${choice('組織へ変更したい','いまのアカウントから変更できる場合があります','googleConvert')}</div>`,'GOOGLE PLAY / 登録済み','いまの個人アカウントを、どうしたいですか？');
   else if (screen==='googleExistingKeep') html = page(`${info('アカウントを作った時期を確認',`2023年11月13日より後に作った個人アカウントには、初めてのアプリを本番公開する前のテスト条件(12人×14日間)があります。 ${source(SOURCES.googleTesting)}`,'warning')}${info('公開される情報',`個人アカウントでも公開される情報(本名など)があります。収益化する場合の住所表示も含めて、現在の公式案内を確認してください。 ${source(SOURCES.googlePublicInfo)}`,'warning')}<div class="choices">${choice('確認した。個人のまま進む','','googleKeepContinue')}</div>`,'GOOGLE PLAY / 個人のまま使う','そのまま使う場合の確認ポイント');
   else if (screen==='appleUpgradeOffer') html = page(`${info('準備するものはGoogle Playとほぼ共通',`Google Playの組織登録で用意するもの(D‑U‑N‑S番号・事業情報など)は、Appleの組織登録でも<strong>ほぼそのまま使えます</strong>。追加の作業は主にApple側への申請です。組織にすると、App Storeにはあなたの本名ではなく<strong>組織名が表示されます</strong>。`,'soft')}${info('確認',`Appleの組織登録にも審査と条件があります(契約できる法的な実体か、など)。必ず通るとは限らない点だけ知っておいてください。 ${source(SOURCES.appleEnrollment)}`,'warning')}<div class="choices">${choice('App Storeも組織にする','Google Play用の準備を使い回せて、本名表示も避けられます','appleUpgradeYes')}${choice('Appleは個人のままでいい','App Storeには本名が表示されます','appleUpgradeNo')}</div>`,'APPLE / ついでの提案','App Storeも組織アカウントにしませんか？','Google Playを組織で進めるなら、Appleを組織にする手間は小さくなります。');
