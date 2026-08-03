@@ -53,7 +53,7 @@ const NOTE_SECTIONS = {
   googleNewOrg: [10, 'Google Playへ組織で新規登録する'],
   googleConvert: [11, 'Google Playを個人から組織へ変更する'],
   googleVerify: [12, 'Googleの組織確認で提出した書類'],
-  etax: [13, 'e‑Tax受信通知を用意する'],
+  etax: [13, '開業届はfreee開業で出すのが一番ラクだった'],
   pitfalls: [14, '実際につまずいたポイント'],
 };
 
