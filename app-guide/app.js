@@ -124,7 +124,13 @@ function reset() {
   render();
 }
 function afterApple() { return state.platform === 'both' ? 'googleStatus' : 'address'; }
-function afterGoogle() { return 'address'; }
+// Apple=個人のまま & Google=組織の人には、D-U-N-S等の準備が共通で使える
+// 「App Storeも組織にする？」の提案を住所の質問の前に挟む
+function afterGoogle() {
+  const googleOrg = state.googleDesired === 'organization' || state.googleStatus === 'organization';
+  const appleIndividual = state.platform === 'both' && ((state.appleStatus === 'none' && state.appleDesired === 'individual') || (state.appleStatus === 'individual' && state.appleDesired === 'keep'));
+  return googleOrg && appleIndividual ? 'appleUpgradeOffer' : 'address';
+}
 
 function buildRoute() {
   const sections = [['compare', ...NOTE_SECTIONS.compare]];
@@ -179,6 +185,7 @@ function resultHtml() {
 // フェーズ(Apple区間/Google区間/住所)ごとの目安配分で出す。
 function progressPercent() {
   if (screen === 'platform') return 5;
+  if (screen === 'appleUpgradeOffer') return 87;
   if (screen === 'address') return 90;
   if (screen === 'result') return 100;
   const frac = {
@@ -216,6 +223,7 @@ function render() {
   else if (screen==='googleOrgWarning') html = page(`${info('主な準備',`D‑U‑N‑S番号(会社を識別する国際的な番号)、組織名・住所、電話番号、Webサイト、Google Paymentsの組織情報などの確認が必要になります。 ${source(SOURCES.googleAccountType)}`,'soft')}<p class="lead">すでに個人アカウントを持っている場合は、条件を満たせば個人→組織への変更手続きがあります。 ${source(SOURCES.googleChangeType,'変更手順')}</p><div class="choices">${choice('わかった。組織ルートで進む','','googleOrgContinue')}</div>`,'GOOGLE PLAY / 組織登録','Google Playの組織登録は、準備するものが少し増えます');
   else if (screen==='googleExistingIndividual') html = page(`<div class="choices">${choice('個人のまま使う','公開前テストと公開される情報が自分に当てはまるか確認します','googleKeep')}${choice('組織へ変更したい','いまのアカウントから変更できる場合があります','googleConvert')}</div>`,'GOOGLE PLAY / 登録済み','いまの個人アカウントを、どうしたいですか？');
   else if (screen==='googleExistingKeep') html = page(`${info('アカウントを作った時期を確認',`2023年11月13日より後に作った個人アカウントには、初めてのアプリを本番公開する前のテスト条件(12人×14日間)があります。 ${source(SOURCES.googleTesting)}`,'warning')}${info('公開される情報',`個人アカウントでも公開される情報(本名など)があります。収益化する場合の住所表示も含めて、現在の公式案内を確認してください。 ${source(SOURCES.googlePublicInfo)}`,'warning')}<div class="choices">${choice('確認した。個人のまま進む','','googleKeepContinue')}</div>`,'GOOGLE PLAY / 個人のまま使う','そのまま使う場合の確認ポイント');
+  else if (screen==='appleUpgradeOffer') html = page(`${info('準備するものはGoogle Playとほぼ共通',`Google Playの組織登録で用意するもの(D‑U‑N‑S番号・事業情報など)は、Appleの組織登録でも<strong>ほぼそのまま使えます</strong>。追加の作業は主にApple側への申請です。組織にすると、App Storeにはあなたの本名ではなく<strong>組織名が表示されます</strong>。`,'soft')}${info('確認',`Appleの組織登録にも審査と条件があります(契約できる法的な実体か、など)。必ず通るとは限らない点だけ知っておいてください。 ${source(SOURCES.appleEnrollment)}`,'warning')}<div class="choices">${choice('App Storeも組織にする','Google Play用の準備を使い回せて、本名表示も避けられます','appleUpgradeYes')}${choice('Appleは個人のままでいい','App Storeには本名が表示されます','appleUpgradeNo')}</div>`,'APPLE / ついでの提案','App Storeも組織アカウントにしませんか？','Google Playを組織で進めるなら、Appleを組織にする手間は小さくなります。');
   else if (screen==='address') html = page(`<div class="choices">${choice('はい。自宅とは別の住所を使いたい','開業届やD‑U‑N‑Sの前に決めておくと、あとで住所変更する二度手間を減らせます','addressYes')}${choice('いいえ。自宅の住所で問題ない','','addressNo')}${choice('まだ分からない','診断結果に「検討ポイント」として残します','addressMaybe')}</div>`,'最後の質問','事業用の住所を、自宅の住所と分けたいですか？','ストアやD‑U‑N‑Sに登録する住所の話です。全員にレンタルオフィスが必要なわけではありません。');
   else if (screen==='result') html = resultHtml();
   app.innerHTML = html;
@@ -233,6 +241,7 @@ app.addEventListener('click', (e) => {
     googleNone:()=>go('googleDesired',{googleStatus:'none'}), googleIndividual:()=>go('googleExistingIndividual',{googleStatus:'individual'}), googleOrganization:()=>go(afterGoogle(),{googleStatus:'organization',googleDesired:'keep'}),
     googleWantIndividual:()=>go('googleTesterWarning',{googleDesired:'individual'}), googleWantOrg:()=>go('googleOrgWarning',{googleDesired:'organization'}), googleHelp:()=>go('googleDecisionHelp'),
     googleTesterOk:()=>go('googlePublicWarning',{googleTesterOk:true}), googleTesterNg:()=>go('googleOrgWarning',{googleDesired:'organization',googleTesterOk:false}), googlePublicOk:()=>go(afterGoogle(),{googlePublicInfoOk:true}), googlePublicNg:()=>go('googleOrgWarning',{googleDesired:'organization',googlePublicInfoOk:false}), googleOrgContinue:()=>go(afterGoogle()), googleKeep:()=>go('googleExistingKeep',{googleDesired:'keep'}), googleConvert:()=>go('googleOrgWarning',{googleDesired:'organization'}), googleKeepContinue:()=>go(afterGoogle()),
+    appleUpgradeYes:()=>go('address',{appleDesired:'organization'}), appleUpgradeNo:()=>go('address'),
     addressYes:()=>go('result',{wantSeparateAddress:true}), addressNo:()=>go('result',{wantSeparateAddress:false}), addressMaybe:()=>go('result',{wantSeparateAddress:null}),
   };
   actions[a]?.();
