@@ -6,13 +6,13 @@
         "id": "jp-mets-virtual-office",
         "name": "METSバーチャルオフィス",
         "url": "https://vo-metsoffice.jp/",
-        "priceNote": "月270円〜(住所利用のみのライトプラン)"
+        "priceNote": "月270円〜(12か月一括のライトプラン。月払いは330円)"
       },
       "phone": {
         "id": "jp-povo",
         "name": "povo2.0",
         "url": "https://povo.jp/",
-        "priceNote": "基本料0円。半年に1回の少額トッピング(250円〜)で維持でき、月あたり数十円ほど"
+        "priceNote": "基本料0円。ただし180日以上有料トッピング等がないと利用停止・解約の可能性あり"
       },
       "disclosure": "※リンクには広告(PR)を含む場合があります。"
     }
