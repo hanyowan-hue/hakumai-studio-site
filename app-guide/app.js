@@ -40,22 +40,24 @@ fetch('./affiliate-config.json')
   })
   .catch(() => {});
 
+// note記事の見出しと1対1対応。order は結果画面での並び順(記事の登場順)
 const NOTE_SECTIONS = {
-  compare: [1, 'App StoreとGoogle Play、どちらに出す？'],
-  accountTypes: [2, '個人アカウントと組織アカウントの違い'],
-  businessBase: [3, '屋号・事業用住所・レンタルオフィス・独自ドメインを考える'],
-  openingNotice: [4, '開業届を出す前に決めておくこと'],
-  duns: [5, 'D‑U‑N‑S番号の取得・住所確認'],
-  appleNewIndividual: [6, 'Appleへ個人で新規登録する'],
-  appleNewOrg: [7, 'Appleへ組織で新規登録する'],
-  appleConvert: [8, 'Appleを個人から組織へ変更する'],
-  googleNewIndividual: [9, 'Google Playへ個人で新規登録する'],
-  googleNewOrg: [10, 'Google Playへ組織で新規登録する'],
-  googleConvert: [11, 'Google Playを個人から組織へ変更する'],
-  googleVerify: [12, 'Googleの組織確認で提出した書類'],
-  etax: [13, '開業届はfreee開業で出すのが一番ラクだった'],
-  redoFlow: [14, '私が今から全部やり直すなら、この順番'],
-  pitfalls: [15, '実際につまずいた6つのポイント'],
+  compare: [1, '2-1', 'App StoreとGoogle Playの違い'],
+  accountTypes: [2, '2-2', '個人アカウントと組織アカウントの違い'],
+  disclosure: [3, '2-3', '本名・住所など、何が公開される？'],
+  businessBase: [4, '3-1', '屋号・事業用住所・電話番号'],
+  domainSite: [5, '3-2', '独自ドメイン・Webサイト・メール'],
+  openingNotice: [6, '3-3', '開業届'],
+  duns: [7, '3-4', 'D‑U‑N‑S番号'],
+  appleNewIndividual: [8, '4-1', 'Appleに個人で登録する'],
+  appleNewOrg: [9, '4-2', 'Appleに組織で登録する'],
+  appleConvert: [10, '4-3', 'Appleを個人→組織へ変更した実例'],
+  googleNewIndividual: [11, '5-1', 'Google Playに個人で登録する'],
+  googleNewOrg: [12, '5-2', 'Google Playに組織で登録する'],
+  googleConvert: [13, '5-3', 'Google Playを個人→組織へ変更した実例'],
+  googleVerify: [14, '5-4', '組織確認で却下→通過した実例'],
+  redoFlow: [15, '6-1', 'おすすめの手続き順'],
+  pitfalls: [16, '6-2', '実際につまずいたポイント'],
 };
 
 const INITIAL = {
@@ -158,7 +160,7 @@ function afterGoogle() {
 }
 
 function buildRoute() {
-  const sections = [['compare', ...NOTE_SECTIONS.compare]];
+  const sections = [['compare', ...NOTE_SECTIONS.compare], ['disclosure', ...NOTE_SECTIONS.disclosure]];
   const steps = [];
   const cautions = [];
   const addSection = (key) => sections.push([key, ...NOTE_SECTIONS[key]]);
@@ -167,11 +169,11 @@ function buildRoute() {
     addSection('accountTypes');
     if (state.appleStatus === 'none') {
       if (state.appleDesired === 'individual') { addSection('appleNewIndividual'); steps.push('Apple Developer Programへ個人として登録する'); cautions.push('Appleの個人登録では、App Store上のデベロッパ名が原則として本人の法的な正式氏名になります。'); }
-      if (state.appleDesired === 'organization') { addSection('businessBase'); addSection('duns'); addSection('appleNewOrg'); steps.push('Appleの組織登録要件を確認する','D‑U‑N‑S情報を整える','Appleへ組織として登録する'); }
+      if (state.appleDesired === 'organization') { addSection('businessBase'); addSection('domainSite'); addSection('duns'); addSection('appleNewOrg'); steps.push('Appleの組織登録要件を確認する','D‑U‑N‑S情報を整える','Appleへ組織として登録する'); }
     }
     if (state.appleStatus === 'individual') {
       if (state.appleDesired === 'keep') { addSection('appleNewIndividual'); steps.push('Apple個人アカウントをそのまま利用する'); cautions.push('個人アカウントではApp Store上に法的な正式氏名が表示されます。'); }
-      if (state.appleDesired === 'organization') { addSection('businessBase'); addSection('duns'); addSection('appleConvert'); steps.push('Appleの組織変更要件を確認する','D‑U‑N‑S情報を整える','既存のAppleメンバーシップについて組織変更を申請する'); }
+      if (state.appleDesired === 'organization') { addSection('businessBase'); addSection('domainSite'); addSection('duns'); addSection('appleConvert'); steps.push('Appleの組織変更要件を確認する','D‑U‑N‑S情報を整える','既存のAppleメンバーシップについて組織変更を申請する'); }
     }
     if (state.appleStatus === 'organization') steps.push('Appleは組織登録済み。組織名・住所・契約情報が現在も正しいか確認する');
   }
@@ -179,16 +181,16 @@ function buildRoute() {
     addSection('accountTypes');
     if (state.googleStatus === 'none') {
       if (state.googleDesired === 'individual') { addSection('googleNewIndividual'); steps.push('Google Play Consoleへ個人として登録する','新規アプリの本番公開前テスト要件を満たす'); cautions.push('2023年11月13日以降に作成された新しい個人アカウントでは、原則12人以上が14日間連続で参加するクローズドテスト後に本番アクセス申請が必要です。'); cautions.push('Google Playでは個人アカウントでも公開されるデベロッパー情報があります。とくに有料販売やアプリ内課金で収益化する場合、Paymentsプロファイルの住所が表示の対象になるため、自宅住所で登録すると公開される可能性があります。'); }
-      if (state.googleDesired === 'organization') { addSection('businessBase'); addSection('openingNotice'); addSection('duns'); addSection('googleNewOrg'); addSection('googleVerify'); steps.push('事業名・住所を整える','D‑U‑N‑S情報を整える','Google Paymentsの組織情報を用意する','Google Playへ組織として登録する'); }
+      if (state.googleDesired === 'organization') { addSection('businessBase'); addSection('domainSite'); addSection('openingNotice'); addSection('duns'); addSection('googleNewOrg'); addSection('googleVerify'); steps.push('事業名・住所を整える','D‑U‑N‑S情報を整える','Google Paymentsの組織情報を用意する','Google Playへ組織として登録する'); }
     }
     if (state.googleStatus === 'individual') {
       if (state.googleDesired === 'keep') { addSection('googleNewIndividual'); steps.push('Google Play個人アカウントをそのまま利用する'); cautions.push('アカウント作成時期によって、新規アプリの本番公開前テスト要件を確認してください。'); }
-      if (state.googleDesired === 'organization') { addSection('businessBase'); addSection('openingNotice'); addSection('duns'); addSection('googleConvert'); addSection('googleVerify'); addSection('etax'); steps.push('事業名・住所を整える','D‑U‑N‑SとGoogle Paymentsの情報を整える','Play Consoleから個人→組織変更を申請する','必要に応じて開業届＋e‑Tax受信通知など組織確認資料を提出する'); }
+      if (state.googleDesired === 'organization') { addSection('businessBase'); addSection('domainSite'); addSection('openingNotice'); addSection('duns'); addSection('googleConvert'); addSection('googleVerify'); steps.push('事業名・住所を整える','D‑U‑N‑SとGoogle Paymentsの情報を整える','Play Consoleから個人→組織変更を申請する','必要に応じて開業届＋e‑Tax受信通知など組織確認資料を提出する'); }
     }
     if (state.googleStatus === 'organization') steps.push('Google Playは組織登録済み。D‑U‑N‑S・Payments・組織情報が現在も一致しているか確認する');
   }
   if ((state.appleDesired === 'organization' || state.googleDesired === 'organization') && state.hasDomain !== true) {
-    addSection('businessBase');
+    addSection('domainSite');
     steps.unshift('独自ドメインを取得し、Webサイトの公開と事業用メールの作成まで済ませる');
     cautions.push('組織アカウントの確認では、事業のWebサイトやドメインに関連するメールアドレスが使われます。ドメインを取得しただけでは足りず、Webサイトの公開と事業用メールの作成まで必要です。');
   }
@@ -196,8 +198,8 @@ function buildRoute() {
   // これから新規で組織ルートに入る人には「やり直すならこの順番」の章が一番役立つ
   if ((state.appleDesired === 'organization' && state.appleStatus === 'none') || (state.googleDesired === 'organization' && state.googleStatus === 'none')) addSection('redoFlow');
   addSection('pitfalls');
-  const sectionMap = new Map(); sections.forEach(([key,num,title]) => sectionMap.set(key,{key,num,title}));
-  return {sections:[...sectionMap.values()].sort((a,b)=>a.num-b.num), steps:[...new Set(steps)], cautions:[...new Set(cautions)]};
+  const sectionMap = new Map(); sections.forEach(([key,order,num,title]) => sectionMap.set(key,{key,order,num,title}));
+  return {sections:[...sectionMap.values()].sort((a,b)=>a.order-b.order), steps:[...new Set(steps)], cautions:[...new Set(cautions)]};
 }
 
 function resultHtml() {
@@ -208,8 +210,8 @@ function resultHtml() {
     <div class="result-grid">${appleText?`<div class="result-platform"><div><span>App Store</span><strong>${appleText}</strong></div></div>`:''}${googleText?`<div class="result-platform"><div><span>Google Play</span><strong>${googleText}</strong></div></div>`:''}</div>
     ${route.cautions.length?`<section class="result-section"><h2>⚠ 先に知っておきたい注意点</h2><ul>${route.cautions.map(c=>`<li>${c}</li>`).join('')}</ul></section>`:''}
     <section class="result-section"><h2>✓ やることリスト</h2><ol>${route.steps.map(s=>`<li>${s}</li>`).join('')}</ol></section>
-    <section class="result-section note-section"><h2>📖 noteではこの章を読めばOK</h2><div class="chapter-list">${route.sections.map(s=>`<div class="chapter"><span>第${s.num}章</span><strong>${s.title}</strong></div>`).join('')}</div><p class="fineprint">公開後にnoteの各見出しURLが確定したら、この結果から該当見出しへ直接ジャンプするリンクを設定します。</p></section>
-    ${state.wantSeparateAddress===true?info('事業用住所を分けたい人へ','レンタルオフィス等を使う予定なら、開業届・D‑U‑N‑S・ストア登録を進める前に住所を決めておくと、あとから住所変更を繰り返す手間を減らしやすくなります。','soft'):''}
+    <section class="result-section note-section"><h2>📖 noteではここを読めばOK</h2><div class="chapter-list">${route.sections.map(s=>`<div class="chapter"><span>${s.num}</span><strong>${s.title}</strong></div>`).join('')}</div><p class="fineprint">公開後にnoteの各見出しURLが確定したら、この結果から該当見出しへ直接ジャンプするリンクを設定します。</p></section>
+    ${state.wantSeparateAddress===true?info('事業用住所を分けたい人へ','バーチャルオフィス等を使う予定なら、開業届・D‑U‑N‑S・ストア登録を進める前に住所を決めておくと、あとから住所変更を繰り返す手間を減らしやすくなります。','soft'):''}
     <div class="result-actions"><button class="primary-button" data-action="notePlaceholder">詳しい手順をnoteで読む ↗</button><button class="secondary-button" data-action="reset">↻ もう一度診断する</button></div>`;
 }
 
@@ -258,7 +260,7 @@ function render() {
   else if (screen==='googleExistingKeep') html = page(`${info('アカウントを作った時期を確認',`2023年11月13日以降に作った個人アカウントには、新しいアプリを本番公開する前のテスト条件(12人×14日間)があります。 ${source(SOURCES.googleTesting)}`,'warning')}${info('公開される情報',`個人アカウントでも公開される情報(本名など)があります。収益化する場合の住所表示も含めて、現在の公式案内を確認してください。 ${source(SOURCES.googlePublicInfo)}`,'warning')}<div class="choices">${choice('確認した。個人のまま進む','','googleKeepContinue')}</div>`,'GOOGLE PLAY / 個人のまま使う','そのまま使う場合の確認ポイント');
   else if (screen==='appleUpgradeOffer') html = page(`${info('準備するものはGoogle Playとほぼ共通',`Google Playの組織登録で用意するもの(D‑U‑N‑S番号・事業情報など)は、Appleの組織登録でも<strong>ほぼそのまま使えます</strong>。追加の作業は主にApple側への申請です。組織にすると、App Storeの販売元(Seller)表示は<strong>組織名になります</strong>。`,'soft')}${info('確認',`Apple公式は、個人事業主・一人事業には原則Individual(個人)での登録を案内しており、屋号や商号(DBA)はOrganizationとして認められません。変更を申請しても必ず通るとは限らず、承認後もApp Store上の一部の表示(デベロッパ名など)がすぐに切り替わらない場合があります。 ${source(SOURCES.appleEnrollment)}`,'warning')}<div class="choices">${choice('App Storeも組織にする','Google Play用の準備を使い回せて、本名表示も避けられます','appleUpgradeYes')}${choice('Appleは個人のままでいい','App Storeには本名が表示されます','appleUpgradeNo')}</div>`,'APPLE / ついでの提案','App Storeも組織アカウントにしませんか？','Google Playを組織で進めるなら、Appleを組織にする手間は小さくなります。');
   else if (screen==='domain') html = page(`${state.appleDesired==='organization'?info('Appleの組織登録では実質必須',`組織のドメインに関連付けられた仕事用メールアドレスと、一般公開されて正常に機能しているWebサイトが求められます。SNSのページや、中身のほとんどないサイトは認められません。 ${source(SOURCES.appleEnrollment)}`,'warning'):''}${state.googleDesired==='organization'?info('Google Playの組織登録でも必要',`組織のWebサイトが必要で、Google Search Consoleを使ったサイト所有権の確認も必要です。個人から組織へ変更する場合も、変更前にWebサイトの登録・確認を求められます。連絡先も、組織Webサイトのドメインと一致する組織のメールアドレスが案内されています。 ${source(SOURCES.googleAccountType)}`,'soft'):''}${info('ドメインを買っただけでは足りません','独自ドメインを取得しただけでは、Webサイトもメールも自動では作られません。「ドメイン取得 → Webサイト公開 → 事業用メール作成」までで1セットです。','soft')}<div class="choices">${choice('持っている','ドメイン・Webサイト・事業用メールまで用意できている','domainYes')}${choice('まだ持っていない','診断結果に「先にドメインを準備」を追加します','domainNo')}${choice('よく分からない','独自ドメインとは何かから、読むべき章として案内します','domainUnsure')}</div>`,'組織ルートの準備','事業用の独自ドメインは持っていますか？','組織アカウントの確認では、事業のWebサイトとメールアドレスが使われます。');
-  else if (screen==='address') html = page(`${info('⚠ なぜ聞くのか: 登録した住所は公開されることがあります',`Google Playの<strong>組織アカウントでは、登録した住所がGoogle Play上に表示されます</strong>。<strong>個人アカウントでも、有料アプリやアプリ内課金で収益化する場合は、Paymentsプロファイルの住所が表示の対象になります</strong>。<br>つまり自宅の住所で登録すると、<strong>自宅住所が公開される可能性があります</strong>。それが気になる人だけ、住所を分けることを検討してください。 ${source(SOURCES.googlePublicInfo)}`,'warning')}<div class="choices">${choice('はい。自宅とは別の住所を使いたい','開業届やD‑U‑N‑Sの前に決めておくと、あとで住所変更する二度手間を減らせます','addressYes')}${choice('いいえ。自宅の住所で問題ない','自宅住所が公開される可能性は理解した上で進みます','addressNo')}${choice('まだ分からない','診断結果に「検討ポイント」として残します','addressMaybe')}</div>`,'最後の質問','事業用の住所を、自宅の住所と分けたいですか？','全員にレンタルオフィスが必要なわけではありません。まず下の内容を確認してください。');
+  else if (screen==='address') html = page(`${info('⚠ なぜ聞くのか: 登録した住所は公開されることがあります',`Google Playの<strong>組織アカウントでは、登録した住所がGoogle Play上に表示されます</strong>。<strong>個人アカウントでも、有料アプリやアプリ内課金で収益化する場合は、Paymentsプロファイルの住所が表示の対象になります</strong>。<br>つまり自宅の住所で登録すると、<strong>自宅住所が公開される可能性があります</strong>。それが気になる人だけ、住所を分けることを検討してください。 ${source(SOURCES.googlePublicInfo)}`,'warning')}<div class="choices">${choice('はい。自宅とは別の住所を使いたい','開業届やD‑U‑N‑Sの前に決めておくと、あとで住所変更する二度手間を減らせます','addressYes')}${choice('いいえ。自宅の住所で問題ない','自宅住所が公開される可能性は理解した上で進みます','addressNo')}${choice('まだ分からない','診断結果に「検討ポイント」として残します','addressMaybe')}</div>`,'最後の質問','事業用の住所を、自宅の住所と分けたいですか？','全員にバーチャルオフィスが必要なわけではありません。まず下の内容を確認してください。');
   else if (screen==='result') html = resultHtml();
   app.innerHTML = html;
 }
