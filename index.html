@@ -306,6 +306,12 @@
       margin-top: auto;
       padding-top: 24px;
       display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .action-row {
+      display: flex;
       flex-wrap: wrap;
       gap: 10px;
     }
@@ -512,8 +518,12 @@
               tiny creatures, and tactical choices.
             </p>
             <div class="app-actions">
-              <a class="text-link dark" href="morifis/">View</a>
-              <a class="text-link" href="privacy/morifis/">Privacy</a>
+              <div class="action-row">
+                <a class="text-link dark" href="morifis/">View</a>
+              </div>
+              <div class="action-row">
+                <a class="text-link" href="privacy/morifis/">Privacy</a>
+              </div>
             </div>
           </article>
 
@@ -521,16 +531,21 @@
             <div class="app-visual">
               <img class="app-icon sotto" src="assets/sottonote/icon.png" alt="Sotto Note app icon">
             </div>
-            <span class="status">App Store &middot; Google Play coming soon</span>
+            <span class="status">App Store &middot; Google Play</span>
             <h3>Sotto Note</h3>
             <p>
               A calm record-keeping app for nail biting and skin picking, designed to help users
               notice patterns without blame.
             </p>
             <div class="app-actions">
-              <a class="text-link dark" href="https://apps.apple.com/jp/app/sotto-note-%E7%88%AA%E5%99%9B%E3%81%BF-%E8%82%8C%E3%81%84%E3%81%98%E3%82%8A/id6760551009" target="_blank" rel="noopener">App Store</a>
-              <a class="text-link" href="privacy/sottonote/">Privacy</a>
-              <a class="text-link" href="terms/sottonote/">Terms</a>
+              <div class="action-row">
+                <a class="text-link dark" href="https://apps.apple.com/jp/app/sotto-note-%E7%88%AA%E5%99%9B%E3%81%BF-%E8%82%8C%E3%81%84%E3%81%98%E3%82%8A/id6760551009" target="_blank" rel="noopener">App Store</a>
+                <a class="text-link dark" href="https://play.google.com/store/apps/details?id=com.sottonote.app" target="_blank" rel="noopener">Google Play</a>
+              </div>
+              <div class="action-row">
+                <a class="text-link" href="privacy/sottonote/">Privacy</a>
+                <a class="text-link" href="terms/sottonote/">Terms</a>
+              </div>
             </div>
           </article>
 
@@ -545,10 +560,14 @@
               steady reflection.
             </p>
             <div class="app-actions">
-              <a class="text-link dark" href="https://apps.apple.com/jp/app/seedly-%E7%94%B7%E6%80%A7%E5%A6%8A%E6%B4%BB%E3%83%AD%E3%82%B0/id6760891530" target="_blank" rel="noopener">App Store</a>
-              <a class="text-link dark" href="https://play.google.com/store/apps/details?id=com.seedly" target="_blank" rel="noopener">Google Play</a>
-              <a class="text-link" href="privacy/seedly/">Privacy</a>
-              <a class="text-link" href="terms/seedly/">Terms</a>
+              <div class="action-row">
+                <a class="text-link dark" href="https://apps.apple.com/jp/app/seedly-%E7%94%B7%E6%80%A7%E5%A6%8A%E6%B4%BB%E3%83%AD%E3%82%B0/id6760891530" target="_blank" rel="noopener">App Store</a>
+                <a class="text-link dark" href="https://play.google.com/store/apps/details?id=com.seedly" target="_blank" rel="noopener">Google Play</a>
+              </div>
+              <div class="action-row">
+                <a class="text-link" href="privacy/seedly/">Privacy</a>
+                <a class="text-link" href="terms/seedly/">Terms</a>
+              </div>
             </div>
           </article>
         </div>
