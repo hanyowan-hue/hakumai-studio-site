@@ -40,24 +40,27 @@ fetch('./affiliate-config.json')
   })
   .catch(() => {});
 
-// note記事の見出しと1対1対応。order は結果画面での並び順(記事の登場順)
+// 公開したnote記事のURL。各見出しのアンカーは NOTE_SECTIONS の4番目で保持する
+const NOTE_URL = 'https://note.com/hakumai_studio/n/n73a509398030';
+
+// note記事の見出しと1対1対応。[並び順, 見出し番号, 見出し名, noteのアンカーID]
 const NOTE_SECTIONS = {
-  compare: [1, '2-1', 'App StoreとGoogle Playの違い'],
-  accountTypes: [2, '2-2', '個人アカウントと組織アカウントの違い'],
-  disclosure: [3, '2-3', '本名・住所など、何が公開される？'],
-  businessBase: [4, '3-1', '屋号・事業用住所・電話番号'],
-  domainSite: [5, '3-2', '独自ドメイン・Webサイト・メール'],
-  openingNotice: [6, '3-3', '開業届'],
-  duns: [7, '3-4', 'D‑U‑N‑S番号'],
-  appleNewIndividual: [8, '4-1', 'Appleに個人で登録する'],
-  appleNewOrg: [9, '4-2', 'Appleに組織で登録する'],
-  appleConvert: [10, '4-3', 'Appleを個人→組織へ変更した実例'],
-  googleNewIndividual: [11, '5-1', 'Google Playに個人で登録する'],
-  googleNewOrg: [12, '5-2', 'Google Playに組織で登録する'],
-  googleConvert: [13, '5-3', 'Google Playを個人→組織へ変更した実例'],
-  googleVerify: [14, '5-4', '組織確認で却下→通過した実例'],
-  redoFlow: [15, '6-1', 'おすすめの手続き順'],
-  pitfalls: [16, '6-2', '実際につまずいたポイント'],
+  compare:            [1,  '2-1', 'App StoreとGoogle Playの違い',        '34826bd2-4ea2-4a83-92a9-f2c020b021ac'],
+  accountTypes:       [2,  '2-2', '個人アカウントと組織アカウントの違い', 'e483633d-539d-48c0-896c-8b228b451481'],
+  disclosure:         [3,  '2-3', '本名・住所など、何が公開される？',     'cacc7c1c-57f2-4cb1-adc9-4ea3d60c8a80'],
+  businessBase:       [4,  '3-1', '屋号・事業用住所・電話番号',           '61054284-75af-4e54-959a-0564a2d51d14'],
+  domainSite:         [5,  '3-2', '独自ドメイン・Webサイト・メール',       '5d2bbe74-7858-4248-b7bd-cd9514a7ec78'],
+  openingNotice:      [6,  '3-3', '開業届',                              'e2f89c65-57c7-48bc-80c3-a9bab387f569'],
+  duns:               [7,  '3-4', 'D‑U‑N‑S番号',                         'a6e86ee3-dea2-4005-9345-8b16b909d99c'],
+  appleNewIndividual: [8,  '4-1', 'Appleに個人で登録する',                '23f043cf-0ebd-4f20-834f-3054ec2ed0fc'],
+  appleNewOrg:        [9,  '4-2', 'Appleに組織で登録する',                'd7bb1b38-98ec-470b-bc1a-980b64ae7b72'],
+  appleConvert:       [10, '4-3', 'Appleを個人→組織へ変更した実例',       'dc6a5806-8239-4522-bc83-a01852086867'],
+  googleNewIndividual:[11, '5-1', 'Google Playに個人で登録する',          'def357ab-2112-4fdd-a380-dbf5fe8c0e7f'],
+  googleNewOrg:       [12, '5-2', 'Google Playに組織で登録する',          '9a6e3f7b-f891-48b9-a25b-d75c67296cfd'],
+  googleConvert:      [13, '5-3', 'Google Playを個人→組織へ変更した実例', 'b1e3f8ce-c1bd-4e57-96cf-e42d9d6cc753'],
+  googleVerify:       [14, '5-4', '組織確認で却下→通過した実例',          '38dd0cef-efd5-4638-ba5a-5b23493a0eb7'],
+  redoFlow:           [15, '6-1', 'おすすめの手続き順',                   '49289afd-9afd-4a94-9792-408c78b60cfe'],
+  pitfalls:           [16, '6-2', '実際につまずいたポイント',             '35d2ffb3-925a-4fd4-a1ef-c57573697cb8'],
 };
 
 const INITIAL = {
@@ -198,7 +201,7 @@ function buildRoute() {
   // これから新規で組織ルートに入る人には「やり直すならこの順番」の章が一番役立つ
   if ((state.appleDesired === 'organization' && state.appleStatus === 'none') || (state.googleDesired === 'organization' && state.googleStatus === 'none')) addSection('redoFlow');
   addSection('pitfalls');
-  const sectionMap = new Map(); sections.forEach(([key,order,num,title]) => sectionMap.set(key,{key,order,num,title}));
+  const sectionMap = new Map(); sections.forEach(([key,order,num,title,anchor]) => sectionMap.set(key,{key,order,num,title,anchor}));
   return {sections:[...sectionMap.values()].sort((a,b)=>a.order-b.order), steps:[...new Set(steps)], cautions:[...new Set(cautions)]};
 }
 
@@ -210,9 +213,9 @@ function resultHtml() {
     <div class="result-grid">${appleText?`<div class="result-platform"><div><span>App Store</span><strong>${appleText}</strong></div></div>`:''}${googleText?`<div class="result-platform"><div><span>Google Play</span><strong>${googleText}</strong></div></div>`:''}</div>
     ${route.cautions.length?`<section class="result-section"><h2>⚠ 先に知っておきたい注意点</h2><ul>${route.cautions.map(c=>`<li>${c}</li>`).join('')}</ul></section>`:''}
     <section class="result-section"><h2>✓ やることリスト</h2><ol>${route.steps.map(s=>`<li>${s}</li>`).join('')}</ol></section>
-    <section class="result-section note-section"><h2>📖 noteではここを読めばOK</h2><div class="chapter-list">${route.sections.map(s=>`<div class="chapter"><span>${s.num}</span><strong>${s.title}</strong></div>`).join('')}</div><p class="fineprint">公開後にnoteの各見出しURLが確定したら、この結果から該当見出しへ直接ジャンプするリンクを設定します。</p></section>
+    <section class="result-section note-section"><h2>📖 noteではここを読めばOK</h2><div class="chapter-list">${route.sections.map(s=>`<a class="chapter" href="${NOTE_URL}#${s.anchor}" target="_blank" rel="noreferrer"><span>${s.num}</span><strong>${s.title}</strong><span class="chapter-go">読む ↗</span></a>`).join('')}</div><p class="fineprint">各項目をタップすると、noteのその見出しへ直接移動します。</p></section>
     ${state.wantSeparateAddress===true?info('事業用住所を分けたい人へ','バーチャルオフィス等を使う予定なら、開業届・D‑U‑N‑S・ストア登録を進める前に住所を決めておくと、あとから住所変更を繰り返す手間を減らしやすくなります。','soft'):''}
-    <div class="result-actions"><button class="primary-button" data-action="notePlaceholder">詳しい手順をnoteで読む ↗</button><button class="secondary-button" data-action="reset">↻ もう一度診断する</button></div>`;
+    <div class="result-actions"><a class="primary-button" href="${NOTE_URL}" target="_blank" rel="noreferrer">詳しい手順をnoteで読む ↗</a><button class="secondary-button" data-action="reset">↻ もう一度診断する</button></div>`;
 }
 
 // 進み具合のざっくり計算。分岐で質問数が変わるため正確な%ではなく、
@@ -268,8 +271,7 @@ function render() {
 app.addEventListener('click', (e) => {
   const btn = e.target.closest('[data-action]'); if (!btn) return;
   const a = btn.dataset.action;
-  if (a==='back') return back(); if (a==='reset') return reset(); if (a==='notePlaceholder') return alert('note公開後にここへ記事URLを設定してください。');
-  const actions = {
+  if (a==='back') return back(); if (a==='reset') return reset(); const actions = {
     platformApple:()=>go('appleStatus',{platform:'apple'}), platformGoogle:()=>go('googleStatus',{platform:'google'}), platformBoth:()=>go('appleStatus',{platform:'both'}),
     appleNone:()=>go('appleDesired',{appleStatus:'none'}), appleIndividual:()=>go('appleExistingIndividual',{appleStatus:'individual'}), appleOrganization:()=>go(afterApple(),{appleStatus:'organization',appleDesired:'keep'}),
     appleWantIndividual:()=>go('appleNameWarning',{appleDesired:'individual'}), appleWantOrg:()=>go('appleOrgWarning',{appleDesired:'organization'}), appleHelp:()=>go('appleDecisionHelp'),

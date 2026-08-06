@@ -80,9 +80,12 @@ dt { color: #67716b; font-size: 12.5px; } dd { margin: 0; font-weight: 700; font
 .result-section h2 { display: flex; align-items: center; gap: 7px; font-size: 18px; }
 .result-section li { margin: 9px 0; line-height: 1.7; }
 .chapter-list { display: grid; gap: 8px; }
-.chapter { padding: 13px 14px; border: 1px solid #e2e8e3; border-radius: 12px; display: grid; grid-template-columns: 72px 1fr; gap: 10px; background: #fff; }
-.chapter span { color: #67716b; font-size: 12.5px; }
+.chapter { padding: 13px 14px; border: 1px solid #e2e8e3; border-radius: 12px; display: grid; grid-template-columns: 52px 1fr auto; gap: 10px; align-items: center; background: #fff; text-decoration: none; color: inherit; transition: .14s ease; }
+a.chapter:hover { border-color: #99b4a2; background: #f6faf7; transform: translateY(-1px); }
+a.chapter:focus-visible { outline: 2px solid #2f6440; outline-offset: 2px; }
+.chapter > span:first-child { color: #2f6440; font-size: 13px; font-weight: 800; }
 .chapter strong { font-size: 14px; }
+.chapter-go { color: #44604f; font-size: 12px; white-space: nowrap; }
 .note-section { padding: 20px; background: #f6f9f6; border-radius: 18px; }
 .result-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 30px; }
 .primary-button, .secondary-button { border-radius: 12px; padding: 13px 16px; cursor: pointer; display: inline-flex; gap: 7px; align-items: center; justify-content: center; font-weight: 700; }
