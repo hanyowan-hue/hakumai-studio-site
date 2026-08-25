@@ -428,6 +428,8 @@
 
     .footer-inner a { color: #fff; font-weight: 800; }
 
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+
     @media (max-width: 880px) {
       header { position: absolute; }
       .nav-links { display: none; }
@@ -646,7 +648,11 @@
   <footer>
     <div class="wrap footer-inner">
       <span>© 2026 Hakumai studio. All rights reserved.</span>
-      <span><a href="privacy/morifis/">Morifis Privacy</a></span>
+      <span class="footer-links">
+        <a href="morifis/#pricing">Morifis Pricing</a>
+        <a href="privacy/morifis/">Morifis Privacy</a>
+        <a href="privacy/morifis/legal.html">特定商取引法に基づく表記</a>
+      </span>
     </div>
   </footer>
 </body>

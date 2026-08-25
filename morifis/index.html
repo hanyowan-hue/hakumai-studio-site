@@ -433,6 +433,39 @@
       color: var(--ink);
       font-size: 15px;
     }
+    .spec-link { color: var(--forest); font-weight: 800; text-decoration: underline; }
+
+    /* ---------- In-app purchase price list ---------- */
+    .price-table {
+      max-width: 720px;
+      margin: 40px auto 0;
+      text-align: left;
+    }
+    .price-row {
+      display: flex; align-items: baseline; gap: 24px;
+      padding: 16px 0;
+      border-top: 1px solid var(--line);
+    }
+    .price-row:last-of-type { border-bottom: 1px solid var(--line); }
+    .price-name {
+      flex: 1 1 auto;
+      color: var(--ink); font-size: 15px; font-weight: 800;
+    }
+    .price-name small {
+      display: block; margin-top: 4px;
+      color: var(--muted-2); font-size: 13px; font-weight: 500;
+    }
+    .price-amount {
+      flex: 0 0 auto;
+      color: var(--ink); font-size: 17px; font-weight: 800;
+      font-variant-numeric: tabular-nums;
+    }
+    .price-note {
+      max-width: 720px; margin: 22px auto 0;
+      text-align: left;
+      color: var(--muted-2); font-size: 13px; line-height: 1.9;
+    }
+    .price-note a { color: var(--forest); font-weight: 800; text-decoration: underline; }
 
     /* ---------- Coming soon / CTA ---------- */
     .cta { text-align: center; }
@@ -793,11 +826,11 @@
           </div>
           <div class="spec-row">
             <span class="spec-term">対応プラットフォーム</span>
-            <span class="spec-value">iOS / Android</span>
+            <span class="spec-value">iOS / Android / ブラウザ版（WebGL に対応した最新版のブラウザ）</span>
           </div>
           <div class="spec-row">
             <span class="spec-term">価格</span>
-            <span class="spec-value">基本プレイ無料（一部アプリ内課金あり）</span>
+            <span class="spec-value">基本プレイ無料（アプリ内課金あり／¥120〜¥4,000・税込）<br><a class="spec-link" href="#pricing">アプリ内購入の価格一覧を見る</a></span>
           </div>
           <div class="spec-row">
             <span class="spec-term">対応言語</span>
@@ -811,6 +844,67 @@
             <span class="spec-term">配信時期</span>
             <span class="spec-value">近日配信予定</span>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== In-app purchase price list ===== -->
+    <section id="pricing">
+      <div class="wrap center">
+        <span class="section-eyebrow">Pricing</span>
+        <h2 class="serif">アプリ内購入の価格</h2>
+        <p class="section-lead" style="margin-inline:auto">
+          Morifis は現在配信準備中です。以下は配信開始時に販売するアプリ内購入の価格です。
+          本編は基本プレイ無料で、ゲーム内で使用する仮想通貨「ジェム」を以下のパック単位で購入できます。
+          価格はすべて日本円・消費税込みの総額表示です。
+        </p>
+        <div class="price-table">
+          <div class="price-row">
+            <span class="price-name">初心者パック
+              <small>ジェム 50個 ＋「ライフ60分∞」1個／初回起動から1週間以内・お一人さま1回限り</small>
+            </span>
+            <span class="price-amount">¥120</span>
+          </div>
+          <div class="price-row">
+            <span class="price-name">ジェムの小袋<small>ジェム 12個</small></span>
+            <span class="price-amount">¥120</span>
+          </div>
+          <div class="price-row">
+            <span class="price-name">ジェムの小箱<small>ジェム 65個</small></span>
+            <span class="price-amount">¥600</span>
+          </div>
+          <div class="price-row">
+            <span class="price-name">ジェムの宝箱<small>ジェム 180個</small></span>
+            <span class="price-amount">¥1,480</span>
+          </div>
+          <div class="price-row">
+            <span class="price-name">大妖精のジェム箱<small>ジェム 600個</small></span>
+            <span class="price-amount">¥4,000</span>
+          </div>
+        </div>
+        <div class="price-note">
+          <p>
+            ・ジェムはゲーム内でのみ使用できる仮想通貨です。ゲーム外での利用、他のユーザーへの譲渡、
+            現金への換金・払い戻しはできません（法令に基づく場合を除く）。有効期限はありません。
+          </p>
+          <p>
+            ・ジェムはゲーム内のアイテム等との交換にご利用いただけます。未使用残高はアプリ内のジェム残高表示でご確認いただけます。
+          </p>
+          <p>
+            ・お支払い方法：<br>
+            アプリ版（iOS / Android）＝ App Store・Google Play の決済<br>
+            ブラウザ版＝ クレジットカード・デビットカード、Apple Pay、Google Pay（決済代行事業者 Stripe を通じて処理します）
+          </p>
+          <p>
+            ・商品の引渡時期：決済完了後、直ちにゲーム内でご利用いただけます。
+          </p>
+          <p>
+            ・デジタルコンテンツの性質上、購入後の返品・キャンセルはお受けできません
+            （各ストアの返金ポリシー、または法令上必要となる場合を除く）。
+          </p>
+          <p>
+            ・販売条件の詳細は <a href="/privacy/morifis/legal.html">特定商取引法に基づく表記</a> をご確認ください。
+          </p>
         </div>
       </div>
     </section>
@@ -829,7 +923,8 @@
         </div>
         <p class="fine">
           お問い合わせ・取材などは <a href="mailto:contact@hakumai-studio.com">contact@hakumai-studio.com</a> まで ·
-          <a href="/privacy/morifis/">プライバシーポリシー</a>
+          <a href="/privacy/morifis/">プライバシーポリシー</a> ·
+          <a href="/privacy/morifis/legal.html">特定商取引法に基づく表記</a>
         </p>
       </div>
     </section>
@@ -840,7 +935,9 @@
       <span>© 2026 Hakumai studio. All rights reserved.</span>
       <span class="footer-links">
         <a href="/">Studio</a>
+        <a href="#pricing">価格</a>
         <a href="/privacy/morifis/">Privacy</a>
+        <a href="/privacy/morifis/legal.html">特定商取引法に基づく表記</a>
         <a href="mailto:contact@hakumai-studio.com">Contact</a>
       </span>
     </div>
