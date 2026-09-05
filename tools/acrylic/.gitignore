@@ -1,0 +1,3 @@
+tests/sample/
+__pycache__/
+*.pyc
