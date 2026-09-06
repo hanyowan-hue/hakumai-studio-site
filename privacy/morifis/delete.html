@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Morifis アカウント削除のご請求 / Morifis Account Deletion</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #203d31;
+      --muted: #61756a;
+      --leaf: #2f7b66;
+      --paper: #fffdf0;
+      --wash: #edf4df;
+      --line: #d5dfbd;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", "Segoe UI", sans-serif;
+      line-height: 1.75;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 15% 0%, rgba(158, 202, 151, 0.38), transparent 32rem),
+        radial-gradient(circle at 85% 10%, rgba(120, 184, 177, 0.22), transparent 28rem),
+        #f4f7ec;
+    }
+
+    main {
+      width: min(960px, calc(100% - 32px));
+      margin: 40px auto;
+      padding: clamp(24px, 5vw, 56px);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 253, 240, 0.94);
+      box-shadow: 0 24px 80px rgba(27, 52, 41, 0.14);
+    }
+
+    h1, h2, h3 {
+      line-height: 1.28;
+      letter-spacing: 0;
+      color: var(--ink);
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(32px, 6vw, 52px);
+    }
+
+    h2 {
+      margin: 44px 0 14px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      font-size: clamp(22px, 3.8vw, 30px);
+    }
+
+    h3 {
+      margin: 28px 0 8px;
+      font-size: 20px;
+    }
+
+    p, ul { margin: 0 0 16px; }
+    ul { padding-left: 1.35em; }
+    a { color: var(--leaf); font-weight: 700; }
+
+    .lead {
+      margin: 12px 0 24px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .meta {
+      display: inline-flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 0 0 28px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .language-nav {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 24px 0 34px;
+    }
+
+    .language-nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 40px;
+      padding: 8px 15px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--wash);
+      text-decoration: none;
+    }
+
+    .note {
+      margin: 24px 0;
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #f7f8e9;
+      color: var(--muted);
+    }
+
+    .section {
+      scroll-margin-top: 24px;
+    }
+
+    footer {
+      margin-top: 44px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Morifis（森守り）アカウント削除のご請求</h1>
+  <p>提供者: 白米スタジオ（Hakumai Studio）／ アプリ名: Morifis - Grow and Defend（森守り）</p>
+
+  <h2>1. アプリ内で削除する（推奨・いちばん早い方法）</h2>
+  <ol>
+    <li>Morifis を起動します。</li>
+    <li>ホーム画面の <b>設定</b> を開きます。</li>
+    <li><b>「データの削除」</b> の欄にある <b>［データを削除］</b> ボタンを押します。</li>
+    <li>「アカウントを削除しますか？」の確認で <b>［次へ］</b> を押します。</li>
+    <li>「本当に削除してよろしいですか？」の確認で <b>［削除を予約する］</b> を押します。</li>
+  </ol>
+  <p>
+    削除は<b>予約</b>として受け付けられます。予約が成立すると端末は初期化され、新しいゲストアカウントで遊べる状態になります。
+    <b>7日以内に同じアカウントでログインすると、予約を取り消して元の状態に戻せます。</b>
+  </p>
+
+  <h2>2. メールで請求する（アプリを削除済みの場合など）</h2>
+  <p>
+    アプリを端末から削除してしまった場合や、アプリ内の操作ができない場合は、
+    <a href="mailto:support@hakumai-studio.com">support@hakumai-studio.com</a> 宛にメールでご請求ください。
+  </p>
+  <ul>
+    <li>件名: <b>アカウント削除希望（Morifis）</b></li>
+    <li>本文: アプリに登録しているメールアドレス、または Apple / Google のサインインに使ったメールアドレス</li>
+  </ul>
+  <p>ご本人確認のうえ、原則として7日以内に受付処理を行います。</p>
+
+  <h2>3. 削除されるデータ</h2>
+  <ul>
+    <li>アカウント情報（メールアドレス、Firebase UID、PlayFab ID）</li>
+    <li>クラウドに保存されたセーブデータ（Azure PlayFab / Azure Blob Storage）</li>
+    <li>ゲーム内の所持品・進行状況・購入によって解放されたコンテンツの権利</li>
+    <li>ランキングに掲載された記録および表示名</li>
+  </ul>
+
+  <h2>4. 保持されるデータと保持期間</h2>
+  <ul>
+    <li><b>猶予期間: 7日間。</b>削除のお申し込みから7日間は、取り消しのためにデータを保持します。
+        この間は当該アカウントでの保存を停止します。同じアカウントでログインすると削除を取り消せます。</li>
+    <li><b>7日経過後、サーバー上のアカウントとデータを完全に削除します。</b>一時的な利用停止ではありません。</li>
+    <li><b>購入・決済の記録:</b> 法令（電子帳簿保存法・税法など）に基づき、
+        取引の記録を最長7年間保持します。この記録はゲームの利用には使われません。</li>
+    <li><b>お問い合わせ履歴:</b> 対応の記録として最長2年間保持します。</li>
+    <li>端末内に保存されたデータは、アプリをアンインストールすると端末から削除されます。
+        iCloud / Google Play Games のセーブは各サービスの仕組みに従います。</li>
+  </ul>
+
+  <h2>5. ご注意</h2>
+  <p>
+    アカウントを削除すると、<b>購入済みのコンテンツ（ジェム・追加の仲間・記憶のオーブなど）は復元できません。</b>
+    削除後に同じメールアドレスで登録し直しても、以前の進行状況や購入内容は戻りません。
+  </p>
+
+  <hr>
+
+  <h1>Morifis — Account Deletion Request</h1>
+  <p>Provider: Hakumai Studio &nbsp;/&nbsp; App: Morifis - Grow and Defend</p>
+
+  <h2>1. Delete in the app (recommended)</h2>
+  <ol>
+    <li>Open Morifis.</li>
+    <li>Open <b>Settings</b> from the home screen.</li>
+    <li>In the <b>“Delete data”</b> section, tap <b>[Delete data]</b>.</li>
+    <li>On “Delete your account?”, tap <b>[Next]</b>.</li>
+    <li>On “Are you sure?”, tap <b>[Schedule deletion]</b>.</li>
+  </ol>
+  <p>
+    Deletion is accepted as a <b>scheduled request</b>. Once scheduled, the device is reset and you can
+    continue playing with a new guest account.
+    <b>Signing in with the same account within 7 days cancels the request</b> and restores your data.
+  </p>
+
+  <h2>2. Request by email</h2>
+  <p>
+    If you have already uninstalled the app, email
+    <a href="mailto:support@hakumai-studio.com">support@hakumai-studio.com</a>
+    with the subject <b>“Account deletion request (Morifis)”</b> and the email address
+    associated with your account. We process requests within 7 days after verifying your identity.
+  </p>
+
+  <h2>3. Data that is deleted</h2>
+  <ul>
+    <li>Account information (email address, Firebase UID, PlayFab ID)</li>
+    <li>Cloud save data (Azure PlayFab / Azure Blob Storage)</li>
+    <li>In-game items, progress, and entitlements unlocked by purchase</li>
+    <li>Leaderboard records and display name</li>
+  </ul>
+
+  <h2>4. Data that is retained, and for how long</h2>
+  <ul>
+    <li><b>Grace period: 7 days.</b> Data is retained so you can cancel the request by signing in again.</li>
+    <li><b>After 7 days the account and its data are permanently deleted</b> from our servers.</li>
+    <li><b>Purchase and transaction records:</b> retained for up to 7 years as required by applicable
+        accounting and tax law. These records are not used for gameplay.</li>
+    <li><b>Support correspondence:</b> retained for up to 2 years.</li>
+    <li>On-device data is removed when you uninstall the app. Saves held by iCloud or Google Play Games
+        follow those services' own policies.</li>
+  </ul>
+
+  <h2>5. Please note</h2>
+  <p>
+    Deleting your account permanently removes purchased content (gems, additional companions,
+    Memory Orbs). It cannot be restored, even if you register again with the same email address.
+  </p>
+
+  <p><a href="./">← プライバシーポリシー / Privacy Policy</a></p>
+</main>
+</body>
+</html>
