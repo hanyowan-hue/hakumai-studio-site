@@ -1,0 +1,1214 @@
+<!doctype html>
+<html lang="ja" class="lp-root">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Morifis / 森守り — 配信準備中</title>
+  <meta name="description" content="君がつくる、世界に1つの森のダンジョン。しずかな森を守る、やさしい防衛ストラテジー「Morifis / 森守り」。iOS / Android / Web 配信準備中。">
+
+  <!--
+    広告専用LP。公式サイト（/morifis/）とは独立している。
+    ・検索には載せない（公式サイトと内容が重複するため）
+    ・canonical は付けない（noindex と矛盾するため）
+    ・AdSense は入れない（CTAを削るため）
+    ・スマホ専用。PCではSP幅をそのまま中央に置く
+  -->
+  <meta name="robots" content="noindex">
+  <meta property="og:title" content="Morifis / 森守り">
+  <meta property="og:description" content="君がつくる、世界に1つの森のダンジョン。iOS / Android / Web 配信準備中。">
+  <meta property="og:image" content="https://hakumai-studio.com/assets/morifis/intro-poster.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#07100b">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%F0%9F%8C%BF%3C/text%3E%3C/svg%3E">
+
+  <!--
+    見出しの明朝。Androidには明朝が入っていないため、指定しないとゴシックに落ちる。
+    Google Fonts の日本語は unicode-range で細かく分割されて配信されるので、
+    実際に使った字のぶんしか落ちてこない。
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@700&display=swap">
+
+  <!-- FVの絵はLCP。最優先で取りに行く -->
+  <link rel="preload" as="image" href="../../assets/morifis/lp/kv.webp" fetchpriority="high">
+
+  <script>
+    /*
+     * JSが動く環境でだけ初期状態を隠す。
+     * JS無効・スクリプト失敗時は最初から完成形が見えるので、CTAを失わない。
+     */
+    document.documentElement.classList.add('js-anim', 'js-storebar');
+  </script>
+
+  <style>
+    /* ===========================================
+       Morifis 広告LP（スマホ専用）
+       配色・書体は公式サイト（/morifis/）から引き継いでいる。
+       =========================================== */
+    :root {
+      color-scheme: dark;
+      --ink: #eef4ec;
+      --muted: #b4c3b6;
+      --muted-2: #8fa392;
+      --line: rgba(255, 255, 255, 0.12);
+      --line-strong: rgba(255, 255, 255, 0.22);
+      --bg: #0c150f;
+      --bg-2: #0f1c14;
+      --forest: #6fae7e;
+      --forest-deep: #143628;
+      --moss: #a9c88f;
+      --gold: #d8c07a;
+      --crystal: #7fe0b8;
+
+      /* 明転セクション（森の仲間）で使う、朝の木漏れ日の側 */
+      --dawn-bg: #f7f1e2;
+      --dawn-ink: #24352a;
+      --dawn-muted: #5c7263;
+      --dawn-line: rgba(74, 58, 32, 0.16);
+
+      --radius: 14px;
+      --shadow-text: 0 4px 18px rgba(0, 0, 0, 0.6);
+
+      --serif: "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", Georgia, serif;
+      --sans: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Helvetica Neue", Arial, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { overflow-x: clip; scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      color: var(--ink);
+      line-height: 1.85;
+      /* PCで開かれたときの左右。SP幅の外側 */
+      background: #07100b;
+      overflow-x: clip;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+
+    .visually-hidden {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+    }
+
+    /*
+     * SP専用。広告はスマホにしか出さないので、PC向けの作り込みはしない。
+     * PCではこの幅をそのまま中央に置き、外側は body の色で埋める。
+     */
+    .lp {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .serif { font-family: var(--serif); font-weight: 700; }
+
+    /* ===========================================
+       ファーストビュー
+       絵（ロゴ・主役キャラ込み）は1枚。その上に仲間を浮かせて奥行きを作る。
+       =========================================== */
+    .kv {
+      position: relative;
+      height: clamp(520px, 132vw, 620px);
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    /*
+     * 原画は 1672x941 の横長。縦長の画面に合わせて 150% まで拡大し、
+     * 左右を切り落としている。ロゴと主役キャラは中央にあるので切れない。
+     * 仲間の位置は .kv（＝画面幅）に対する % で持たせているため、
+     * この倍率を変えても仲間はずれない。
+     */
+    .kv-art {
+      position: absolute;
+      top: -4%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(150%, 720px);
+      max-width: none;
+      z-index: 0;
+    }
+
+    /* 絵の下端を背景色に溶かす。境界に線を出さないため bottom: 0 まで届かせる */
+    .kv::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      top: 38%;
+      bottom: 0;
+      background: linear-gradient(to bottom,
+        transparent 0%,
+        rgba(12, 21, 15, 0.55) 42%,
+        var(--bg) 78%,
+        var(--bg) 100%);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* ---- 浮かぶ仲間 ---- */
+    .kv-friend {
+      position: absolute;
+      display: block;
+      z-index: 1;
+      /* transform / opacity だけで動かす（GPU処理でスマホでもカクつかない） */
+      will-change: transform, opacity;
+      pointer-events: none;
+    }
+    .kv-friend__art { width: 100%; height: auto; display: block; }
+    /* 反転は内側の img が持つ。外側の浮遊アニメーションと食い合わない */
+    /*
+     * 反転は transform ではなく scale プロパティで持つ。
+     * 内側の img に揺れのキーフレーム（transform）を掛けても打ち消されない。
+     */
+    .kv-friend__art--flip { scale: -1 1; }
+
+    /*
+     * 奥行きは彩度と明るさだけで付ける。
+     * 以前はここで blur をかけて背景の柔らかさに寄せていたが、
+     * 絵が潰れて「解像度が低い」ように見えるだけだった。ぼかしは使わない。
+     */
+    /*
+     * 奥行きは「大きさ」だけで付ける。
+     * 以前は奥のものを薄く・暗くしていたが、コントラストが落ちて
+     * 「ぼやけている」ように見えた。減光はほとんど掛けない。
+     */
+    .kv-friend--far .kv-friend__art { filter: saturate(0.96); opacity: 0.97; }
+
+    /*
+     * 接地影。地面に立っているものの足元に楕円の影を敷く。
+     * img には擬似要素を付けられないので、包んでいる span 側に出している。
+     */
+    .kv-friend--grounded::after {
+      content: '';
+      position: absolute;
+      left: 14%; right: 14%;
+      bottom: -3%;
+      height: 16%;
+      z-index: -1;
+      border-radius: 50%;
+      background: radial-gradient(50% 50% at 50% 50%, rgba(0, 0, 0, 0.5), transparent 72%);
+    }
+
+    /* ---- 光の粒（胞子・蛍）。画像は使わずCSSだけで描く ---- */
+    .kv-spores {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background-image:
+        radial-gradient(1.7px 1.7px at 14% 26%, rgba(216, 192, 122, 0.95), transparent 60%),
+        radial-gradient(1.4px 1.4px at 82% 18%, rgba(169, 200, 143, 0.9), transparent 60%),
+        radial-gradient(1.9px 1.9px at 34% 72%, rgba(127, 224, 184, 0.85), transparent 60%),
+        radial-gradient(1.3px 1.3px at 90% 60%, rgba(255, 255, 255, 0.8), transparent 60%),
+        radial-gradient(1.6px 1.6px at 58% 38%, rgba(216, 192, 122, 0.8), transparent 60%),
+        radial-gradient(1.2px 1.2px at 24% 50%, rgba(169, 200, 143, 0.85), transparent 60%),
+        radial-gradient(1.5px 1.5px at 70% 82%, rgba(127, 224, 184, 0.7), transparent 60%);
+      animation: spore-twinkle 6s ease-in-out infinite;
+    }
+    @keyframes spore-twinkle {
+      0%, 100% { opacity: 0.35; }
+      50%      { opacity: 0.95; }
+    }
+
+    /* ---- FVの文字とCTA ---- */
+    .kv-content {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      z-index: 3;
+      padding: 0 18px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .kv-catch {
+      text-align: center;
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: clamp(19px, 5.4vw, 25px);
+      line-height: 1.55;
+      letter-spacing: 0.08em;
+      color: #fff;
+      text-shadow: var(--shadow-text);
+    }
+    .kv-catch span { display: block; white-space: nowrap; }
+    .kv-catch em {
+      font-style: normal;
+      color: var(--moss);
+    }
+
+    .kv-reg {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      text-align: center;
+    }
+    .kv-reg__release {
+      font-size: 13px; font-weight: 800;
+      letter-spacing: 0.24em; text-indent: 0.24em;
+      color: var(--moss);
+      text-shadow: var(--shadow-text);
+    }
+    .kv-reg__label {
+      font-size: 18px; font-weight: 800;
+      letter-spacing: 0.18em; text-indent: 0.18em;
+      color: #fff;
+      text-shadow: var(--shadow-text);
+      /*
+       * Webフォントの読み込み前後で行の高さが変わると、下のCTAが動く。
+       * 実測値で固定してずれを消している。
+       */
+      line-height: 1.45;
+    }
+
+    /* ===========================================
+       ストアCTA
+       アイコンとバッジ2枚を1つのフレックス行に並べ、
+       幅を「1 : 3.3889 : 3.3043」（＝各要素の縦横比）で分配している。
+       こうすると3つの高さが自動的に一致し、余りの余白も出ない。
+       いま中身はCSSで描いた「準備中」だが、公式バッジ画像に差し替えても
+       同じ縦横比なのでレイアウトは変わらない。
+         App Store   183x54  → 3.3889
+         Google Play 380x115 → 3.3043
+       =========================================== */
+    .store-cta {
+      display: flex;
+      align-items: center;
+      gap: min(8px, 2vw);
+      width: 100%;
+      max-width: 400px;
+      /*
+       * 行の高さはここで決める。
+       * バッジの中身がいまは画像ではなく文字なので、幅から高さを導かせると
+       * 文字の最小の大きさに引っぱられてアイコンだけ低くなった（実測 35.1 対 42.6）。
+       * 3つとも同じ高さを直接与えて、ずれる余地を無くしている。
+       */
+      --cta-h: clamp(42px, 11.5vw, 54px);
+    }
+    .store-cta__icon {
+      position: relative;
+      flex: 0 0 auto;
+      width: var(--cta-h);
+      height: var(--cta-h);
+      border-radius: 22%;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .store-cta__icon img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
+    .store-badge {
+      position: relative;
+      flex-basis: 0; min-width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 4.5%;
+      /*
+       * 暗い地の上で確実に目に入るよう、バッジだけ明るくする。
+       *
+       * 光沢のグラデーションを敷くと、つるりとした機械的なボタンに見える。
+       * 平らな紙の色に、feTurbulence で作った細かいざらつきを重ねて
+       * クラフト紙の質感にしている（画像は使わず、SVGをそのまま埋めている）。
+       * 縁は白ではなく、紙の小口に近いあたたかい茶。
+       */
+      border: 1px solid #c6b189;
+      border-radius: 12px;
+      background-color: #f4ead3;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23p)' opacity='0.42'/%3E%3C/svg%3E");
+      background-size: 140px 140px;
+      box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+      cursor: default;
+      overflow: hidden;
+      height: var(--cta-h);
+    }
+    /*
+     * 番号ではなくクラスで指定している。:nth-of-type は「同じタグの中で何番目か」
+     * を数えるため、アイコンもバッジも <span> のいまは、アイコンが1番目に数えられて
+     * 番号が1つずつずれる（App Storeが227px・Google Playが32pxに潰れた）。
+     * リンクになった日に <a> へ変えても、クラスならずれない。
+     */
+    /*
+     * 幅の比は公式バッジ画像の縦横比そのもの（App Store 183x54 / Google Play 380x115）。
+     * 画像に差し替えたとき、いまと同じ幅の配分になるようにしてある。
+     */
+    .store-badge--ios { flex-grow: 3.3889; }
+    .store-badge--android { flex-grow: 3.3043; }
+    /* Web は文字が短いので、そのぶん幅を詰める */
+    .store-badge--web { flex-grow: 2.1; }
+    .store-badge small {
+      display: block;
+      font-size: clamp(8px, 2.1vw, 9.5px);
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      line-height: 1.5;
+      color: #8a7550;
+      /* 日本語ラベルにしたので大文字化は不要。字間も詰める */
+      letter-spacing: 0.04em;
+    }
+    .store-badge b {
+      display: block;
+      font-size: clamp(11px, 3vw, 14px);
+      font-weight: 800;
+      line-height: 1.3;
+      color: #4a3a22;
+      white-space: nowrap;
+    }
+    /*
+     * バッジの高さは幅に従うため、狭い端末では推奨のタップ領域（44px）を
+     * 下回る。見た目を変えずに当たり判定だけ広げておく
+     * （いまは準備中で押せないが、リンクに変えた日にそのまま効く）。
+     */
+    .store-badge::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; top: 50%;
+      height: 44px;
+      transform: translateY(-50%);
+    }
+
+    /* FV内のCTAは絵の上に乗るため、下にガラスの板を敷いて可読性を確保する */
+    .store-cta--inline {
+      padding: min(8px, 2vw);
+      border-radius: 14px;
+      background: rgba(12, 21, 15, 0.42);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: 0 6px 22px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(12px) saturate(130%);
+      -webkit-backdrop-filter: blur(12px) saturate(130%);
+    }
+
+    /* ---- 追従バー（FVを過ぎたら画面下部に固定） ---- */
+    .store-cta--fixed {
+      position: fixed;
+      left: 50%; bottom: 0;
+      /*
+       * ここでは隠さない。JSが動かない環境では常時表示にしてCTAを失わないため。
+       * 隠すのは js-storebar が付いたときだけ（下記）。
+       */
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 480px;
+      padding: 9px 14px calc(9px + env(safe-area-inset-bottom));
+      background: rgba(9, 18, 13, 0.9);
+      border-top: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.45);
+      z-index: 90;
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .store-cta--fixed .store-cta { max-width: none; }
+    /*
+     * 表示側は詳細度を1つ上げておくこと（同じ詳細度だと後勝ちで隠れたままになる）。
+     */
+    .js-storebar .store-cta--fixed { transform: translate(-50%, 110%); }
+    .js-storebar .store-cta--fixed.is-visible { transform: translate(-50%, 0); }
+
+    /* ===========================================
+       セクション共通
+       =========================================== */
+    .sec { padding: 56px 20px; }
+    .sec-eyebrow {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--forest);
+      font-size: 11px; font-weight: 800;
+      letter-spacing: 0.22em; text-transform: uppercase;
+    }
+    .sec h2 {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: clamp(25px, 6.6vw, 31px);
+      line-height: 1.42;
+      letter-spacing: 0.02em;
+      margin-bottom: 14px;
+    }
+    .sec-lead {
+      color: var(--muted);
+      font-size: 14.5px;
+      line-height: 1.95;
+    }
+
+    /* ---- 遊び方の3ステップ ---- */
+    .steps { margin-top: 26px; display: flex; flex-direction: column; gap: 26px; }
+    .step img { width: 100%; border-radius: var(--radius); border: 1px solid var(--line); }
+    .step-num {
+      display: block;
+      font-family: var(--serif);
+      font-size: 30px;
+      line-height: 1;
+      color: var(--forest);
+      margin: 16px 0 6px;
+    }
+    .step h3 { font-size: 18px; font-weight: 800; margin-bottom: 6px; }
+    .step p { color: var(--muted); font-size: 14px; line-height: 1.9; }
+
+    /* ===========================================
+       明転セクション（森の仲間）
+       ページ全体が夜の森なので、ここだけ朝の木漏れ日に反転させて対比を作る。
+       =========================================== */
+    .dawn {
+      position: relative;
+      background:
+        radial-gradient(120% 70% at 50% 0%, #fdf9ef 0%, var(--dawn-bg) 58%, #ece0c8 100%);
+      color: var(--dawn-ink);
+      overflow: hidden;
+    }
+    /* 上下の境界を、前後の暗いセクションへ溶かす */
+    .dawn::before,
+    .dawn::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      height: 46px;
+      pointer-events: none;
+    }
+    .dawn::before { top: 0; background: linear-gradient(to bottom, var(--bg), transparent); }
+    .dawn::after { bottom: 0; background: linear-gradient(to top, var(--bg), transparent); }
+    .dawn > * { position: relative; z-index: 1; }
+    .dawn .sec-eyebrow { color: #6f8a5d; }
+    .dawn .sec-lead { color: var(--dawn-muted); }
+
+    .friends {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .friend {
+      border: 1px solid var(--dawn-line);
+      border-radius: var(--radius);
+      background: rgba(253, 249, 239, 0.8);
+      padding: 12px 12px 14px;
+      text-align: center;
+      box-shadow: 0 6px 18px rgba(36, 53, 42, 0.06);
+    }
+    .friend img {
+      width: 86px; height: 86px;
+      margin: 0 auto 6px;
+      object-fit: contain;
+      /* 白地に置くので、キャラの足元に薄い影を付けて浮かせる */
+      filter: drop-shadow(0 6px 8px rgba(36, 53, 42, 0.18));
+    }
+    .friend-tag {
+      display: block;
+      font-size: 10.5px; font-weight: 800;
+      letter-spacing: 0.08em;
+      color: #7d9169;
+      line-height: 1.5;
+    }
+    .friend-name {
+      font-family: var(--serif);
+      font-size: 17px; font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 4px;
+    }
+    .friend p { font-size: 12px; line-height: 1.75; color: var(--dawn-muted); }
+    .friends-note {
+      margin-top: 22px;
+      text-align: center;
+      font-size: 13.5px; font-weight: 700;
+      color: #6f8a5d;
+    }
+
+    /* ---- 進化（きのこ3段） ---- */
+    .evolution {
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid var(--dawn-line);
+    }
+    .evolution h3 {
+      margin-bottom: 14px;
+      text-align: center;
+      color: var(--dawn-ink);
+      font-size: 21px;
+      line-height: 1.5;
+    }
+    .evolution__row {
+      display: grid;
+      /* Lv.3 の列だけ広く取る。進化の到達点をいちばん大きく見せる */
+      grid-template-columns: minmax(0, 1fr) 18px minmax(0, 1.05fr) 18px minmax(0, 1.55fr);
+      /* 高さが違うので、名前の行が下で揃うようにする */
+      align-items: end;
+      gap: 4px;
+    }
+    .evolution__arrow { align-self: center; }
+
+    /*
+     * Lv.3 は見せ場。ひとまわり大きくし、後ろに金の後光を出す。
+     * 後光は img ではなく包んでいる div 側に出し、z-index で絵の後ろへ回す。
+     */
+    .evolution__step--final { position: relative; }
+    .evolution__step--final::before {
+      content: '';
+      position: absolute;
+      left: 50%; top: 38%;
+      width: 158%;
+      aspect-ratio: 1;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      border-radius: 50%;
+      pointer-events: none;
+      background: radial-gradient(closest-side,
+        rgba(216, 192, 122, 0.62) 0%,
+        rgba(216, 192, 122, 0.26) 44%,
+        transparent 72%);
+      animation: evo-glow 3.6s ease-in-out infinite;
+    }
+    .evolution__step--final > * { position: relative; z-index: 1; }
+    .evolution__step--final img { height: 178px; }
+    @keyframes evo-glow {
+      0%, 100% { opacity: 0.68; transform: translate(-50%, -50%) scale(0.95); }
+      50%      { opacity: 1;    transform: translate(-50%, -50%) scale(1.05); }
+    }
+    .evolution__step { min-width: 0; text-align: center; }
+    .evolution__step img {
+      width: 100%; height: 128px; object-fit: contain;
+      filter: drop-shadow(0 6px 8px color-mix(in srgb, var(--dawn-ink) 14%, transparent));
+    }
+    /*
+     * Lv.2 / Lv.3 は伏せる。形だけ残したシルエットに金の輪郭を出して、
+     * 「何になるか分からないが、ただならぬもの」と分かるようにする。
+     * 輪郭の光は drop-shadow。アルファの形に沿うので、四角い影にならない。
+     */
+    .dragon__stage--hidden img {
+      filter: drop-shadow(0 0 2px rgba(216, 192, 122, 0.85))
+              drop-shadow(0 0 10px rgba(216, 192, 122, 0.35));
+    }
+    .dragon__stage--hidden .dragon__name {
+      color: var(--gold);
+      opacity: 0.75;
+      letter-spacing: 0.12em;
+    }
+
+    .evolution__level,
+    .dragon__level {
+      display: block; color: var(--dawn-muted); font-size: 11px;
+      font-weight: 800; letter-spacing: 0.08em; line-height: 1.4;
+    }
+    .evolution__name {
+      display: block; color: var(--dawn-ink); font-family: var(--serif);
+      font-size: 15px; font-weight: 700; line-height: 1.4;
+    }
+    .evolution__arrow,
+    .dragon__arrow { color: var(--dawn-muted); font-size: 18px; font-weight: 800; text-align: center; }
+
+    /* ---- 竜（特別枠） ---- */
+    .dragon {
+      position: relative; overflow: hidden;
+      border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold);
+      background:
+        radial-gradient(120% 65% at 50% 0%, color-mix(in srgb, var(--gold) 12%, transparent), transparent 72%),
+        linear-gradient(180deg, var(--forest-deep), var(--bg-2));
+      color: var(--ink);
+    }
+    .dragon::before {
+      content: ''; position: absolute; left: 0; right: 0; top: 0; height: 46px;
+      pointer-events: none; background: linear-gradient(to bottom, var(--dawn-bg), transparent);
+    }
+    .dragon > * { position: relative; z-index: 1; }
+    .dragon .sec-eyebrow, .dragon h2, .dragon__level { color: var(--gold); }
+    .dragon .sec-lead { color: var(--muted); }
+    .dragon__intro { margin-bottom: 22px; }
+    .dragon__line {
+      display: grid;
+      grid-template-columns: 26px minmax(0, 1fr) 18px minmax(0, 1fr) 18px minmax(0, 1fr);
+      align-items: center; gap: 4px; padding: 10px 0;
+      border-top: 1px solid color-mix(in srgb, var(--gold) 42%, transparent);
+    }
+    .dragon__line:last-child { border-bottom: 1px solid color-mix(in srgb, var(--gold) 42%, transparent); }
+    .dragon__branch {
+      color: var(--gold); font-family: var(--serif); font-size: 16px;
+      font-weight: 700; text-align: center;
+    }
+    .dragon__stage { min-width: 0; text-align: center; }
+    .dragon__stage img {
+      width: 100%; height: 78px; object-fit: contain;
+      filter: drop-shadow(0 5px 8px color-mix(in srgb, var(--bg) 35%, transparent));
+    }
+    .dragon__name {
+      display: block; color: var(--ink); font-family: var(--serif);
+      font-size: 13px; font-weight: 700; line-height: 1.35;
+    }
+    .dragon__arrow { color: var(--gold); font-size: 16px; }
+
+    /* ---- 五つの森（横スクロール） ---- */
+    .worlds {
+      margin-top: 24px;
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      /* セクションの余白を無視して画面端まで流す */
+      margin-inline: -20px;
+      padding: 4px 20px 10px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .worlds::-webkit-scrollbar { display: none; }
+
+    /*
+     * 横スクロールの合図。
+     * カードの覗きだけでは気づかれなかったため、右端を地の色へ落として
+     * 「画面の外にまだある」ことを見せ、上に文字でも言う。
+     */
+    .worlds-wrap { position: relative; }
+    .worlds-wrap::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 10px; right: -20px;
+      width: 56px;
+      pointer-events: none;
+      background: linear-gradient(to left, var(--bg) 12%, transparent 100%);
+    }
+    .worlds-hint {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 16px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: var(--forest);
+    }
+    .worlds-hint::after {
+      content: '';
+      flex: 1 1 auto;
+      height: 1px;
+      background: linear-gradient(to right, rgba(111, 174, 126, 0.5), transparent);
+    }
+    .worlds-hint__arrow {
+      display: inline-block;
+      animation: hint-nudge 1.8s ease-in-out infinite;
+    }
+    @keyframes hint-nudge {
+      0%, 100% { transform: translateX(0); }
+      50%      { transform: translateX(4px); }
+    }
+    .world {
+      /* 次のカードがはっきり覗く幅にする。覗きが「まだ続く」の合図になる */
+      flex: 0 0 68%;
+      scroll-snap-align: center;
+    }
+    .world img { width: 100%; border-radius: var(--radius); border: 1px solid var(--line); }
+    .world figcaption {
+      margin-top: 9px;
+      font-size: 12.5px;
+      line-height: 1.7;
+      color: var(--muted-2);
+    }
+    .world figcaption b {
+      display: block;
+      font-size: 13.5px; font-weight: 800;
+      color: var(--ink);
+    }
+
+    /* ===========================================
+       最終CTA
+       =========================================== */
+    .final {
+      position: relative;
+      padding: 54px 20px 64px;
+      text-align: center;
+      overflow: hidden;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+    }
+    .final > * { position: relative; z-index: 1; }
+
+    .final__ribbon {
+      display: inline-block;
+      padding: 0.45em 1.7em;
+      margin-bottom: 10px;
+      background: linear-gradient(96deg, var(--forest-deep) 0%, #1d5038 100%);
+      border: 1px solid rgba(169, 200, 143, 0.35);
+      color: var(--moss);
+      font-size: 12px; font-weight: 800;
+      letter-spacing: 0.16em; text-indent: 0.16em;
+      line-height: 1.5;
+      clip-path: polygon(0.7em 0, calc(100% - 0.7em) 0, 100% 50%,
+                         calc(100% - 0.7em) 100%, 0.7em 100%, 0 50%);
+    }
+    .final__title {
+      font-size: 20px; font-weight: 800;
+      letter-spacing: 0.12em; text-indent: 0.12em;
+      margin-bottom: 22px;
+    }
+    .final .store-cta { margin: 0 auto; }
+    .final__note {
+      /* 幅を絞らないと最後の1文字だけが次の行に落ちる */
+      max-width: 300px;
+      margin: 16px auto 0;
+      font-size: 12.5px;
+      color: var(--muted-2);
+    }
+    .final__site {
+      display: inline-flex;
+      align-items: center; gap: 8px;
+      margin-top: 22px;
+      padding: 11px 22px;
+      min-height: 44px;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      font-size: 13.5px; font-weight: 800;
+      color: rgba(255, 255, 255, 0.88);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    /* ---- フッター ---- */
+    .lp-footer {
+      padding: 26px 20px calc(96px + env(safe-area-inset-bottom));
+      border-top: 1px solid var(--line);
+      background: var(--bg);
+      text-align: center;
+      font-size: 11.5px;
+      line-height: 2;
+      color: var(--muted-2);
+    }
+    .lp-footer nav {
+      display: flex; flex-wrap: wrap;
+      justify-content: center; gap: 6px 16px;
+      margin-bottom: 12px;
+    }
+    .lp-footer nav a { font-weight: 700; color: rgba(255, 255, 255, 0.7); }
+
+    /* ===========================================
+       スクロールに応じた登場
+       =========================================== */
+    .js-anim .reveal { opacity: 0; transform: translateY(22px) scale(0.975); }
+    .reveal { transition: opacity 0.7s ease-out, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+    .reveal.is-in { opacity: 1; transform: none; }
+
+    /* ===========================================
+       FVの登場アニメーション
+       ・登場: 絵 → 奥の仲間 → 中 → 手前 → コピー → 準備中 → CTA
+       ・常時: 群ごとにゆっくり上下（止まった絵に見せない）
+       =========================================== */
+    .js-anim .kv-art,
+    .js-anim .kv-friend,
+    .js-anim .kv-catch,
+    .js-anim .kv-reg,
+    .js-anim .store-cta--inline { opacity: 0; }
+
+    @keyframes kv-art-in {
+      from { opacity: 0; transform: translateX(-50%) scale(1.06); }
+      to   { opacity: 1; transform: translateX(-50%) scale(1); }
+    }
+    @keyframes kv-friend-in {
+      from { opacity: 0; transform: translateY(16px) scale(0.94); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes kv-text-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    /* ちょうだけが飛ぶ。地面にいるものは登場だけさせて静止させる */
+    @keyframes kv-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+    @keyframes kv-sway  { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+    /* 足元を軸にして頭だけを振る。rotate は transform とは別枠なので反転(scale)と両立する */
+    @keyframes kv-head  { 0%, 100% { rotate: -1.5deg; } 50% { rotate: 1.5deg; } }
+    @keyframes kv-drift {
+      0%, 100% { transform: translateX(-50%) scale(1); }
+      50%      { transform: translateX(-50%) scale(1.018); }
+    }
+
+    /* 登場 → 常時ゆらぎ を、同じ要素でカンマ連結して繋ぐ */
+    .is-ready .kv-art {
+      animation: kv-art-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both,
+                 kv-drift 26s ease-in-out 0.9s infinite;
+    }
+    .is-ready .kv-friend--far  { animation: kv-friend-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both; }
+    .is-ready .kv-friend--mid  { animation: kv-friend-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both; }
+    .is-ready .kv-friend--near { animation: kv-friend-in 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.65s both; }
+    /* 同じ群の2体目は少し遅らせる */
+    .is-ready .kv-friend[data-i="2"] { animation-delay: 0.62s; }
+    /* 飛ぶものだけ、登場のあとに上下を継ぐ */
+    /*
+     * 常時のゆらぎは内側の img に掛ける。外側の span は動かないので、
+     * 足元の影（span の ::after）が一緒に上下せず、生き物だけが揺れる。
+     * 周期と振れ幅を変えて、2匹が同時に動いて見えないようにする。
+     */
+    .is-ready .kv-friend--float .kv-friend__art { animation: kv-float 4.4s ease-in-out 1.05s infinite; }
+    .is-ready .kv-friend--sway  .kv-friend__art { animation: kv-sway 5.9s ease-in-out 1.5s infinite; }
+    .is-ready .kv-friend--head  .kv-friend__art { transform-origin: 50% 100%; animation: kv-head 7.2s ease-in-out 1.9s infinite; }
+
+    .is-ready .kv-catch          { animation: kv-text-in 0.6s ease-out 0.8s both; }
+    .is-ready .kv-reg            { animation: kv-text-in 0.6s ease-out 1.05s both; }
+    .is-ready .store-cta--inline { animation: kv-text-in 0.6s ease-out 1.25s both; }
+
+    /* ===========================================
+       動きを減らす設定の端末では、全部止めて完成形を出す
+       =========================================== */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .js-anim .reveal { opacity: 1; transform: none; }
+      .reveal { transition: none; }
+      .js-anim .kv-art,
+      .js-anim .kv-friend,
+      .js-anim .kv-catch,
+      .js-anim .kv-reg,
+      .js-anim .store-cta--inline { opacity: 1; }
+      .is-ready .kv-art,
+      .is-ready .kv-friend--far,
+      .is-ready .kv-friend--mid,
+      .is-ready .kv-friend--near,
+      .is-ready .kv-friend--float .kv-friend__art,
+      .is-ready .kv-friend--sway .kv-friend__art,
+      .is-ready .kv-friend--head .kv-friend__art,
+      .is-ready .kv-catch,
+      .is-ready .kv-reg,
+      .is-ready .store-cta--inline { animation: none; }
+      .kv-art { transform: translateX(-50%); }
+      .kv-spores, .worlds-hint__arrow, .evolution__step--final::before { animation: none; }
+      .store-cta--fixed { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="lp">
+
+  <!-- 絵の中のロゴが視覚的な役割を担うため、読み上げ用にここに置く -->
+  <h1 class="visually-hidden">Morifis / 森守り — 君がつくる、世界に1つの森のダンジョン。iOS / Android / Web 配信準備中</h1>
+
+  <!-- ===== ファーストビュー ===== -->
+  <section class="kv" aria-label="キービジュアル">
+    <img class="kv-art" src="../../assets/morifis/lp/kv.webp"
+         alt="Morifis / もりふぃす — しずかな森と、こもれび石をかかえた森の守り手"
+         width="1672" height="941" loading="lazy" decoding="async" fetchpriority="high">
+
+    <!--
+      浮かぶ仲間。位置は画面幅に対する %。上段左は空き。
+        なし            ちょう(ルミファ Lv3)
+        きのこ(ピカリ)   ハス(ハスノコ)
+        こけ(モコケ)     イーブイ(アオルミア Lv3)
+
+      span で包み、中の img と役割を分けている。
+        span … 位置と浮遊アニメーション（transform を使う）
+        img  … 左右反転（transform を使う）
+      1つの要素に両方を持たせるとキーフレームが反転を上書きして消す。
+
+      飛ぶのはちょうだけ。地面にいるものは登場後そのまま静止させ、
+      足元に影を敷いて接地させる（浮いて見えるのを防ぐ）。
+    -->
+    <span class="kv-friend kv-friend--far kv-friend--float" data-i="1"
+          style="left:84%; top:5%; width:11%" aria-hidden="true">
+      <img class="kv-friend__art" src="../../assets/morifis/lp/kv-lumifa.webp" alt=""
+           width="446" height="512" decoding="async">
+    </span>
+    <span class="kv-friend kv-friend--mid kv-friend--grounded kv-friend--head" data-i="1"
+          style="left:7%; top:26%; width:13%" aria-hidden="true">
+      <img class="kv-friend__art kv-friend__art--flip" src="../../assets/morifis/lp/kv-pikari.webp" alt=""
+           width="442" height="512" decoding="async">
+    </span>
+    <span class="kv-friend kv-friend--mid kv-friend--grounded" data-i="2"
+          style="left:85%; top:29%; width:10%" aria-hidden="true">
+      <img class="kv-friend__art" src="../../assets/morifis/lp/kv-hasunoko.webp" alt=""
+           width="512" height="290" decoding="async">
+    </span>
+    <span class="kv-friend kv-friend--near kv-friend--grounded" data-i="1"
+          style="left:14%; top:40%; width:17%" aria-hidden="true">
+      <img class="kv-friend__art kv-friend__art--flip" src="../../assets/morifis/lp/kv-hanamos.webp" alt="" width="437" height="512" decoding="async">
+    </span>
+    <span class="kv-friend kv-friend--near kv-friend--grounded kv-friend--sway" data-i="2"
+          style="left:66%; top:37%; width:28%" aria-hidden="true">
+      <img class="kv-friend__art" src="../../assets/morifis/lp/kv-aolumia.webp" alt=""
+           width="512" height="338" decoding="async">
+    </span>
+
+    <div class="kv-spores" aria-hidden="true"></div>
+
+    <div class="kv-content">
+      <p class="kv-catch">
+        <span>君がつくる、</span>
+        <span>世界に<em>1</em>つの森のダンジョン</span>
+      </p>
+
+      <div class="kv-reg">
+        <p class="kv-reg__release">iOS / Android / Web</p>
+        <p class="kv-reg__label">配信準備中</p>
+      </div>
+
+      <!--
+        ストアURLが発行されたら、この .store-badge を
+        <a href="..."> に変えて中身を公式バッジ画像に差し替える。
+        縦横比を合わせてあるので、レイアウトは変わらない。
+      -->
+      <div class="store-cta store-cta--inline">
+        <span class="store-cta__icon" aria-hidden="true">
+          <img src="../../assets/morifis/app-icon.webp" alt="" width="360" height="360" loading="lazy" decoding="async">
+        </span>
+        <span class="store-badge store-badge--ios"><small>準備中</small><b>App Store</b></span>
+        <span class="store-badge store-badge--android"><small>準備中</small><b>Google Play</b></span>
+        <span class="store-badge store-badge--web"><small>準備中</small><b>Web</b></span>
+      </div>
+    </div>
+  </section>
+
+  <main>
+
+    <!-- ===== 遊び方 ===== -->
+    <section class="sec reveal">
+      <span class="sec-eyebrow">How to play</span>
+      <h2 class="serif">森をひらいて、守る。</h2>
+      <p class="sec-lead">
+        閉じた森をマナでひらき、道をつくる。こもれび石を守りぬき、敵を森へ還す。
+        ——ルールはシンプル。でも「どこをひらくか」で、戦いはまるで変わります。
+      </p>
+
+      <div class="steps">
+        <article class="step">
+          <img src="../../assets/morifis/gp-start.jpg" alt="閉じた森とマナ。ステージ開始の画面"
+               width="1280" height="589" loading="lazy" decoding="async">
+          <span class="step-num serif">01</span>
+          <h3>森をひらく</h3>
+          <p>はじまりは、閉じた森。マナを使って森をひらくと、その跡が敵の通る道になる。肥えた土をひらくほど、森の仲間も目覚めます。</p>
+        </article>
+        <article class="step">
+          <img src="../../assets/morifis/gp-place.jpg" alt="ひらいた道に、こもれび石を置く場所を選んでいる画面"
+               width="1280" height="589" loading="lazy" decoding="async">
+          <span class="step-num serif">02</span>
+          <h3>こもれび石を、隠す</h3>
+          <p>ひらいた道のどこかに「こもれび石」を置く。入口から遠く、見つかりにくい場所に隠すほど、敵に気づかれにくく、守りやすくなります。</p>
+        </article>
+        <article class="step">
+          <img src="../../assets/morifis/gp-battle.jpg" alt="迫る敵を、森の仲間とはな・ねっこで迎え撃つ戦闘画面"
+               width="1280" height="589" loading="lazy" decoding="async">
+          <span class="step-num serif">03</span>
+          <h3>迎え撃つ</h3>
+          <p>敵は入口から侵入し、こもれび石を狙う。はな・ねっこと目覚めた仲間で迎え撃ち、石を持ち帰られる前に、すべて森へ還せば勝ちです。</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== 森の仲間（ここだけ朝に反転） ===== -->
+    <section class="sec dawn reveal">
+      <span class="sec-eyebrow">Forest friends</span>
+      <h2 class="serif">目覚める、森の仲間たち。</h2>
+      <p class="sec-lead">
+        肥えた土をひらくと、森の仲間「いぶき」が目覚める。出会ったいぶきは図鑑に集まり、育つとすがたを変えていく。
+      </p>
+
+      <div class="friends">
+        <div class="friend">
+          <img src="../../assets/morifis/lp/f-mokoke.webp" alt="モコケ — 植物" width="256" height="256" loading="lazy" decoding="async">
+          <span class="friend-tag">植物</span>
+          <h3 class="friend-name">モコケ</h3>
+          <p>閉じた森からいぶきを吸い、近くの育つ仲間へ運ぶ。</p>
+        </div>
+        <div class="friend">
+          <img src="../../assets/morifis/lp/f-leafin.webp" alt="リーフィン — ひかり" width="256" height="256" loading="lazy" decoding="async">
+          <span class="friend-tag">ひかり</span>
+          <h3 class="friend-name">リーフィン</h3>
+          <p>低い攻撃力で、すばやく連続攻撃する。</p>
+        </div>
+        <div class="friend">
+          <img src="../../assets/morifis/lp/f-hasunoko.webp" alt="ハスノコ — 水" width="256" height="256" loading="lazy" decoding="async">
+          <span class="friend-tag">水</span>
+          <h3 class="friend-name">ハスノコ</h3>
+          <p>水に棲む丈夫な仲間。Lv.3になると、いぶきから子を増やす。</p>
+        </div>
+        <div class="friend">
+          <img src="../../assets/morifis/lp/f-pikari.webp" alt="ピカリ — きのこ" width="256" height="256" loading="lazy" decoding="async">
+          <span class="friend-tag">きのこ</span>
+          <h3 class="friend-name">ピカリ</h3>
+          <p>命中ごとに、敵の最大HPをうばう毒を与える。毒は重ねがけできる。</p>
+        </div>
+        <div class="friend">
+          <img src="../../assets/morifis/lp/f-iwarou.webp" alt="イワロウ — 岩獣" width="256" height="256" loading="lazy" decoding="async">
+          <span class="friend-tag">岩獣</span>
+          <h3 class="friend-name">イワロウ</h3>
+          <p>敵を見つけると遠吠え、まわりの仲間の攻撃力を上げる。複数の遠吠えは乗算で重なる。</p>
+        </div>
+        <div class="friend">
+          <img src="../../assets/morifis/lp/f-yukipon.webp" alt="ユキポン — 雪の精霊" width="256" height="256" loading="lazy" decoding="async">
+          <span class="friend-tag">雪の精霊</span>
+          <h3 class="friend-name">ユキポン</h3>
+          <p>攻撃で敵の移動速度を下げる。鈍足は乗算で重なる。</p>
+        </div>
+      </div>
+
+      <p class="friends-note">——出会えるいぶきは約50種類。育てると、すがたも変わる。</p>
+
+      <div class="evolution">
+        <h3 class="serif">育てると、すがたが変わる。</h3>
+        <div class="evolution__row">
+          <div class="evolution__step"><img src="../../assets/morifis/lp/evo/evo-mushroom-1.webp" alt="ピカリ" width="276" height="320" loading="lazy" decoding="async"><span class="evolution__level">Lv.1</span><span class="evolution__name">ピカリ</span></div>
+          <span class="evolution__arrow" aria-hidden="true">→</span>
+          <div class="evolution__step"><img src="../../assets/morifis/lp/evo/evo-mushroom-2.webp" alt="ツキタケ" width="320" height="305" loading="lazy" decoding="async"><span class="evolution__level">Lv.2</span><span class="evolution__name">ツキタケ</span></div>
+          <span class="evolution__arrow" aria-hidden="true">→</span>
+          <div class="evolution__step evolution__step--final"><img src="../../assets/morifis/lp/evo/evo-mushroom-3.webp" alt="ルミシエラ" width="320" height="285" loading="lazy" decoding="async"><span class="evolution__level">Lv.3</span><span class="evolution__name">ルミシエラ</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 竜（特別枠） ===== -->
+    <section class="sec dragon reveal">
+      <span class="sec-eyebrow">SPECIAL</span>
+      <h2 class="serif">竜は、特別ないぶき。</h2>
+      <p class="sec-lead dragon__intro">ほかのいぶきは一本道で三段まで。竜だけは三つの系統に分かれ、それぞれがちがう姿へ育つ。</p>
+
+      <div class="dragon__line">
+        <span class="dragon__branch">A</span>
+        <div class="dragon__stage"><img src="../../assets/morifis/lp/evo/evo-dragon-a1.webp" alt="リーフル" width="271" height="320" loading="lazy" decoding="async"><span class="dragon__level">Lv.1</span><span class="dragon__name">リーフル</span></div>
+        <span class="dragon__arrow" aria-hidden="true">→</span>
+        <div class="dragon__stage dragon__stage--hidden"><img src="../../assets/morifis/lp/evo/sil-dragon-a2.webp" alt="" aria-hidden="true" width="320" height="229" loading="lazy" decoding="async"><span class="dragon__level">Lv.2</span><span class="dragon__name">？</span></div>
+        <span class="dragon__arrow" aria-hidden="true">→</span>
+        <div class="dragon__stage dragon__stage--hidden"><img src="../../assets/morifis/lp/evo/sil-dragon-a3.webp" alt="" aria-hidden="true" width="320" height="288" loading="lazy" decoding="async"><span class="dragon__level">Lv.3</span><span class="dragon__name">？</span></div>
+      </div>
+      <div class="dragon__line">
+        <span class="dragon__branch">B</span>
+        <div class="dragon__stage"><img src="../../assets/morifis/lp/evo/evo-dragon-b1.webp" alt="ハナメ" width="278" height="320" loading="lazy" decoding="async"><span class="dragon__level">Lv.1</span><span class="dragon__name">ハナメ</span></div>
+        <span class="dragon__arrow" aria-hidden="true">→</span>
+        <div class="dragon__stage dragon__stage--hidden"><img src="../../assets/morifis/lp/evo/sil-dragon-b2.webp" alt="" aria-hidden="true" width="320" height="243" loading="lazy" decoding="async"><span class="dragon__level">Lv.2</span><span class="dragon__name">？</span></div>
+        <span class="dragon__arrow" aria-hidden="true">→</span>
+        <div class="dragon__stage dragon__stage--hidden"><img src="../../assets/morifis/lp/evo/sil-dragon-b3.webp" alt="" aria-hidden="true" width="320" height="212" loading="lazy" decoding="async"><span class="dragon__level">Lv.3</span><span class="dragon__name">？</span></div>
+      </div>
+      <div class="dragon__line">
+        <span class="dragon__branch">C</span>
+        <div class="dragon__stage"><img src="../../assets/morifis/lp/evo/evo-dragon-c1.webp" alt="コモリ" width="320" height="255" loading="lazy" decoding="async"><span class="dragon__level">Lv.1</span><span class="dragon__name">コモリ</span></div>
+        <span class="dragon__arrow" aria-hidden="true">→</span>
+        <div class="dragon__stage dragon__stage--hidden"><img src="../../assets/morifis/lp/evo/sil-dragon-c2.webp" alt="" aria-hidden="true" width="320" height="292" loading="lazy" decoding="async"><span class="dragon__level">Lv.2</span><span class="dragon__name">？</span></div>
+        <span class="dragon__arrow" aria-hidden="true">→</span>
+        <div class="dragon__stage dragon__stage--hidden"><img src="../../assets/morifis/lp/evo/sil-dragon-c3.webp" alt="" aria-hidden="true" width="320" height="290" loading="lazy" decoding="async"><span class="dragon__level">Lv.3</span><span class="dragon__name">？</span></div>
+      </div>
+    </section>
+
+    <!-- ===== 五つの森 ===== -->
+    <section class="sec reveal">
+      <span class="sec-eyebrow">Five forests</span>
+      <h2 class="serif">森が違えば、<br>戦い方も変わる。</h2>
+      <p class="sec-lead">
+        陽だまりの森から、水辺、こかげの奥、雪の森まで。ワールドごとに地形も、咲く草木も、攻めてくる相手も変わります。
+      </p>
+
+      <p class="worlds-hint">横にスワイプ <span class="worlds-hint__arrow" aria-hidden="true">→</span></p>
+
+      <div class="worlds-wrap">
+      <div class="worlds">
+        <figure class="world">
+          <img src="../../assets/morifis/biome-w1.jpg" alt="ひだまりの森のバトル画面。緑あふれる明るい森"
+               width="1280" height="589" loading="lazy" decoding="async">
+          <figcaption><b>ひだまりの森 · World 1</b>陽だまりの、はじまりの森</figcaption>
+        </figure>
+        <figure class="world">
+          <img src="../../assets/morifis/biome-w2.jpg" alt="しずくの水辺のバトル画面。池とせせらぎのある森"
+               width="1280" height="589" loading="lazy" decoding="async">
+          <figcaption><b>しずくの水辺 · World 2</b>せせらぎと、水辺の森</figcaption>
+        </figure>
+        <figure class="world">
+          <img src="../../assets/morifis/biome-w3.jpg" alt="こかげの深森のバトル画面。ほのかに光る幻想的な夜の森"
+               width="1280" height="589" loading="lazy" decoding="async">
+          <figcaption><b>こかげの深森 · World 3</b>光ほのかな、こかげの奥</figcaption>
+        </figure>
+        <figure class="world">
+          <img src="../../assets/morifis/biome-w5.jpg" alt="白銀の森のバトル画面。雪と氷におおわれた森"
+               width="1280" height="589" loading="lazy" decoding="async">
+          <figcaption><b>白銀の森 · World 5</b>雪と氷に、しずまる森</figcaption>
+        </figure>
+      </div>
+      </div>
+    </section>
+
+    <!-- ===== 最終CTA ===== -->
+    <section class="final reveal" aria-labelledby="final-title">
+      <p class="final__ribbon">iOS / Android / Web</p>
+      <h2 class="final__title" id="final-title">配信準備中</h2>
+
+      <div class="store-cta">
+        <span class="store-cta__icon" aria-hidden="true">
+          <img src="../../assets/morifis/app-icon.webp" alt="" width="360" height="360" loading="lazy" decoding="async">
+        </span>
+        <span class="store-badge store-badge--ios"><small>準備中</small><b>App Store</b></span>
+        <span class="store-badge store-badge--android"><small>準備中</small><b>Google Play</b></span>
+        <span class="store-badge store-badge--web"><small>準備中</small><b>Web</b></span>
+      </div>
+
+      <p class="final__note">本編は基本プレイ無料。配信開始までもう少しお待ちください。</p>
+
+      <a class="final__site" href="/morifis/">公式サイトで、もっと見る →</a>
+    </section>
+
+  </main>
+
+  <footer class="lp-footer">
+    <nav aria-label="Footer">
+      <a href="/morifis/">公式サイト</a>
+      <a href="/privacy/morifis/">プライバシーポリシー</a>
+      <a href="/privacy/morifis/legal.html">特定商取引法に基づく表記</a>
+      <a href="mailto:contact@hakumai-studio.com">お問い合わせ</a>
+    </nav>
+    <span>© 2026 Hakumai studio. All rights reserved.</span>
+  </footer>
+
+</div>
+
+<!-- 追従CTA（FVを過ぎたら画面下部に固定） -->
+<div class="store-cta store-cta--fixed">
+  <span class="store-cta__icon" aria-hidden="true">
+    <img src="../../assets/morifis/app-icon.webp" alt="" width="360" height="360" loading="lazy" decoding="async">
+  </span>
+  <span class="store-badge store-badge--ios"><small>準備中</small><b>App Store</b></span>
+  <span class="store-badge store-badge--android"><small>準備中</small><b>Google Play</b></span>
+  <span class="store-badge store-badge--web"><small>準備中</small><b>Web</b></span>
+</div>
+
+<script>
+  // 画像が出そろってからFVのアニメーションを始める。
+  // 1.5秒経ったら、揃っていなくても必ず始める（CTAを見せないまま終わらせない）。
+  (function () {
+    var start = function () { document.documentElement.classList.add('is-ready'); };
+    if (document.readyState === 'complete') start();
+    else window.addEventListener('load', start);
+    setTimeout(start, 1500);
+  })();
+
+  (function () {
+    if (!('IntersectionObserver' in window)) {
+      // 監視できない環境では追従バーを出しっぱなしにする
+      document.documentElement.classList.remove('js-storebar');
+      return;
+    }
+    var run = function () {
+      // FV内のCTAが画面外に出たら追従バーを出す
+      var inline = document.querySelector('.store-cta--inline');
+      var bar = document.querySelector('.store-cta--fixed');
+      if (inline && bar) {
+        new IntersectionObserver(function (es) {
+          es.forEach(function (e) { bar.classList.toggle('is-visible', !e.isIntersecting); });
+        }, { threshold: 0 }).observe(inline);
+      }
+
+      // 各セクションをスクロールに応じてフェードイン＋わずかに上へ
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          e.target.classList.add('is-in');
+          io.unobserve(e.target);
+        });
+      }, { threshold: 0, rootMargin: '0px 0px -12% 0px' });
+      Array.prototype.forEach.call(document.querySelectorAll('.reveal'), function (el) { io.observe(el); });
+    };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
+    else run();
+  })();
+</script>
+
+</body>
+</html>
