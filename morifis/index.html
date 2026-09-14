@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Morifis / 森守り — Hakumai studio</title>
-  <meta name="description" content="Morifis（森守り／もりふぃす）は、しずかな森を守るやさしい防衛ストラテジー。小さな守り手といきものと、森の「よりしろ」を守りぬく。iOS / Android 近日配信。">
+  <meta name="description" content="Morifis（森守り／もりふぃす）は、しずかな森を守るやさしい防衛ストラテジー。小さな守り手といきものと、森の「よりしろ」を守りぬく。iOS / Android / Web 近日配信。">
   <meta property="og:title" content="Morifis / 森守り">
-  <meta property="og:description" content="しずかな森を守る、やさしい防衛ストラテジー。iOS / Android 近日配信。">
+  <meta property="og:description" content="しずかな森を守る、やさしい防衛ストラテジー。iOS / Android / Web 近日配信。">
   <meta property="og:image" content="https://hakumai-studio.com/assets/morifis/intro-poster.jpg">
   <meta property="og:type" content="website">
   <link rel="canonical" href="https://hakumai-studio.com/morifis/">
@@ -15,13 +15,20 @@
   <meta property="og:locale" content="ja_JP">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Morifis / 森守り">
-  <meta name="twitter:description" content="しずかな森を守る、やさしい防衛ストラテジー。iOS / Android 近日配信。">
+  <meta name="twitter:description" content="しずかな森を守る、やさしい防衛ストラテジー。iOS / Android / Web 近日配信。">
   <meta name="twitter:image" content="https://hakumai-studio.com/assets/morifis/intro-poster.jpg">
   <link rel="alternate" hreflang="ja" href="https://hakumai-studio.com/morifis/">
   <link rel="alternate" hreflang="en" href="https://hakumai-studio.com/morifis/en/">
   <link rel="alternate" hreflang="x-default" href="https://hakumai-studio.com/morifis/">
   <meta name="theme-color" content="#0d1812">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%F0%9F%8C%BF%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="../assets/morifis/icons/favicon-180.png" sizes="any">
+  <link rel="apple-touch-icon" href="../assets/morifis/icons/favicon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@700&display=swap">
+  <script>
+    document.documentElement.classList.add('js-anim', 'js-storebar');
+  </script>
   <style>
     :root {
       color-scheme: dark;
@@ -38,6 +45,10 @@
       --moss: #a9c88f;
       --gold: #d8c07a;
       --crystal: #7fe0b8;
+      --dawn-bg: #f7f1e2;
+      --dawn-ink: #24352a;
+      --dawn-muted: #5c7263;
+      --dawn-line: rgba(74, 58, 32, 0.16);
       --radius: 14px;
       --radius-sm: 9px;
       --shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
@@ -57,12 +68,18 @@
     }
 
     a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; }
+    /*
+     * height: auto は必須。
+     * HTML側に height 属性があると、CSSで width を決めた時点で幅も高さも確定値になり、
+     * aspect-ratio が無効化される（画像が属性の高さで描かれ、object-fit: cover が原画を切り抜く）。
+     */
+    img { max-width: 100%; height: auto; }
 
     .wrap { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
 
     .serif {
-      font-family: "Hiragino Mincho ProN", "Yu Mincho", Georgia, "Times New Roman", serif;
+      font-family: "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", Georgia, "Times New Roman", serif;
+      font-weight: 700;
     }
 
     /* ---------- Header ---------- */
@@ -154,7 +171,7 @@
       color: #fff;
       text-shadow: 0 6px 40px rgba(0, 0, 0, 0.45);
     }
-    .title .leaf { color: var(--moss); font-size: 0.44em; vertical-align: 0.5em; margin-left: 0.06em; }
+    .title .leaf { display: inline-block; width: 0.34em; height: auto; vertical-align: 0.52em; margin-left: 0.10em; }
     .subtitle {
       margin: 14px 0 0;
       font-size: clamp(15px, 3.4vw, 20px);
@@ -346,14 +363,16 @@
       min-height: 190px;
     }
     .feature .glyph {
-      width: 46px; height: 46px;
+      width: 58px; height: 58px;
       display: grid; place-items: center;
-      border-radius: 12px;
-      background: rgba(111, 174, 126, 0.14);
-      border: 1px solid rgba(111, 174, 126, 0.28);
-      font-size: 22px;
+      border-radius: 14px;
+      background: rgba(111, 174, 126, 0.10);
+      border: 1px solid rgba(111, 174, 126, 0.24);
       margin-bottom: 18px;
+      overflow: hidden;
     }
+    /* ゲーム内のスプライトをそのまま置く。絵文字は使わない */
+    .feature .glyph img { width: 40px; height: 40px; object-fit: contain; }
     .feature h3 {
       margin: 0 0 8px;
       font-size: 19px; font-weight: 800;
@@ -410,6 +429,54 @@
       font-size: 13px;
       text-align: center;
     }
+
+    /* ---------- Dawn friends / evolution ---------- */
+    .dawn {
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(120% 70% at 50% 0%, #fdf9ef 0%, var(--dawn-bg) 58%, #ece0c8 100%);
+      color: var(--dawn-ink);
+    }
+    .dawn::before, .dawn::after { content: ''; position: absolute; left: 0; right: 0; height: 56px; pointer-events: none; }
+    .dawn::before { top: 0; background: linear-gradient(to bottom, var(--bg), transparent); }
+    .dawn::after { bottom: 0; background: linear-gradient(to top, var(--bg), transparent); }
+    .dawn > * { position: relative; z-index: 1; }
+    .dawn .section-eyebrow { color: #6f8a5d; }
+    .dawn .section-lead, .dawn .friend-card p { color: var(--dawn-muted); }
+    .dawn .friend-card { border-color: var(--dawn-line); background: rgba(253, 249, 239, 0.8); box-shadow: 0 6px 18px rgba(36, 53, 42, 0.06); }
+    .dawn .friend-tag { color: #7d9169; }
+    .dawn .friend-name, .dawn h2 { color: var(--dawn-ink); }
+    .dawn .friends-note { color: #6f8a5d; }
+    .evolution { margin-top: 42px; padding-top: 32px; border-top: 1px solid var(--dawn-line); }
+    .evolution h3 { margin: 0 0 22px; text-align: center; color: var(--dawn-ink); font-size: 26px; line-height: 1.5; }
+    .evolution__row { display: grid; grid-template-columns: minmax(0, 1fr) 34px minmax(0, 1.05fr) 34px minmax(0, 1.55fr); align-items: end; gap: 8px; }
+    .evolution__step { min-width: 0; text-align: center; }
+    .evolution__step img { display: block; width: 100%; height: 220px; object-fit: contain; filter: drop-shadow(0 6px 8px color-mix(in srgb, var(--dawn-ink) 14%, transparent)); }
+    .evolution__step--final { position: relative; }
+    .evolution__step--final::before { content: ''; position: absolute; left: 50%; top: 38%; width: 158%; aspect-ratio: 1; transform: translate(-50%, -50%); z-index: 0; border-radius: 50%; pointer-events: none; background: radial-gradient(closest-side, rgba(216,192,122,.62) 0%, rgba(216,192,122,.26) 44%, transparent 72%); animation: evo-glow 3.6s ease-in-out infinite; }
+    .evolution__step--final > * { position: relative; z-index: 1; }
+    .evolution__step--final img { height: 285px; }
+    .evolution__level { display: block; color: var(--dawn-muted); font-size: 12px; font-weight: 800; letter-spacing: .08em; }
+    .evolution__name { display: block; color: var(--dawn-ink); font-family: "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", Georgia, serif; font-size: 17px; font-weight: 700; }
+    .evolution__arrow { align-self: center; color: var(--dawn-muted); font-size: 24px; font-weight: 800; text-align: center; }
+    @keyframes evo-glow { 0%,100% { opacity: .68; transform: translate(-50%,-50%) scale(.95); } 50% { opacity: 1; transform: translate(-50%,-50%) scale(1.05); } }
+
+    /* ---------- Special dragon ---------- */
+    .dragon { position: relative; overflow: hidden; border-block: 1px solid var(--gold); background: radial-gradient(120% 65% at 50% 0%, color-mix(in srgb, var(--gold) 12%, transparent), transparent 72%), linear-gradient(180deg, var(--forest-deep), var(--bg-2)); }
+    .dragon::before { content: ''; position: absolute; inset: 0 0 auto; height: 56px; pointer-events: none; background: linear-gradient(to bottom, var(--dawn-bg), transparent); }
+    .dragon > * { position: relative; z-index: 1; }
+    .dragon .section-eyebrow, .dragon h2, .dragon__level { color: var(--gold); }
+    .dragon__intro { max-width: 720px; margin: 20px auto 30px; }
+    .dragon__line { display: grid; grid-template-columns: 34px minmax(0, 1fr) 34px minmax(0, 1fr) 34px minmax(0, 1fr); align-items: center; gap: 12px; padding: 18px 0; border-top: 1px solid color-mix(in srgb, var(--gold) 42%, transparent); }
+    .dragon__line:last-child { border-bottom: 1px solid color-mix(in srgb, var(--gold) 42%, transparent); }
+    .dragon__branch { color: var(--gold); font-family: "Shippori Mincho B1", Georgia, serif; font-size: 22px; font-weight: 700; text-align: center; }
+    .dragon__stage { min-width: 0; text-align: center; }
+    .dragon__stage img { display: block; width: 100%; height: 210px; object-fit: contain; filter: drop-shadow(0 5px 8px color-mix(in srgb, var(--bg) 35%, transparent)); }
+    .dragon__name { display: block; color: var(--ink); font-family: "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", Georgia, serif; font-size: 17px; font-weight: 700; }
+    .dragon__level { display: block; font-size: 12px; font-weight: 800; letter-spacing: .08em; }
+    .dragon__arrow { color: var(--gold); font-size: 24px; font-weight: 800; text-align: center; }
+    .dragon__stage--hidden img { filter: drop-shadow(0 0 2px rgba(216,192,122,.85)) drop-shadow(0 0 10px rgba(216,192,122,.35)); }
+    .dragon__stage--hidden .dragon__name { color: var(--gold); opacity: .75; letter-spacing: .12em; }
 
     /* ---------- Product info ---------- */
     .spec-table {
@@ -474,18 +541,31 @@
       margin-top: 34px;
     }
     .store-badge {
-      display: inline-flex; align-items: center; justify-content: center;
+      position: relative; display: inline-flex; align-items: center; justify-content: center;
       min-height: 58px; padding: 0 26px;
-      border: 1px solid var(--line-strong);
+      border: 1px solid #c6b189;
       border-radius: 12px;
-      background: rgba(255, 255, 255, 0.04);
-      color: rgba(255, 255, 255, 0.7);
+      background-color: #f4ead3;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23p)' opacity='0.42'/%3E%3C/svg%3E");
+      background-size: 140px 140px;
+      color: #4a3a22;
       font-weight: 700;
       cursor: default;
       text-align: left;
+      overflow: hidden;
+      box-shadow: 0 2px 7px rgba(0,0,0,.3);
     }
-    .store-badge small { display: block; font-size: 10.5px; letter-spacing: 0.1em; color: var(--muted-2); font-weight: 800; text-transform: uppercase; }
-    .store-badge b { font-size: 15px; font-weight: 800; color: rgba(255,255,255,0.86); }
+    .store-badge small { display: block; font-size: 10.5px; letter-spacing: .04em; color: #8a7550; font-weight: 800; }
+    .store-badge b { font-size: 15px; font-weight: 800; color: #4a3a22; white-space: nowrap; }
+    .store-badge::after { content: ''; position: absolute; inset: 50% 0 auto; height: 44px; transform: translateY(-50%); }
+    .store-badge--ios, .store-badge--android { min-width: 190px; }
+    .store-cta--fixed { position: fixed; left: 50%; bottom: 0; transform: translateX(-50%); width: min(1120px, calc(100% - 40px)); padding: 10px 0 calc(10px + env(safe-area-inset-bottom)); display: flex; gap: 12px; justify-content: center; background: rgba(9,18,13,.92); border-top: 1px solid var(--line); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 -4px 20px rgba(0,0,0,.45); z-index: 90; transition: transform .35s cubic-bezier(.22,1,.36,1); }
+    .js-storebar .store-cta--fixed { transform: translate(-50%, 110%); }
+    .js-storebar .store-cta--fixed.is-visible { transform: translate(-50%, 0); }
+    .js-anim .reveal { opacity: 0; transform: translateY(22px) scale(.975); }
+    .reveal { transition: opacity .7s ease-out, transform .7s cubic-bezier(.22,1,.36,1); }
+    .reveal.is-in { opacity: 1; transform: none; }
+    .mobile-section-links { display: none; }
     .cta .fine {
       margin-top: 26px; color: var(--muted-2); font-size: 13px;
     }
@@ -508,6 +588,9 @@
       header { position: absolute; }
       .nav-links { gap: 16px; }
       .nav-links .navmid { display: none; }
+      .mobile-section-links { display: flex; position: relative; z-index: 20; gap: 18px; overflow-x: auto; margin-top: 62px; padding: 10px 20px; white-space: nowrap; color: var(--muted-2); background: var(--bg); border-bottom: 1px solid var(--line); font-size: 12px; font-weight: 800; }
+      .mobile-section-links::after { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 42px; pointer-events: none; background: linear-gradient(90deg, transparent, var(--bg)); }
+      .mobile-section-links a { flex: 0 0 auto; }
       section { padding: 78px 0; }
       .shots, .features { grid-template-columns: 1fr; }
       .friends-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -524,6 +607,13 @@
       .feature { padding: 26px 22px; min-height: 0; }
       .spec-row { flex-direction: column; gap: 6px; }
       .spec-term { flex-basis: auto; }
+      .store-cta--fixed { width: 100%; max-width: none; padding-inline: 14px; }
+      .store-cta--fixed .store-badge { min-width: 0; flex: 1 1 0; padding-inline: 14px; }
+      .evolution__row { grid-template-columns: minmax(0, 1fr) 22px minmax(0, 1fr) 22px minmax(0, 1.3fr); gap: 4px; }
+      .evolution__step img { height: 145px; }
+      .evolution__step--final img { height: 190px; }
+      .dragon__line { grid-template-columns: 24px minmax(0, 1fr) 22px minmax(0, 1fr) 22px minmax(0, 1fr); gap: 4px; }
+      .dragon__stage img { height: 130px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -531,6 +621,10 @@
       .scroll-hint { animation: none; }
       figure.still img { transition: none; }
       .friend-card img { transition: none; }
+      .js-anim .reveal { opacity: 1; transform: none; }
+      .reveal { transition: none; }
+      .evolution__step--final::before { animation: none; }
+      .store-cta--fixed { transition: none; }
     }
   </style>
   <script type="application/ld+json">
@@ -569,22 +663,26 @@
         <a class="navmid" href="#friends">Friends</a>
         <a class="navmid" href="#worlds">Worlds</a>
         <a class="navmid" href="#screens">Screens</a>
+        <a class="navmid" href="#pricing">価格</a>
         <a class="lang" href="/morifis/en/">EN</a>
         <a class="home" href="/">← Studio</a>
       </nav>
     </div>
   </header>
+  <nav class="mobile-section-links" aria-label="セクションリンク">
+    <a href="#opening">Opening</a><a href="#howto">Play</a><a href="#game">Game</a><a href="#friends">Friends</a><a href="#worlds">Worlds</a><a href="#screens">Screens</a><a href="#info">Info</a><a href="#pricing">価格</a>
+  </nav>
 
   <main>
     <!-- ===== Hero ===== -->
     <section class="hero">
-      <video autoplay muted loop playsinline preload="auto"
+      <video autoplay muted loop playsinline preload="metadata"
              poster="../assets/morifis/home-poster.jpg" aria-hidden="true">
         <source src="../assets/morifis/home-loop.mp4" type="video/mp4">
       </video>
       <div class="wrap">
         <p class="eyebrow">Forest-defense strategy · Hakumai studio</p>
-        <h1 class="title serif">Morifis<span class="leaf">🌿</span></h1>
+        <h1 class="title serif">Morifis<img class="leaf" src="../assets/morifis/icons/leaf.webp" alt="" width="96" height="94" decoding="async"></h1>
         <p class="subtitle">もりふぃす</p>
         <div class="rule"></div>
         <p class="lead">
@@ -598,13 +696,13 @@
           </a>
           <a class="button ghost" href="#game">ゲームについて</a>
         </div>
-        <p class="hero-note">Coming soon · iOS / Android</p>
+        <p class="hero-note">配信準備中 · iOS / Android / Web</p>
       </div>
       <span class="scroll-hint" aria-hidden="true">SCROLL</span>
     </section>
 
     <!-- ===== Opening movie ===== -->
-    <section id="opening" class="opening">
+    <section id="opening" class="opening reveal">
       <div class="wrap center">
         <span class="section-eyebrow">Opening movie</span>
         <h2 class="serif">物語の、はじまり</h2>
@@ -624,7 +722,7 @@
     </section>
 
     <!-- ===== How to play ===== -->
-    <section id="howto">
+    <section id="howto" class="reveal">
       <div class="wrap">
         <span class="section-eyebrow">How to play</span>
         <h2 class="serif">森をひらいて、守る。</h2>
@@ -635,7 +733,7 @@
         <div class="steps">
           <article class="step">
             <div class="step-media">
-              <img src="../assets/morifis/gp-start.jpg" alt="閉じた森とマナ。ステージ開始の画面" loading="lazy">
+              <img src="../assets/morifis/gp-start.jpg" alt="閉じた森とマナ。ステージ開始の画面" loading="lazy" width="1280" height="589">
             </div>
             <div class="step-body">
               <span class="step-num serif">01</span>
@@ -645,7 +743,7 @@
           </article>
           <article class="step reverse">
             <div class="step-media">
-              <img src="../assets/morifis/gp-place.jpg" alt="ひらいた道に、こもれび石を置く場所を選んでいる画面" loading="lazy">
+              <img src="../assets/morifis/gp-place.jpg" alt="ひらいた道に、こもれび石を置く場所を選んでいる画面" loading="lazy" width="1280" height="589">
             </div>
             <div class="step-body">
               <span class="step-num serif">02</span>
@@ -655,7 +753,7 @@
           </article>
           <article class="step">
             <div class="step-media">
-              <img src="../assets/morifis/gp-battle.jpg" alt="迫る敵を、森の仲間とはな・ねっこで迎え撃つ戦闘画面" loading="lazy">
+              <img src="../assets/morifis/gp-battle.jpg" alt="迫る敵を、森の仲間とはな・ねっこで迎え撃つ戦闘画面" loading="lazy" width="1280" height="589">
             </div>
             <div class="step-body">
               <span class="step-num serif">03</span>
@@ -668,32 +766,32 @@
     </section>
 
     <!-- ===== The game ===== -->
-    <section id="game" class="game">
+    <section id="game" class="game reveal">
       <div class="wrap">
         <span class="section-eyebrow">The game</span>
-        <h2 class="serif">やさしく、じっくり。<br>森を守るストラテジー。</h2>
+        <h2 class="serif">準備の時間で、<br>勝ち筋が決まる。</h2>
         <p class="section-lead">
-          マナで森をひらき、こもれび石を守る。リアルタイムに介入しながら、
-          急かされずに一手ずつ考える——そんな防衛ストラテジーです。
+          マナで森をひらき、道をつくる。時間が来れば、侵入がはじまる。
+          どこをひらいたかが、そのまま戦いの形になる防衛ストラテジーです。
         </p>
         <div class="features">
           <div class="feature">
-            <div class="glyph" aria-hidden="true">🌱</div>
+            <div class="glyph"><img src="../assets/morifis/icons/ico-open.webp" alt="森の力" width="192" height="187" loading="lazy" decoding="async"></div>
             <h3>森をひらく <span>Open</span></h3>
             <p>マナで閉じた森をひらいて道をつくる。ひらいた場所が、そのまま敵の通り道に。地形づくりから戦いは始まる。</p>
           </div>
           <div class="feature">
-            <div class="glyph" aria-hidden="true">🍄</div>
+            <div class="glyph"><img src="../assets/morifis/icons/ico-awaken.webp" alt="ハナモス" width="164" height="192" loading="lazy" decoding="async"></div>
             <h3>仲間が目覚める <span>Awaken</span></h3>
             <p>肥えた土をひらくと森の仲間が目覚める。はな・ねっこと組み合わせ、置きどころで守りの形を変えていく。</p>
           </div>
           <div class="feature">
-            <div class="glyph" aria-hidden="true">💠</div>
+            <div class="glyph"><img src="../assets/morifis/icons/ico-tactics.webp" alt="マナ" width="107" height="192" loading="lazy" decoding="async"></div>
             <h3>考える楽しさ <span>Tactics</span></h3>
-            <p>使えるマナは決められた予算だけ。ひと手で流れが変わる、パズルのように落ち着いた戦略性。</p>
+            <p>使えるマナは決められた予算だけ。ひと手で流れが変わる、パズルのような組み立て。</p>
           </div>
           <div class="feature">
-            <div class="glyph" aria-hidden="true">🍃</div>
+            <div class="glyph"><img src="../assets/morifis/icons/ico-journey.webp" alt="依代の石" width="148" height="192" loading="lazy" decoding="async"></div>
             <h3>集めて、五つの森へ <span>Journey</span></h3>
             <p>出会った仲間は図鑑に。ひだまりの森から霜のかがやく奥地まで、表情のちがう五つの森をめぐる。</p>
           </div>
@@ -702,7 +800,7 @@
     </section>
 
     <!-- ===== Forest friends ===== -->
-    <section id="friends">
+    <section id="friends" class="dawn reveal">
       <div class="wrap">
         <span class="section-eyebrow">Forest friends</span>
         <h2 class="serif">目覚める、森の仲間たち。</h2>
@@ -711,48 +809,66 @@
         </p>
         <div class="friends-grid">
           <div class="friend-card">
-            <img src="../assets/morifis/friends/mokoke.png" alt="モコケ — こけのいぶき" loading="lazy" width="512" height="512">
-            <span class="friend-tag">こけのいぶき</span>
+            <img src="../assets/morifis/friends/mokoke.png" alt="モコケ — 植物" loading="lazy" width="512" height="512">
+            <span class="friend-tag">植物</span>
             <h3 class="friend-name">モコケ</h3>
-            <p>肥えた土からいちばんに目覚める、もこもこのこけのこ。せっせと養分をはこぶ働きもの。</p>
+            <p>閉じた森からいぶきを吸い、近くの育つ仲間へ運ぶ。</p>
           </div>
           <div class="friend-card">
-            <img src="../assets/morifis/friends/hotari.png" alt="ホタリ — はねむしのいぶき" loading="lazy" width="512" height="512">
-            <span class="friend-tag">はねむしのいぶき</span>
-            <h3 class="friend-name">ホタリ</h3>
-            <p>ひらいた道を、ふわりふわり。森でいちばんちいさな羽。</p>
-          </div>
-          <div class="friend-card">
-            <img src="../assets/morifis/friends/leafin.png" alt="リーフィン — ひだまりの守り手" loading="lazy" width="512" height="512">
-            <span class="friend-tag">ひだまりの守り手</span>
+            <img src="../assets/morifis/friends/leafin.png" alt="リーフィン — ひかり" loading="lazy" width="512" height="512">
+            <span class="friend-tag">ひかり</span>
             <h3 class="friend-name">リーフィン</h3>
-            <p>葉をまとった、ひだまりのけもの。育つほど、緑はあざやかに。</p>
+            <p>低い攻撃力で、すばやく連続攻撃する。</p>
           </div>
           <div class="friend-card">
-            <img src="../assets/morifis/friends/hasunoko.png" alt="ハスノコ — 水辺の守り手" loading="lazy" width="512" height="512">
-            <span class="friend-tag">水辺の守り手</span>
+            <img src="../assets/morifis/friends/hasunoko.png" alt="ハスノコ — 水" loading="lazy" width="512" height="512">
+            <span class="friend-tag">水</span>
             <h3 class="friend-name">ハスノコ</h3>
-            <p>葉っぱの上にぽつん。しずくの水辺を見守るこども。</p>
+            <p>水に棲む丈夫な仲間。Lv.3になると、いぶきから子を増やす。</p>
           </div>
           <div class="friend-card">
-            <img src="../assets/morifis/friends/pikari.png" alt="ピカリ — 月明かりのきのこ" loading="lazy" width="512" height="512">
-            <span class="friend-tag">月明かりのきのこ</span>
+            <img src="../assets/morifis/friends/pikari.png" alt="ピカリ — きのこ" loading="lazy" width="512" height="512">
+            <span class="friend-tag">きのこ</span>
             <h3 class="friend-name">ピカリ</h3>
-            <p>夜の森に、ぽっ、ぽっ。ほのかな月明かりの道しるべ。</p>
+            <p>命中ごとに、敵の最大HPをうばう毒を与える。毒は重ねがけできる。</p>
           </div>
           <div class="friend-card">
-            <img src="../assets/morifis/friends/yukipon.png" alt="ユキポン — しらゆきの精" loading="lazy" width="512" height="512">
-            <span class="friend-tag">しらゆきの精</span>
+            <img src="../assets/morifis/lp/f-iwarou.webp" alt="イワロウ — 岩獣" loading="lazy" width="256" height="256">
+            <span class="friend-tag">岩獣</span>
+            <h3 class="friend-name">イワロウ</h3>
+            <p>敵を見つけると遠吠え、まわりの仲間の攻撃力を上げる。複数の遠吠えは乗算で重なる。</p>
+          </div>
+          <div class="friend-card">
+            <img src="../assets/morifis/friends/yukipon.png" alt="ユキポン — 雪の精霊" loading="lazy" width="512" height="512">
+            <span class="friend-tag">雪の精霊</span>
             <h3 class="friend-name">ユキポン</h3>
-            <p>白銀の森にまう、こおりのしずく。きらきら、結晶をまとう。</p>
+            <p>攻撃で敵の移動速度を下げる。鈍足は乗算で重なる。</p>
           </div>
         </div>
-        <p class="friends-note">——出会えるいぶきは30種類以上。育てると、すがたも変わる。</p>
+        <p class="friends-note">——出会えるいぶきは約50種類。育てると、すがたも変わる。</p>
+        <div class="evolution">
+          <h3 class="serif">育てると、すがたが変わる。</h3>
+          <div class="evolution__row">
+            <div class="evolution__step"><img src="../assets/morifis/lp/evo/evo-mushroom-1.webp" alt="ピカリ" width="276" height="320" loading="lazy"><span class="evolution__level">Lv.1</span><span class="evolution__name">ピカリ</span></div><span class="evolution__arrow" aria-hidden="true">→</span>
+            <div class="evolution__step"><img src="../assets/morifis/lp/evo/evo-mushroom-2.webp" alt="ツキタケ" width="320" height="305" loading="lazy"><span class="evolution__level">Lv.2</span><span class="evolution__name">ツキタケ</span></div><span class="evolution__arrow" aria-hidden="true">→</span>
+            <div class="evolution__step evolution__step--final"><img src="../assets/morifis/lp/evo/evo-mushroom-3.webp" alt="ルミシエラ" width="320" height="285" loading="lazy"><span class="evolution__level">Lv.3</span><span class="evolution__name">ルミシエラ</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dragon reveal" aria-labelledby="dragon-title">
+      <div class="wrap center">
+        <span class="section-eyebrow">SPECIAL</span><h2 class="serif" id="dragon-title">竜は、特別ないぶき。</h2>
+        <p class="section-lead dragon__intro">ほかのいぶきは一本道で三段まで。竜だけは三つの系統に分かれ、それぞれがちがう姿へ育つ。</p>
+        <div class="dragon__line"><span class="dragon__branch">A</span><div class="dragon__stage"><img src="../assets/morifis/lp/evo/evo-dragon-a1.webp" alt="リーフル" width="271" height="320" loading="lazy"><span class="dragon__level">Lv.1</span><span class="dragon__name">リーフル</span></div><span class="dragon__arrow">→</span><div class="dragon__stage dragon__stage--hidden"><img src="../assets/morifis/lp/evo/sil-dragon-a2.webp" alt="" aria-hidden="true" width="320" height="229" loading="lazy"><span class="dragon__level">Lv.2</span><span class="dragon__name">?</span></div><span class="dragon__arrow">→</span><div class="dragon__stage dragon__stage--hidden"><img src="../assets/morifis/lp/evo/sil-dragon-a3.webp" alt="" aria-hidden="true" width="320" height="288" loading="lazy"><span class="dragon__level">Lv.3</span><span class="dragon__name">?</span></div></div>
+        <div class="dragon__line"><span class="dragon__branch">B</span><div class="dragon__stage"><img src="../assets/morifis/lp/evo/evo-dragon-b1.webp" alt="ハナメ" width="278" height="320" loading="lazy"><span class="dragon__level">Lv.1</span><span class="dragon__name">ハナメ</span></div><span class="dragon__arrow">→</span><div class="dragon__stage dragon__stage--hidden"><img src="../assets/morifis/lp/evo/sil-dragon-b2.webp" alt="" aria-hidden="true" width="320" height="243" loading="lazy"><span class="dragon__level">Lv.2</span><span class="dragon__name">?</span></div><span class="dragon__arrow">→</span><div class="dragon__stage dragon__stage--hidden"><img src="../assets/morifis/lp/evo/sil-dragon-b3.webp" alt="" aria-hidden="true" width="320" height="212" loading="lazy"><span class="dragon__level">Lv.3</span><span class="dragon__name">?</span></div></div>
+        <div class="dragon__line"><span class="dragon__branch">C</span><div class="dragon__stage"><img src="../assets/morifis/lp/evo/evo-dragon-c1.webp" alt="コモリ" width="320" height="255" loading="lazy"><span class="dragon__level">Lv.1</span><span class="dragon__name">コモリ</span></div><span class="dragon__arrow">→</span><div class="dragon__stage dragon__stage--hidden"><img src="../assets/morifis/lp/evo/sil-dragon-c2.webp" alt="" aria-hidden="true" width="320" height="292" loading="lazy"><span class="dragon__level">Lv.2</span><span class="dragon__name">?</span></div><span class="dragon__arrow">→</span><div class="dragon__stage dragon__stage--hidden"><img src="../assets/morifis/lp/evo/sil-dragon-c3.webp" alt="" aria-hidden="true" width="320" height="290" loading="lazy"><span class="dragon__level">Lv.3</span><span class="dragon__name">?</span></div></div>
       </div>
     </section>
 
     <!-- ===== Worlds ===== -->
-    <section id="worlds">
+    <section id="worlds" class="reveal">
       <div class="wrap">
         <span class="section-eyebrow">Five forests</span>
         <h2 class="serif">森ごとに、風がちがう。</h2>
@@ -762,19 +878,19 @@
         </p>
         <div class="shots">
           <figure class="shot">
-            <img src="../assets/morifis/biome-w1.jpg" alt="ひだまりの森のバトル画面。緑あふれる明るい森" loading="lazy">
+            <img src="../assets/morifis/biome-w1.jpg" alt="ひだまりの森のバトル画面。緑あふれる明るい森" loading="lazy" width="1280" height="589">
             <figcaption><b>ひだまりの森 · World 1</b>陽だまりの、はじまりの森</figcaption>
           </figure>
           <figure class="shot">
-            <img src="../assets/morifis/biome-w2.jpg" alt="しずくの水辺のバトル画面。池とせせらぎのある森" loading="lazy">
+            <img src="../assets/morifis/biome-w2.jpg" alt="しずくの水辺のバトル画面。池とせせらぎのある森" loading="lazy" width="1280" height="589">
             <figcaption><b>しずくの水辺 · World 2</b>せせらぎと、水辺の森</figcaption>
           </figure>
           <figure class="shot">
-            <img src="../assets/morifis/biome-w3.jpg" alt="こかげの深森のバトル画面。ほのかに光る幻想的な夜の森" loading="lazy">
+            <img src="../assets/morifis/biome-w3.jpg" alt="こかげの深森のバトル画面。ほのかに光る幻想的な夜の森" loading="lazy" width="1280" height="589">
             <figcaption><b>こかげの深森 · World 3</b>光ほのかな、こかげの奥</figcaption>
           </figure>
           <figure class="shot">
-            <img src="../assets/morifis/biome-w5.jpg" alt="白銀の森のバトル画面。雪と氷におおわれた森" loading="lazy">
+            <img src="../assets/morifis/biome-w5.jpg" alt="白銀の森のバトル画面。雪と氷におおわれた森" loading="lazy" width="1280" height="589">
             <figcaption><b>白銀の森 · World 5</b>雪と氷に、しずまる森</figcaption>
           </figure>
         </div>
@@ -782,7 +898,7 @@
     </section>
 
     <!-- ===== Screens ===== -->
-    <section id="screens" class="screens">
+    <section id="screens" class="screens reveal">
       <div class="wrap">
         <span class="section-eyebrow">Screens</span>
         <h2 class="serif">画面をのぞく</h2>
@@ -791,19 +907,19 @@
         </p>
         <div class="shots">
           <figure class="shot">
-            <img src="../assets/morifis/ui-worlds.jpg" alt="五つのワールドを選ぶワールド選択画面" loading="lazy">
+            <img src="../assets/morifis/ui-worlds.jpg" alt="五つのワールドを選ぶワールド選択画面" loading="lazy" width="1280" height="589">
             <figcaption><b>World select</b>五つの森から、次の舞台を選ぶ</figcaption>
           </figure>
           <figure class="shot">
-            <img src="../assets/morifis/ui-stages.jpg" alt="星3条件と攻めてくる相手が並ぶステージ選択画面" loading="lazy">
+            <img src="../assets/morifis/ui-stages.jpg" alt="星3条件と攻めてくる相手が並ぶステージ選択画面" loading="lazy" width="1280" height="589">
             <figcaption><b>Stage select</b>攻めてくる相手と★条件を読んで、挑む</figcaption>
           </figure>
           <figure class="shot">
-            <img src="../assets/morifis/ui-zukan.jpg" alt="仲間の進化ラインを集める図鑑画面" loading="lazy">
+            <img src="../assets/morifis/ui-zukan.jpg" alt="仲間の進化ラインを集める図鑑画面" loading="lazy" width="1280" height="589">
             <figcaption><b>Encyclopedia</b>出会った仲間と、その進化を図鑑に</figcaption>
           </figure>
           <figure class="shot">
-            <img src="../assets/morifis/gp-combat.jpg" alt="森伐りたちと接近戦になっている戦闘画面" loading="lazy">
+            <img src="../assets/morifis/gp-combat.jpg" alt="森伐りたちと接近戦になっている戦闘画面" loading="lazy" width="1280" height="589">
             <figcaption><b>Battle</b>ひらいた道の上で、迫る侵入者と対峙する</figcaption>
           </figure>
         </div>
@@ -811,7 +927,7 @@
     </section>
 
     <!-- ===== Product info ===== -->
-    <section id="info">
+    <section id="info" class="reveal">
       <div class="wrap center">
         <span class="section-eyebrow">Product info</span>
         <h2 class="serif">製品情報</h2>
@@ -849,7 +965,7 @@
     </section>
 
     <!-- ===== In-app purchase price list ===== -->
-    <section id="pricing">
+    <section id="pricing" class="reveal">
       <div class="wrap center">
         <span class="section-eyebrow">Pricing</span>
         <h2 class="serif">アプリ内購入の価格</h2>
@@ -910,16 +1026,17 @@
     </section>
 
     <!-- ===== Coming soon ===== -->
-    <section class="cta">
+    <section class="cta reveal">
       <div class="wrap">
         <span class="section-eyebrow">Coming soon</span>
         <h2 class="serif">配信を、準備しています。</h2>
         <p class="section-lead" style="margin-inline:auto">
-          Morifis は現在開発中です。iOS / Android での配信を予定しています。
+          Morifis は現在開発中です。iOS / Android / ブラウザでの配信を予定しています。
         </p>
         <div class="badges" aria-label="配信予定プラットフォーム">
-          <span class="store-badge"><span><small>Coming soon</small><b>App Store · iOS</b></span></span>
-          <span class="store-badge"><span><small>Coming soon</small><b>Google Play</b></span></span>
+          <a class="store-badge store-badge--ios" aria-disabled="true"><span><small>準備中</small><b>App Store · iOS</b></span></a>
+          <a class="store-badge store-badge--android" aria-disabled="true"><span><small>準備中</small><b>Google Play</b></span></a>
+          <a class="store-badge store-badge--web" aria-disabled="true"><span><small>準備中</small><b>Web</b></span></a>
         </div>
         <p class="fine">
           お問い合わせ・取材などは <a href="mailto:contact@hakumai-studio.com">contact@hakumai-studio.com</a> まで ·
@@ -928,7 +1045,13 @@
         </p>
       </div>
     </section>
-  </main>
+</main>
+
+  <div class="store-cta store-cta--fixed" aria-label="Store links">
+    <a class="store-badge store-badge--ios" aria-disabled="true"><span><small>準備中</small><b>App Store · iOS</b></span></a>
+    <a class="store-badge store-badge--android" aria-disabled="true"><span><small>準備中</small><b>Google Play</b></span></a>
+    <a class="store-badge store-badge--web" aria-disabled="true"><span><small>準備中</small><b>Web</b></span></a>
+  </div>
 
   <footer>
     <div class="wrap footer-inner">
@@ -950,6 +1073,28 @@
       if (!v) return;
       setTimeout(function () { v.play().catch(function () {}); }, 650);
     });
+    (function () {
+      if (!('IntersectionObserver' in window)) {
+        document.documentElement.classList.remove('js-storebar');
+        return;
+      }
+      var run = function () {
+        var inline = document.querySelector('.hero-actions');
+        var bar = document.querySelector('.store-cta--fixed');
+        if (inline && bar) new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) { bar.classList.toggle('is-visible', !entry.isIntersecting); });
+        }, { threshold: 0 }).observe(inline);
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-in');
+            io.unobserve(entry.target);
+          });
+        }, { threshold: 0, rootMargin: '0px 0px -12% 0px' });
+        Array.prototype.forEach.call(document.querySelectorAll('.reveal'), function (el) { io.observe(el); });
+      };
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();
+    })();
   </script>
 </body>
 </html>
