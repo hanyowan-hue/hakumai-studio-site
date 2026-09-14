@@ -1,15 +1,41 @@
 {
-  "version": 1,
+  "version": 2,
   "offers": {
     "JP": {
-      "id": "jp-night-protein-testosterone-2026",
-      "titleJa": "自宅でできるテストステロン検査",
-      "titleEn": "At-home Testosterone Test",
-      "bodyJa": "毛髪を郵送してテストステロン量を確認できる検査キットです。医師による診断に代わるものではありません。",
-      "bodyEn": "A mail-in hair test for measuring testosterone levels. It is not a substitute for medical diagnosis.",
-      "ctaJa": "商品を確認する",
-      "ctaEn": "View product",
-      "url": "https://hakumai-studio.com/apex/test-kit/"
+      "testosterone": {
+        "id": "jp-night-protein-testosterone-2026",
+        "url": "https://hakumai-studio.com/apex/test-kit/",
+        "text": {
+          "ja": {
+            "title": "自宅でできるテストステロン検査",
+            "body": "毛髪を郵送してテストステロン量を確認できる検査キットです。医師による診断に代わるものではありません。",
+            "cta": "商品を確認する"
+          },
+          "en": {
+            "title": "At-home Testosterone Test",
+            "body": "A mail-in hair test for measuring testosterone levels. It is not a substitute for medical diagnosis.",
+            "cta": "View product"
+          }
+        }
+      },
+      "semenTest": {
+        "id": "jp-mens-loupe",
+        "url": "https://www.amazon.co.jp/dp/B01EV0Q0SA?tag=hanyowan-22",
+        "text": {
+          "ja": {
+            "title": "自宅で精子を観察できるキット",
+            "body": "スマートフォンのカメラに取り付けて、自宅で精子の様子を観察できるキットです。医療機関の検査に代わるものではありませんが、まず自分の状態を見てみたいときの選択肢になります。",
+            "cta": "Amazonで見る",
+            "disclosure": "Amazonのアソシエイトとして、Hakumai Studioは適格販売により収入を得ています。"
+          },
+          "en": {
+            "title": "A kit for observing sperm at home",
+            "body": "This kit attaches to your smartphone camera so you can observe sperm at home. It is not a substitute for a clinical test, but it is one option when you want a first look at your own condition.",
+            "cta": "View on Amazon",
+            "disclosure": "As an Amazon Associate, Hakumai Studio earns from qualifying purchases."
+          }
+        }
+      }
     }
   }
 }
