@@ -103,20 +103,16 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      font-weight: 800;
-      font-size: 15px;
-      letter-spacing: 0.01em;
-      color: rgba(255, 255, 255, 0.88);
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: 0.06em;
+      color: #fff;
     }
-    .brand-mark {
-      width: 26px; height: 26px;
-      border: 1px solid var(--line-strong);
-      border-radius: 7px;
-      display: grid; place-items: center;
-      font-size: 12px;
-      background: rgba(255, 255, 255, 0.08);
+    .brand-cloud {
+      width: 34px;
+      height: 20px;
+      flex: none;
     }
-    .brand-mark::before { content: "白"; }
     .nav-links {
       display: flex; align-items: center; gap: 22px;
       color: rgba(255, 255, 255, 0.72);
@@ -467,10 +463,11 @@
     .dragon > * { position: relative; z-index: 1; }
     .dragon .section-eyebrow, .dragon h2, .dragon__level { color: var(--gold); }
     .dragon__intro { max-width: 720px; margin: 20px auto 30px; }
-    .dragon__line { display: grid; grid-template-columns: 34px minmax(0, 1fr) 34px minmax(0, 1fr) 34px minmax(0, 1fr); align-items: center; gap: 12px; padding: 18px 0; border-top: 1px solid color-mix(in srgb, var(--gold) 42%, transparent); }
+    .dragon__line { display: grid; grid-template-columns: minmax(0, 1fr) 34px minmax(0, 1fr) 34px minmax(0, 1fr); align-items: center; gap: 12px; padding: 18px 0; border-top: 1px solid color-mix(in srgb, var(--gold) 42%, transparent); }
     .dragon__line:last-child { border-bottom: 1px solid color-mix(in srgb, var(--gold) 42%, transparent); }
-    .dragon__branch { color: var(--gold); font-family: "Shippori Mincho B1", Georgia, serif; font-size: 22px; font-weight: 700; text-align: center; }
     .dragon__stage { min-width: 0; text-align: center; }
+    /* Lv.1 は他の段より小さく見せる（0.8倍） */
+    .dragon__line > .dragon__stage:not(.dragon__stage--hidden) img { height: 168px; }
     .dragon__stage img { display: block; width: 100%; height: 210px; object-fit: contain; filter: drop-shadow(0 5px 8px color-mix(in srgb, var(--bg) 35%, transparent)); }
     .dragon__name { display: block; color: var(--ink); font-family: "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", Georgia, serif; font-size: 17px; font-weight: 700; }
     .dragon__level { display: block; font-size: 12px; font-weight: 800; letter-spacing: .08em; }
@@ -612,8 +609,9 @@
       .evolution__row { grid-template-columns: minmax(0, 1fr) 22px minmax(0, 1fr) 22px minmax(0, 1.3fr); gap: 4px; }
       .evolution__step img { height: 145px; }
       .evolution__step--final img { height: 190px; }
-      .dragon__line { grid-template-columns: 24px minmax(0, 1fr) 22px minmax(0, 1fr) 22px minmax(0, 1fr); gap: 4px; }
+      .dragon__line { grid-template-columns: minmax(0, 1fr) 22px minmax(0, 1fr) 22px minmax(0, 1fr); gap: 4px; }
       .dragon__stage img { height: 130px; }
+      .dragon__line > .dragon__stage:not(.dragon__stage--hidden) img { height: 104px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -653,8 +651,11 @@
   <header>
     <div class="wrap nav">
       <a class="brand" href="/">
-        <span class="brand-mark" aria-hidden="true"></span>
-        <span>Hakumai studio</span>
+        <svg class="brand-cloud" viewBox="0 0 68 40" fill="none" aria-hidden="true">
+          <path d="M14 33c-6 0-10-4.2-10-9.4 0-4.8 3.6-8.7 8.3-9.3C14 8.2 19.3 4 25.6 4c5.2 0 9.8 2.9 11.9 7.3 1.4-.8 3-1.3 4.8-1.3 4.8 0 8.8 3.4 9.7 7.9 4.6.5 8 4.2 8 8.6 0 4.8-4 8.5-9 8.5H14Z"
+            stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>HAKUMAI STUDIO</span>
       </a>
       <nav class="nav-links" aria-label="Main navigation">
         <a class="navmid" href="#opening">Opening</a>
@@ -707,8 +708,7 @@
         <span class="section-eyebrow">Opening movie</span>
         <h2 class="serif">物語の、はじまり</h2>
         <p class="section-lead">
-          平和な王国に、静かな脅威が忍び寄る。<br>
-          森のいきものたちが立ち上がるまでの、30秒の序章。
+          穏やかな森に脅威が忍び寄る
         </p>
         <div class="video-frame">
           <video id="introVideo" controls playsinline preload="none"
@@ -861,9 +861,9 @@
       <div class="wrap center">
         <span class="section-eyebrow">SPECIAL</span><h2 class="serif" id="dragon-title">竜は、特別ないぶき。</h2>
         <p class="section-lead dragon__intro">ほかのいぶきは一本道で三段まで。竜だけは三つの系統に分かれ、それぞれがちがう姿へ育つ。</p>
-        <div class="dragon__line"><span class="dragon__branch">A</span><div class="dragon__stage"><img src="../assets/morifis/lp/evo/evo-dragon-a1.webp" alt="リーフル" width="271" height="320" loading="lazy"><span class="dragon__level">Lv.1</span><span class="dragon__name">リーフル</span></div><span class="dragon__arrow">→</span><div class="dragon__stage dragon__stage--hidden"><img src="../assets/morifis/lp/evo/sil-dragon-a2.webp" alt="" aria-hidden="true" width="320" height="229" loading="lazy"><span class="dragon__level">Lv.2</span><span class="dragon__name">?</span></div><span class="dragon__arrow">→</span><div class="dragon__stage dragon__stage--hidden"><img src="../assets/morifis/lp/evo/sil-dragon-a3.webp" alt="" aria-hidden="true" width="320" height="288" loading="lazy"><span class="dragon__level">Lv.3</span><span class="dragon__name">?</span></div></div>
-        <div class="dragon__line"><span class="dragon__branch">B</span><div class="dragon__stage"><img src="../assets/morifis/lp/evo/evo-dragon-b1.webp" alt="ハナメ" width="278" height="320" loading="lazy"><span class="dragon__level">Lv.1</span><span class="dragon__name">ハナメ</span></div><span class="dragon__arrow">→</span><div class="dragon__stage dragon__stage--hidden"><img src="../assets/morifis/lp/evo/sil-dragon-b2.webp" alt="" aria-hidden="true" width="320" height="243" loading="lazy"><span class="dragon__level">Lv.2</span><span class="dragon__name">?</span></div><span class="dragon__arrow">→</span><div class="dragon__stage dragon__stage--hidden"><img src="../assets/morifis/lp/evo/sil-dragon-b3.webp" alt="" aria-hidden="true" width="320" height="212" loading="lazy"><span class="dragon__level">Lv.3</span><span class="dragon__name">?</span></div></div>
-        <div class="dragon__line"><span class="dragon__branch">C</span><div class="dragon__stage"><img src="../assets/morifis/lp/evo/evo-dragon-c1.webp" alt="コモリ" width="320" height="255" loading="lazy"><span class="dragon__level">Lv.1</span><span class="dragon__name">コモリ</span></div><span class="dragon__arrow">→</span><div class="dragon__stage dragon__stage--hidden"><img src="../assets/morifis/lp/evo/sil-dragon-c2.webp" alt="" aria-hidden="true" width="320" height="292" loading="lazy"><span class="dragon__level">Lv.2</span><span class="dragon__name">?</span></div><span class="dragon__arrow">→</span><div class="dragon__stage dragon__stage--hidden"><img src="../assets/morifis/lp/evo/sil-dragon-c3.webp" alt="" aria-hidden="true" width="320" height="290" loading="lazy"><span class="dragon__level">Lv.3</span><span class="dragon__name">?</span></div></div>
+        <div class="dragon__line"><div class="dragon__stage"><img src="../assets/morifis/lp/evo/evo-dragon-a1.webp" alt="リーフル" width="271" height="320" loading="lazy"><span class="dragon__level">Lv.1</span><span class="dragon__name">リーフル</span></div><span class="dragon__arrow">→</span><div class="dragon__stage dragon__stage--hidden"><img src="../assets/morifis/lp/evo/sil-dragon-a2.webp" alt="" aria-hidden="true" width="320" height="229" loading="lazy"><span class="dragon__level">Lv.2</span><span class="dragon__name">?</span></div><span class="dragon__arrow">→</span><div class="dragon__stage dragon__stage--hidden"><img src="../assets/morifis/lp/evo/sil-dragon-a3.webp" alt="" aria-hidden="true" width="320" height="288" loading="lazy"><span class="dragon__level">Lv.3</span><span class="dragon__name">?</span></div></div>
+        <div class="dragon__line"><div class="dragon__stage"><img src="../assets/morifis/lp/evo/evo-dragon-b1.webp" alt="ハナメ" width="278" height="320" loading="lazy"><span class="dragon__level">Lv.1</span><span class="dragon__name">ハナメ</span></div><span class="dragon__arrow">→</span><div class="dragon__stage dragon__stage--hidden"><img src="../assets/morifis/lp/evo/sil-dragon-b2.webp" alt="" aria-hidden="true" width="320" height="243" loading="lazy"><span class="dragon__level">Lv.2</span><span class="dragon__name">?</span></div><span class="dragon__arrow">→</span><div class="dragon__stage dragon__stage--hidden"><img src="../assets/morifis/lp/evo/sil-dragon-b3.webp" alt="" aria-hidden="true" width="320" height="212" loading="lazy"><span class="dragon__level">Lv.3</span><span class="dragon__name">?</span></div></div>
+        <div class="dragon__line"><div class="dragon__stage"><img src="../assets/morifis/lp/evo/evo-dragon-c1.webp" alt="コモリ" width="320" height="255" loading="lazy"><span class="dragon__level">Lv.1</span><span class="dragon__name">コモリ</span></div><span class="dragon__arrow">→</span><div class="dragon__stage dragon__stage--hidden"><img src="../assets/morifis/lp/evo/sil-dragon-c2.webp" alt="" aria-hidden="true" width="320" height="292" loading="lazy"><span class="dragon__level">Lv.2</span><span class="dragon__name">?</span></div><span class="dragon__arrow">→</span><div class="dragon__stage dragon__stage--hidden"><img src="../assets/morifis/lp/evo/sil-dragon-c3.webp" alt="" aria-hidden="true" width="320" height="290" loading="lazy"><span class="dragon__level">Lv.3</span><span class="dragon__name">?</span></div></div>
       </div>
     </section>
 
