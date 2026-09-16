@@ -693,10 +693,17 @@
     }
 
     /* --- FEATURED APP --- */
+    #featured { overflow-x: clip; }
+
+    /* 端末を大きく見せたいので、この節だけ .wrap の 1120px 上限を広げる */
+    .wrap.featured-app {
+      width: min(1880px, calc(100% - 32px));
+    }
+
     .featured-app {
       display: grid;
-      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-      gap: clamp(28px, 4vw, 72px);
+      grid-template-columns: minmax(400px, 0.62fr) minmax(0, 1.38fr);
+      gap: clamp(16px, 2vw, 36px);
       align-items: center;
     }
 
@@ -746,12 +753,12 @@
     .legal-row a:hover { color: var(--ink); }
     .legal-row span { opacity: .5; }
 
+    /* 端末は列幅いっぱい。列比と wrap 上限で画面幅に応じて自動拡縮する。 */
     .featured-shot {
       position: relative;
-      justify-self: center;
-      /* 端末を大きく見せる。列幅を超えて左右に広げる */
-      width: min(132%, 920px);
-      margin-inline: -16%;
+      justify-self: stretch;
+      width: 100%;
+      margin-inline: 0;
     }
 
     .featured-shot img {
