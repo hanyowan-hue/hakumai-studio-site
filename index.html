@@ -1220,7 +1220,7 @@
         <img class="layer layer-final idle-squirrel" src="assets/hero/squirrel5.webp" alt="" aria-hidden="true">
         <img class="layer layer-final idle-bird" src="assets/hero/bird5.webp" alt="" aria-hidden="true">
         <img class="layer layer-final idle-gorilla" src="assets/hero/gorilla5.webp" alt="" aria-hidden="true">
-        <img class="layer layer-final idle-mochi" src="assets/hero/mochi4.webp" alt="" aria-hidden="true">
+        <img class="layer layer-final idle-mochi" src="assets/hero/mochi5.webp" alt="" aria-hidden="true">
 
         <!-- キャラクター: コマ送り -->
         <div id="chars" aria-hidden="true"></div>
@@ -1465,7 +1465,7 @@
 
     // 素材の差し替えは動きの設定に関係なく必ず行う。
     // （reduced-motion でもスマホには専用素材を出す）
-    var FINAL_SP = { cat: 4, squirrel: 5, bird: 5, gorilla: 4, mochi: 4 };
+    var FINAL_SP = { cat: 4, squirrel: 5, bird: 5, gorilla: 4, mochi: 5 };
     if (isSP) {
       [['.layer-bg', 'bg'], ['.layer-water', 'water'],
        ['.layer-cloud1', 'cloud1'], ['.layer-cloud2', 'cloud2'],
@@ -1499,15 +1499,15 @@
     // そこでゴリラを早めに到着させ、ゴリラが最終コマへ移ったあとに
     // なぞが最終コマへ移るよう end をずらす。
     var CAST = isSP ? [
-      { name: 'bird',     frames: 5, start: 0, end: 2100 },
-      { name: 'gorilla',  frames: 4, start: 0, end: 2500 },
-      { name: 'mochi',    frames: 4, start: 0, end: 4000 },
+      { name: 'bird',     frames: 5, start: 0, end: 2500 },
+      { name: 'gorilla',  frames: 4, start: 0, end: 2800 },
+      { name: 'mochi',    frames: 5, start: 0, end: 4000 },
       { name: 'squirrel', frames: 5, start: 0, end: 4400 },
       { name: 'cat',      frames: 4, start: 0, end: 4900 }
     ] : [
-      { name: 'bird',     frames: 5, start: 0, end: 2100 },
+      { name: 'bird',     frames: 5, start: 0, end: 2500 },
       { name: 'gorilla',  frames: 5, start: 0, end: 2500 },
-      { name: 'mochi',    frames: 4, start: 0, end: 4000 },
+      { name: 'mochi',    frames: 5, start: 0, end: 4000 },
       { name: 'squirrel', frames: 5, start: 0, end: 4400 },
       { name: 'cat',      frames: 4, start: 0, end: 4900 }
     ];
