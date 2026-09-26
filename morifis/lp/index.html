@@ -281,8 +281,8 @@
        こうすると3つの高さが自動的に一致し、余りの余白も出ない。
        いま中身はCSSで描いた「準備中」だが、公式バッジ画像に差し替えても
        同じ縦横比なのでレイアウトは変わらない。
-         App Store   183x54  → 3.3889
-         Google Play 380x115 → 3.3043
+         App Store（日本語・公式SVG） 108.85x40 → 2.7213
+         Google Play（日本語・余白を除いたPNG） 646x192 → 3.3646
        =========================================== */
     .store-cta {
       display: flex;
@@ -348,10 +348,18 @@
      * 幅の比は公式バッジ画像の縦横比そのもの（App Store 183x54 / Google Play 380x115）。
      * 画像に差し替えたとき、いまと同じ幅の配分になるようにしてある。
      */
-    .store-badge--ios { flex-grow: 3.3889; }
-    .store-badge--android { flex-grow: 3.3043; }
+    .store-badge--ios { flex-grow: 2.7213; }
+    .store-badge--android { flex-grow: 3.3646; }
+    /* 公式ストアバッジ（2026-09-26）。紙の装飾を外し、Apple / Google 配布の画像を加工せずに見せる。 */
+    .store-badge--official { padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; overflow: visible; cursor: pointer; }
+    .store-badge--official img { display: block; width: 100%; height: 100%; object-fit: contain; }
     /* Web は文字が短いので、そのぶん幅を詰める */
     .store-badge--web { flex-grow: 2.1; }
+    /* ストアの行はスクショの定番どおり「アイコン＋App Store＋Google Play」。4つ並べると幅400pxに収まらず、
+       縦横比を崩せない公式バッジだけ背が低くなった（2026-09-26）。Web は行の下の文字リンクにする。 */
+    .web-play { margin: 8px 0 0; text-align: center; font-size: 12.5px; }
+    .web-play a { display: inline-block; padding: 10px 6px; color: rgba(255, 255, 255, 0.82); font-weight: 700;
+      text-decoration: underline; text-underline-offset: 3px; }
     .store-badge small {
       display: block;
       font-size: clamp(8px, 2.1vw, 9.5px);
@@ -954,10 +962,10 @@
         <span class="store-cta__icon" aria-hidden="true">
           <img src="../../assets/morifis/app-icon.webp" alt="" width="360" height="360" loading="lazy" decoding="async">
         </span>
-        <a class="store-badge store-badge--ios" href="https://apps.apple.com/app/id6784138434" target="_blank" rel="noopener"><small>ダウンロード</small><b>App Store</b></a>
-        <a class="store-badge store-badge--android" href="https://play.google.com/store/apps/details?id=com.morifis.app" target="_blank" rel="noopener"><small>ダウンロード</small><b>Google Play</b></a>
-        <a class="store-badge store-badge--web" href="https://play.hakumai-studio.com/morifis/" target="_blank" rel="noopener"><small>ブラウザで遊ぶ</small><b>Web</b></a>
+        <a class="store-badge store-badge--ios store-badge--official" href="https://apps.apple.com/app/id6784138434" target="_blank" rel="noopener"><img src="/assets/badges/app-store-ja.svg" alt="App Store からダウンロード" width="109" height="40"></a>
+        <a class="store-badge store-badge--android store-badge--official" href="https://play.google.com/store/apps/details?id=com.morifis.app" target="_blank" rel="noopener"><img src="/assets/badges/google-play-ja.png" alt="Google Play で手に入れよう" width="646" height="192"></a>
       </div>
+      <p class="web-play"><a href="https://play.hakumai-studio.com/morifis/" target="_blank" rel="noopener">ブラウザで遊ぶ（Web版）→</a></p>
     </div>
   </section>
 
@@ -1135,10 +1143,10 @@
         <span class="store-cta__icon" aria-hidden="true">
           <img src="../../assets/morifis/app-icon.webp" alt="" width="360" height="360" loading="lazy" decoding="async">
         </span>
-        <a class="store-badge store-badge--ios" href="https://apps.apple.com/app/id6784138434" target="_blank" rel="noopener"><small>ダウンロード</small><b>App Store</b></a>
-        <a class="store-badge store-badge--android" href="https://play.google.com/store/apps/details?id=com.morifis.app" target="_blank" rel="noopener"><small>ダウンロード</small><b>Google Play</b></a>
-        <a class="store-badge store-badge--web" href="https://play.hakumai-studio.com/morifis/" target="_blank" rel="noopener"><small>ブラウザで遊ぶ</small><b>Web</b></a>
+        <a class="store-badge store-badge--ios store-badge--official" href="https://apps.apple.com/app/id6784138434" target="_blank" rel="noopener"><img src="/assets/badges/app-store-ja.svg" alt="App Store からダウンロード" width="109" height="40"></a>
+        <a class="store-badge store-badge--android store-badge--official" href="https://play.google.com/store/apps/details?id=com.morifis.app" target="_blank" rel="noopener"><img src="/assets/badges/google-play-ja.png" alt="Google Play で手に入れよう" width="646" height="192"></a>
       </div>
+      <p class="web-play"><a href="https://play.hakumai-studio.com/morifis/" target="_blank" rel="noopener">ブラウザで遊ぶ（Web版）→</a></p>
 
       <p class="final__note">本編は基本プレイ無料です。</p>
 
@@ -1164,9 +1172,8 @@
   <span class="store-cta__icon" aria-hidden="true">
     <img src="../../assets/morifis/app-icon.webp" alt="" width="360" height="360" loading="lazy" decoding="async">
   </span>
-  <a class="store-badge store-badge--ios" href="https://apps.apple.com/app/id6784138434" target="_blank" rel="noopener"><small>ダウンロード</small><b>App Store</b></a>
-  <a class="store-badge store-badge--android" href="https://play.google.com/store/apps/details?id=com.morifis.app" target="_blank" rel="noopener"><small>ダウンロード</small><b>Google Play</b></a>
-  <a class="store-badge store-badge--web" href="https://play.hakumai-studio.com/morifis/" target="_blank" rel="noopener"><small>ブラウザで遊ぶ</small><b>Web</b></a>
+  <a class="store-badge store-badge--ios store-badge--official" href="https://apps.apple.com/app/id6784138434" target="_blank" rel="noopener"><img src="/assets/badges/app-store-ja.svg" alt="App Store からダウンロード" width="109" height="40"></a>
+  <a class="store-badge store-badge--android store-badge--official" href="https://play.google.com/store/apps/details?id=com.morifis.app" target="_blank" rel="noopener"><img src="/assets/badges/google-play-ja.png" alt="Google Play で手に入れよう" width="646" height="192"></a>
 </div>
 
 <script>

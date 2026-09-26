@@ -523,6 +523,10 @@
     .store-badge b { font-size: 15px; font-weight: 800; color: #4a3a22; white-space: nowrap; }
     .store-badge::after { content: ''; position: absolute; inset: 50% 0 auto; height: 44px; transform: translateY(-50%); }
     .store-badge--ios, .store-badge--android { min-width: 190px; }
+    /* 公式ストアバッジ（2026-09-26）。クラフト紙の装飾を外し、Apple / Google 配布の画像を加工せずに見せる。 */
+    .store-badge--official { padding: 0; min-height: 0; border: 0; border-radius: 0; background: none; box-shadow: none; overflow: visible; cursor: pointer; }
+    .store-badge--ios.store-badge--official, .store-badge--android.store-badge--official { min-width: 0; }
+    .store-badge--official img { display: block; height: 58px; width: auto; }
     .store-cta--fixed { position: fixed; left: 50%; bottom: 0; transform: translateX(-50%); width: min(1120px, calc(100% - 40px)); padding: 10px 0 calc(10px + env(safe-area-inset-bottom)); display: flex; gap: 12px; justify-content: center; background: rgba(9,18,13,.92); border-top: 1px solid var(--line); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 -4px 20px rgba(0,0,0,.45); z-index: 90; transition: transform .35s cubic-bezier(.22,1,.36,1); }
     .js-storebar .store-cta--fixed { transform: translate(-50%, 110%); }
     .js-storebar .store-cta--fixed.is-visible { transform: translate(-50%, 0); }
@@ -573,6 +577,13 @@
       .spec-term { flex-basis: auto; }
       .store-cta--fixed { width: 100%; max-width: none; padding-inline: 14px; }
       .store-cta--fixed .store-badge { min-width: 0; flex: 1 1 0; padding-inline: 14px; }
+      /* 画面下の固定バー: 幅をバッジの縦横比で割り振ると、2枚の高さがそろう。Web は文字の分だけ確保。 */
+      .store-cta--fixed .store-badge--official { padding-inline: 0; }
+      .store-cta--fixed .store-badge--official img { width: 100%; height: auto; }
+      .store-cta--fixed .store-badge--ios { flex-grow: 2.99; }
+      .store-cta--fixed .store-badge--android { flex-grow: 3.36; }
+      /* スマホではアプリを案内する（Web は下の案内欄にある）。固定バーはストアの2つだけ。 */
+      .store-cta--fixed .store-badge--web { display: none; }
       .evolution__row { grid-template-columns: minmax(0, 1fr) 22px minmax(0, 1fr) 22px minmax(0, 1.3fr); gap: 4px; }
       .evolution__step img { height: 145px; }
       .evolution__step--final img { height: 190px; }
@@ -940,8 +951,8 @@
           Play on iOS, Android, or in your browser. Free to play.
         </p>
         <div class="badges" aria-label="Platforms">
-          <a class="store-badge store-badge--ios" href="https://apps.apple.com/app/id6784138434" target="_blank" rel="noopener"><span><small>Download</small><b>App Store · iOS</b></span></a>
-          <a class="store-badge store-badge--android" href="https://play.google.com/store/apps/details?id=com.morifis.app" target="_blank" rel="noopener"><span><small>Download</small><b>Google Play</b></span></a>
+          <a class="store-badge store-badge--ios store-badge--official" href="https://apps.apple.com/app/id6784138434" target="_blank" rel="noopener"><img src="/assets/badges/app-store-en.svg" alt="Download on the App Store" width="120" height="40"></a>
+          <a class="store-badge store-badge--android store-badge--official" href="https://play.google.com/store/apps/details?id=com.morifis.app" target="_blank" rel="noopener"><img src="/assets/badges/google-play-en.png" alt="Get it on Google Play" width="564" height="168"></a>
           <a class="store-badge store-badge--web" href="https://play.hakumai-studio.com/morifis/" target="_blank" rel="noopener"><span><small>Play in browser</small><b>Web</b></span></a>
         </div>
         <p class="fine">
@@ -953,8 +964,8 @@
   </main>
 
   <div class="store-cta store-cta--fixed" aria-label="Store links">
-    <a class="store-badge store-badge--ios" href="https://apps.apple.com/app/id6784138434" target="_blank" rel="noopener"><span><small>Download</small><b>App Store · iOS</b></span></a>
-    <a class="store-badge store-badge--android" href="https://play.google.com/store/apps/details?id=com.morifis.app" target="_blank" rel="noopener"><span><small>Download</small><b>Google Play</b></span></a>
+    <a class="store-badge store-badge--ios store-badge--official" href="https://apps.apple.com/app/id6784138434" target="_blank" rel="noopener"><img src="/assets/badges/app-store-en.svg" alt="Download on the App Store" width="120" height="40"></a>
+    <a class="store-badge store-badge--android store-badge--official" href="https://play.google.com/store/apps/details?id=com.morifis.app" target="_blank" rel="noopener"><img src="/assets/badges/google-play-en.png" alt="Get it on Google Play" width="564" height="168"></a>
     <a class="store-badge store-badge--web" href="https://play.hakumai-studio.com/morifis/" target="_blank" rel="noopener"><span><small>Play in browser</small><b>Web</b></span></a>
   </div>
 
