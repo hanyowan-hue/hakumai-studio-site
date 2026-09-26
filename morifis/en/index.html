@@ -551,6 +551,8 @@
     }
     .footer-inner a { color: rgba(255, 255, 255, 0.82); font-weight: 700; }
     .footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
+    /* ストアバッジを載せるときに求められる商標表記（2026-09-26）。 */
+    .footer-trademarks { margin-top: 18px; font-size: 11px; line-height: 1.8; color: var(--muted-2); }
 
     @media (max-width: 820px) {
       header { position: absolute; }
@@ -980,6 +982,7 @@
         <a href="mailto:contact@hakumai-studio.com">Contact</a>
       </span>
     </div>
+    <p class="wrap footer-trademarks">Apple and the Apple logo are trademarks of Apple Inc., registered in the U.S. and other countries. App Store is a service mark of Apple Inc. Google Play and the Google Play logo are trademarks of Google LLC.</p>
   </footer>
 
   <script>
