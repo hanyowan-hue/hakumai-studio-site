@@ -31,5 +31,14 @@ Key features
 - Conquer five worlds: Travel from sunlit groves to forests of snow and ice. Each world has its own scenery, with new terrain and new enemies waiting.
 - Step in at any time, even mid-battle: Watch the fight unfold in real time and turn it in your favor.
 
+Ally combinations change how you fight
+Each ally has its own way of fighting.
+- Kohaku: Kohaku heals nearby allies.
+- Iwarou: Iwarou howls to raise its allies' attack power.
+- Hasunoko: Once grown, Hasunoko produces one small offspring after another to block the enemy's path.
+- Asagi: Once grown, Asagi takes to the air and targets the most weakened enemy.
+- Yukipon: Yukipon catches enemy attacks on an ice shield and sends them back.
+Players choose which allies to bring together and how to combine them, and depending on how well those allies work together, the way to win can change completely. Working out those combinations is the most enjoyable part of Morifis.
+
 About Hakumai Studio
 Hakumai Studio is a one-person indie studio based in Japan. Morifis is its first game, with everything from design and development to live operation handled by a single developer.
