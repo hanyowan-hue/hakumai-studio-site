@@ -32,7 +32,7 @@ Key features
 - Raising allies strengthens their special abilities too: When allies level up through training, their special abilities, such as healing and howling, grow stronger along with their HP and attack power.
 - Forest Trial, an endurance mode: The Forest Trial takes place on a large map where two forests sit side by side. Players face an endless stream of invaders and try to see how many Waves they can hold out. Enemies grow stronger as the Waves go on, and every 9 to 12 Waves players move to a new map and open their paths again from scratch. Because players stay on one map for a long time, a forward-looking plan for which allies to raise and when is what decides the outcome. The Wave each player reaches can be compared with the records of players around the world.
 - Conquer five worlds: Travel from sunlit groves to forests of snow and ice. Each world has its own scenery, with new terrain and new enemies waiting.
-- Several actions to choose from as the battle changes: Besides opening the forest, players have several other actions.
+- Several actions to choose from as the battle changes: Opening the forest is only one of the actions players can take.
 - Open: carve paths through the forest and awaken allies.
 - Flower: grow a flower that draws enemies in, holding them up while dealing damage.
 - Root: place a wall of roots that enemies cannot pass, blocking the path.
