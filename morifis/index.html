@@ -499,6 +499,16 @@
     }
     .spec-link { color: var(--forest); font-weight: 800; text-decoration: underline; }
 
+    /* ---------- Featured in（メディア掲載・ロゴは使わず文字だけ。「その他◯件」は全件数−並べた数＝掲載が増えたら直す） ---------- */
+    .press-strip { padding: 72px 0; }
+    .press-strip h2 { font-size: clamp(24px, 3.4vw, 34px); }
+    .press-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 28px auto 0; padding: 0; list-style: none; max-width: 900px; }
+    .press-list a { display: inline-flex; align-items: baseline; gap: 8px; padding: 9px 16px; border: 1px solid var(--line-strong); border-radius: 999px; background: var(--panel); font-weight: 700; font-size: 15px; transition: border-color .2s, background .2s; }
+    .press-list a:hover { border-color: var(--forest); background: rgba(111, 174, 126, 0.08); }
+    .press-list small { color: var(--muted-2); font-weight: 500; font-size: 12px; }
+    .press-list .press-others a { border-style: dashed; color: var(--forest); }
+
+
     /* ---------- In-app purchase price list ---------- */
     .price-table {
       max-width: 720px;
@@ -941,6 +951,26 @@
             <figcaption><b>Battle</b>ひらいた道の上で、迫る侵入者と対峙する</figcaption>
           </figure>
         </div>
+      </div>
+    </section>
+
+    <!-- ===== Featured in（媒体名と国を文字で・記事へリンク。全件はプレスキット） ===== -->
+    <section id="press" class="press-strip reveal">
+      <div class="wrap center">
+        <span class="section-eyebrow">In the press</span>
+        <h2 class="serif">メディア掲載</h2>
+        <p class="section-lead">台湾・香港・韓国・日本・アルゼンチンのゲームメディアで紹介されました。</p>
+        <ul class="press-list">
+          <li><a href="https://gnn.gamer.com.tw/detail.php?sn=312521" target="_blank" rel="noopener">巴哈姆特 GNN<small>台湾</small></a></li>
+          <li><a href="https://news.qoo-app.com/post/446535/indie-games-morifis-launch" target="_blank" rel="noopener">QooApp<small>香港</small></a></li>
+          <li><a href="https://m.ruliweb.com/news/read/230043" target="_blank" rel="noopener">루리웹 Ruliweb<small>韓国</small></a></li>
+          <li><a href="https://www.thisisgame.com/articles/430517" target="_blank" rel="noopener">디스이즈게임 ThisIsGame<small>韓国</small></a></li>
+          <li><a href="https://gamefocus.co.kr/detail.php?number=179487" target="_blank" rel="noopener">게임포커스 GameFocus<small>韓国</small></a></li>
+          <li><a href="https://www.appbank.net/2026/10/01/game/3119264.php" target="_blank" rel="noopener">AppBank<small>日本</small></a></li>
+          <li><a href="https://gamewith.jp/gamedb/18672" target="_blank" rel="noopener">GameWith<small>日本</small></a></li>
+          <li><a href="https://www.playnomore.com.ar/?section=posts&amp;action=read&amp;post-id=37581" target="_blank" rel="noopener">playNOmore<small>アルゼンチン</small></a></li>
+          <li class="press-others"><a href="/morifis/press/#coverage">その他 8件 →</a></li>
+        </ul>
       </div>
     </section>
 
