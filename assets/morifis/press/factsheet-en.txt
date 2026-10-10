@@ -4,7 +4,7 @@ Title: Morifis
 Genre: Real-time tower defense strategy
 Platforms: iOS / Android / Web browser
 Price: Free to play (in-app purchases)
-Languages: English, Japanese, Korean, Chinese (Simplified / Traditional), Spanish, Portuguese
+Languages: English, Japanese, Korean, Chinese (Simplified / Traditional), Spanish, Portuguese, French, German, Italian, Indonesian, Turkish, Polish, Vietnamese, Filipino, Malay (16 languages)
 Release date: Google Play: September 19, 2026 / App Store: September 26, 2026
 Developer: Hakumai Studio (Japan)
 Contact: contact@hakumai-studio.com
