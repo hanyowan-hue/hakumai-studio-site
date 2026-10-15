@@ -1,0 +1,7 @@
+{
+  "ok": true,
+  "versions": [
+    { "platform": "ios", "minVersion": "1.0.0", "latestVersion": "1.0.0" },
+    { "platform": "android", "minVersion": "1.0.0", "latestVersion": "1.0.0" }
+  ]
+}
