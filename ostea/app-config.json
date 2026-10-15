@@ -1,1 +1,6 @@
-{"ios": {"minimumVersion": "1.0", "latestVersion": "1.0", "storeUrl": "https://apps.apple.com/app/id6822129347"}}
+{
+  "ok": true,
+  "versions": [
+    { "platform": "ios", "minVersion": "1.0", "latestVersion": "1.0" }
+  ]
+}
