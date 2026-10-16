@@ -139,14 +139,14 @@
 <li>集めた標本、図鑑、集中の記録（時間・札・岩）、標本室の名前、設定などのデータ。<strong>端末の中にだけ保存し、当社には送信しません。</strong></li>
 <li>アプリ内購入に関する商品ID、購入が有効かどうかの確認結果、匿名の購入者ID。購入した内容を付与し、あとで復元するために使います。購入状態の確認には RevenueCat（RevenueCat, Inc.）を利用します。決済情報そのものは Apple または Google が処理し、当社は氏名・支払い情報・Apple ID・Google アカウントなどを受け取りません。</li>
 </ul>
-<p>本アプリは、氏名、メールアドレス、位置情報、連絡先、写真、広告識別子などを取得しません。</p>
+<p>本アプリは、氏名、位置情報、連絡先、写真、広告識別子などを取得しません。メールアドレスは、利用者がお問い合わせフォームに書いたときだけ受け取ります（下の「お問い合わせフォーム」）。</p>
 <h3>アプリの制限に使う機能（「一呼吸」「厳しいモード」）</h3>
 <ul>
 <li>iPhone では、Apple のスクリーンタイムの仕組み（Family Controls）を使います。止めるアプリは端末で選び、その内容は Apple が暗号化した識別子として端末の中にだけ保存されます。本アプリは、どのアプリを選んだかを読み取ることも、端末の外へ送ることもできません。</li>
 <li>Android では、「使用状況へのアクセス」と「他のアプリの上に表示」の許可を使います。どのアプリが前面にあるかは端末の中で判定し、記録・送信しません。一呼吸が有効な間は、その判定のために通知を伴う常駐の処理が動きます。設定でいつでも止められます。</li>
 <li>どちらの機能も初期状態では無効で、利用者が設定で有効にしたときだけ動きます。</li>
 </ul>
-<h3>カメラ（AR、iPhone のみ）</h3>
+<h3>カメラ（AR、iPhone・iPad）</h3>
 <ul>
 <li>手元の標本を AR で部屋に置くときだけ、カメラを使います。カメラの映像は表示のために端末の中で使うだけで、記録も送信もしません。</li>
 <li>AR は利用者が標本の画面で選んだときだけ動き、カメラの利用は最初に端末の許可を求めます。</li>
@@ -158,28 +158,36 @@
 <li>新しい版の有無を確かめるため、起動時などに当社のサイト（hakumai-studio.com）に置いた公開の設定ファイルを読み込みます。このとき個人の情報や端末の識別子は送りません。サイトの配信元（GitHub Pages）には、IP アドレスなど通常の通信の記録が残ります。</li>
 <li>標本ラベル・入館券・ポスターの画像は端末の中で作られ、利用者が共有を選んだときだけ、利用者が選んだアプリへ渡されます。</li>
 </ul>
+<h3>お問い合わせフォーム</h3>
+<ul>
+<li>設定の「お問い合わせ」から送ると、次の情報が当社に届きます：お問い合わせの種類と本文、返信用のメールアドレス（任意）、アプリの版、端末の種類と OS の版、言語、送信時刻、起動ごとに作る使い捨ての番号（同じ端末からの連続送信を防ぐためだけに使い、端末や利用者を特定するものではありません）。</li>
+<li>届いた内容は、当社の Google アカウントの Google スプレッドシートに記録され、当社のメール（support@hakumai-studio.com）に通知されます。受け取りの処理には Google Apps Script を使います。</li>
+<li>お問い合わせへの回答と、不具合の修正・アプリの改善のためだけに使い、ほかの目的には使いません。</li>
+<li>送るかどうかは利用者が選べます。フォームを使わず、メールで直接お問い合わせいただくこともできます。</li>
+</ul>
 <h3>利用目的</h3>
 <ul>
 <li>集めた標本・集中の記録・設定の保存</li>
 <li>アプリ内購入の処理、購入内容の付与、購入の復元</li>
 <li>利用者が有効にしたアプリの制限と、集中中の表示</li>
+<li>お問い合わせへの回答と、不具合の修正・アプリの改善</li>
 </ul>
 <h3>事業者情報（データ管理者）</h3>
 <p>本アプリの提供事業者およびデータ管理者は次のとおりです。</p>
 <p>事業者名：Hakumai Studio<br>所在地：〒103-0026 東京都中央区日本橋兜町 17-2 兜町第 6 葉山ビル 4F<br>連絡先：<a href="mailto:support@hakumai-studio.com">support@hakumai-studio.com</a></p>
 <h3>処理の法的根拠（EEA・英国の利用者向け）</h3>
-<p>アプリ内購入の処理と購入の復元は、サービス提供のための契約の履行に基づきます。集めた標本・集中の記録・アプリの制限に関する情報は端末の中にだけ保存され、当社は処理しません。</p>
+<p>アプリ内購入の処理と購入の復元は、サービス提供のための契約の履行に基づきます。お問い合わせの内容の処理は、お問い合わせに答え、アプリを改善するという当社の正当な利益に基づきます。集めた標本・集中の記録・アプリの制限に関する情報は端末の中にだけ保存され、当社は処理しません。</p>
 <h3>第三者サービス</h3>
-<p>本アプリは、アプリ内購入のために Apple の App Store と Google Play Billing を、購入状態の確認のために RevenueCat を利用します。これらのサービスで処理される情報は、それぞれのプライバシーポリシーに従います。</p>
+<p>本アプリは、アプリ内購入のために Apple の App Store と Google Play Billing を、購入状態の確認のために RevenueCat を、お問い合わせの受け取りのために Google（Google Apps Script・Google スプレッドシート・Gmail）を利用します。これらのサービスで処理される情報は、それぞれのプライバシーポリシーに従います。</p>
 <ul>
 <li>Apple：<a href="https://www.apple.com/legal/privacy/">https://www.apple.com/legal/privacy/</a></li>
 <li>Google：<a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a></li>
 <li>RevenueCat：<a href="https://www.revenuecat.com/privacy">https://www.revenuecat.com/privacy</a></li>
 </ul>
 <h3>データの保存期間</h3>
-<p>端末内に保存されるデータは、本アプリを削除するまで端末内に残り、削除とともに消えます。購入の記録は Apple または Google、および RevenueCat が管理し、購入の復元に使われます。</p>
+<p>端末内に保存されるデータは、本アプリを削除するまで端末内に残り、削除とともに消えます。購入の記録は Apple または Google、および RevenueCat が管理し、購入の復元に使われます。お問い合わせの内容は、対応が終わってから1年で削除します。</p>
 <h3>お子さまのプライバシー</h3>
-<p>本アプリは、お子さまを含め、どなたからも個人情報を取得しません。アプリ内購入は各ストアの保護者による承認の仕組みに従います。</p>
+<p>本アプリは、お問い合わせフォームに利用者自身が書いた内容を除き、お子さまを含め、どなたからも個人情報を取得しません。お子さまがお問い合わせをするときは、保護者の方と一緒に送ってください。アプリ内購入は各ストアの保護者による承認の仕組みに従います。</p>
 <h3>本ポリシーの変更</h3>
 <p>本ポリシーを変更する場合は、このページと施行日を更新します。</p>
 <h3>お問い合わせ</h3>
@@ -195,14 +203,14 @@
 <li>Your specimens, field guide, focus records (time, tag and rock), cabinet name and settings. <strong>This is stored only on your device and is never sent to us.</strong></li>
 <li>For in-app purchases, the product ID, whether a purchase is valid, and an anonymous customer ID, so the app can deliver and later restore what you bought. Purchase status is verified through RevenueCat (RevenueCat, Inc.). Payments are processed by Apple or Google; we do not receive your name, payment details, Apple ID or Google account.</li>
 </ul>
-<p>The app does not collect your name, email address, location, contacts, photos or advertising identifier.</p>
+<p>The app does not collect your name, location, contacts, photos or advertising identifier. We receive an email address only if you write one in the contact form (see "Contact form" below).</p>
 <h3>App-blocking features ("Breath" and "Strict mode")</h3>
 <ul>
 <li>On iPhone, the app uses Apple Screen Time (Family Controls). You choose the apps on your device; the choice is stored on the device only, as identifiers encrypted by Apple. The app can neither read which apps you chose nor send that information off the device.</li>
 <li>On Android, the app uses the Usage access and Display over other apps permissions. Which app is in the foreground is checked on the device and is neither recorded nor sent. While Breath is on, a background service with a persistent notification performs this check; you can turn it off in Settings at any time.</li>
 <li>Both features are off by default and only work after you turn them on.</li>
 </ul>
-<h3>Camera (AR, iPhone only)</h3>
+<h3>Camera (AR, iPhone and iPad)</h3>
 <ul>
 <li>The camera is used only while you place one of your specimens in your room with AR. The camera image is used on the device for display only and is neither recorded nor sent.</li>
 <li>AR runs only when you choose it on a specimen screen, and the device asks for camera permission the first time.</li>
@@ -214,28 +222,36 @@
 <li>To check whether a newer version is available, the app reads a public settings file on our website (hakumai-studio.com), for example at launch. No personal information or device identifier is sent. The site's host (GitHub Pages) keeps ordinary connection logs such as IP addresses.</li>
 <li>Specimen labels, admission tickets and posters are made on your device and are passed only to the app you choose when you share them.</li>
 </ul>
+<h3>Contact form</h3>
+<ul>
+<li>When you send a message from Contact in Settings, we receive: the type and text of your message, a reply email address (optional), the app version, device type and OS version, language, the time it was sent, and a disposable number created at each launch (used only to prevent repeated submissions from the same device; it does not identify your device or you).</li>
+<li>Messages are recorded in a Google Sheets spreadsheet in our Google account and forwarded to our email (support@hakumai-studio.com). They are received through Google Apps Script.</li>
+<li>We use them only to answer you and to fix bugs and improve the app, and for no other purpose.</li>
+<li>Sending is up to you. You can also contact us directly by email instead of using the form.</li>
+</ul>
 <h3>Purposes of use</h3>
 <ul>
 <li>Saving your specimens, focus records and settings</li>
 <li>Processing in-app purchases, delivering purchased content and restoring purchases</li>
 <li>App blocking that you turn on, and the focus display</li>
+<li>Answering your messages, fixing bugs and improving the app</li>
 </ul>
 <h3>Data controller</h3>
 <p>The provider and data controller of the app is:</p>
 <p>Company: Hakumai Studio<br>Address: 4F Kabutocho No. 6 Hayama Building, 17-2 Nihonbashi Kabutocho, Chuo-ku, Tokyo 103-0026, Japan<br>Contact: <a href="mailto:support@hakumai-studio.com">support@hakumai-studio.com</a></p>
 <h3>Legal basis for processing (users in the EEA and the UK)</h3>
-<p>Processing in-app purchases and restoring purchases is necessary to perform our contract with you. Your specimens, focus records and app-blocking information are stored only on your device and are not processed by us.</p>
+<p>Processing in-app purchases and restoring purchases is necessary to perform our contract with you. Processing your contact messages is based on our legitimate interest in answering you and improving the app. Your specimens, focus records and app-blocking information are stored only on your device and are not processed by us.</p>
 <h3>Third-party services</h3>
-<p>The app uses Apple's App Store and Google Play Billing for in-app purchases, and RevenueCat to verify purchase status. Information processed by these services is subject to their own privacy policies.</p>
+<p>The app uses Apple's App Store and Google Play Billing for in-app purchases, RevenueCat to verify purchase status, and Google (Google Apps Script, Google Sheets and Gmail) to receive contact messages. Information processed by these services is subject to their own privacy policies.</p>
 <ul>
 <li>Apple: <a href="https://www.apple.com/legal/privacy/">https://www.apple.com/legal/privacy/</a></li>
 <li>Google: <a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a></li>
 <li>RevenueCat: <a href="https://www.revenuecat.com/privacy">https://www.revenuecat.com/privacy</a></li>
 </ul>
 <h3>Data retention</h3>
-<p>Data stored on your device remains there until you delete the app, and is deleted with it. Purchase records are kept by Apple or Google and by RevenueCat, and are used to restore purchases.</p>
+<p>Data stored on your device remains there until you delete the app, and is deleted with it. Purchase records are kept by Apple or Google and by RevenueCat, and are used to restore purchases. Contact messages are deleted one year after the matter is resolved.</p>
 <h3>Children's privacy</h3>
-<p>The app does not collect personal information from anyone, including children. In-app purchases follow each store's parental approval features.</p>
+<p>Apart from what you write yourself in the contact form, the app does not collect personal information from anyone, including children. Children should send messages together with a parent or guardian. In-app purchases follow each store's parental approval features.</p>
 <h3>Changes to this policy</h3>
 <p>If this policy changes, we will update this page and the effective date.</p>
 <h3>Contact</h3>
