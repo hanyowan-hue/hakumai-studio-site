@@ -1,0 +1,7 @@
+{
+  "version": "onboarding-1",
+  "onboarding": {
+    "west": {"variants": {"everyday": 50, "family": 50}},
+    "asia": {"variants": {"family": 100}}
+  }
+}
