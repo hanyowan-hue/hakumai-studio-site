@@ -12,21 +12,24 @@ App Store: https://apps.apple.com/app/id6822129347
 Contact: contact@hakumai-studio.com
 
 About Ostea
-A 3D puzzle where you rebuild the skeletons of dinosaurs and other animals one bone at a time.
+A 3D puzzle where you rebuild the skeletons of dinosaurs and other animals one bone at a time, then work out from the shape of the bones how each animal lived.
 
+A giraffe has 7 neck bones, the same number as a human, yet each one can be more than 25 cm long. Tyrannosaurus teeth were not thin like knives but thick like bananas. What were those thick teeth for?
 The bones start out scattered. You drag each one to where it belongs on the body. When the last bone fits, the skeleton stands in a museum hall and the animal's plate is drawn into an illustrated encyclopedia.
 Most of the skeletons are made from 3D scans of specimens held by universities and museums, including the Natural History Museum of the University of Pisa. There are 36 skeletons. The 5 in the first volume (Triceratops, Cat, Human, Giraffe and Bottlenose dolphin) are free, and there are no ads.
 
 Features
+- A Bone quiz about how animals lived: "What did these thick teeth do?" (Tyrannosaurus), "What is this long neck for?" (Giraffe), "What is this long tusk mainly for?" (Narwhal). You answer three-choice questions while looking at the skeleton you just built: 49 questions across 34 animals, each answer with an explanation and a cited source.
 - Skeletons made from scans of real specimens: Most of the skeletons come from 3D scans of skeleton specimens in university and museum collections. Others come from scans of display replicas, from medical CT data, or from reconstructed models. Each specimen states how it was made and lists its sources.
-- A Bone quiz about how animals lived: "What did these thick teeth do?" (Tyrannosaurus). You answer three-choice questions while looking at the skeleton you just built: 49 questions across 34 animals, each answer with an explanation and a cited source.
 - Playable by ear with VoiceOver: With VoiceOver on, you hear a clue written for each bone and choose where on the body it belongs. A wrong answer tells you which way to go, and a right one snaps the bone in with a sound and a haptic. Available in all 10 languages.
+- Take out a single bone to study it: Tap a bone on a finished skeleton to see its name. You can take out a single bone and read its Latin name and a note on its features.
 - A museum hall or a habitat scene: Turn a finished skeleton to study it from any angle, in the museum hall or in a scene of the animal's habitat, such as a forest or underwater. On supported devices, AR places it in your room at life size.
 - 36 skeletons, from dinosaurs to sea animals: Five volumes: First specimens (5, free), Dinosaurs and ancient creatures (9), Land animals (9), Sea animals (6), and Large animals of forests and grasslands (7).
+- Choose your difficulty: Play in Easy or Normal mode, and the Human also has Expert. Available levels vary by specimen. Turn on the timer only when you want it.
 - One-time purchases, no ads: The first volume is free. The other 4 volumes are one-time purchases, sold individually or as a bundle. There are no ads and no subscriptions.
 
 From the developer
-"I have always loved dinosaurs, and what fascinated me was that the features of a bone show how the animal lived. I would be happiest if children enjoyed playing and it gave them a chance to think things through for themselves."
+"I have always loved dinosaurs, and what fascinated me was that the features of a bone show how the animal lived. While making Ostea, I kept being surprised. The hip of Tyrannosaurus, for example: the pubis reaches forward and ends in a broad foot like the sole of a boot, nothing like any animal alive today. The narwhal's long horn turned out to be a tooth. And a shark like megalodon has not a single piece of hard bone. I would be happiest if children enjoyed playing and it got them thinking about things like this."
 (Developer, Hakumai Studio)
 
 How the skeletons and art were made
