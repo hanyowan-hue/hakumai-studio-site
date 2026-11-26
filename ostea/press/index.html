@@ -37,6 +37,27 @@ h3{font-size:16px;margin:0 0 6px}
 .feat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
 .feat p{margin:0;color:var(--muted);font-size:15px}
 .wide{max-width:70ch}
+.rows{display:flex;flex-direction:column;gap:40px;margin-top:8px}
+.row{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:32px;align-items:center}
+.row.flip{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}.row.flip .row-fig{order:2}
+.row.plain{grid-template-columns:1fr;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 24px}
+.row-fig{background:#1d1c19;border:0}
+.row-fig img{width:100%}
+.row-fig figcaption{background:var(--card);border-top:1px solid var(--line)}
+.row-text h3{font-size:21px;margin:0 0 10px;line-height:1.45}
+.row-text p{margin:0 0 14px;max-width:60ch}
+.qs{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+.qs li{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:6px;padding:10px 14px;display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.qs b{font-size:17px}.qs span{color:var(--muted);font-size:14px;white-space:nowrap}
+.voice{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+.voice li{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:10px 14px;display:grid;grid-template-columns:7.5em 1fr;gap:12px;align-items:baseline}
+.voice span{color:var(--accent);font-size:13px;font-weight:700}.voice b{font-weight:600}
+.levels{background:var(--card);border:1px solid var(--line);padding:20px 20px 0;display:flex;flex-direction:column;gap:16px}
+.levels figcaption{margin:4px -20px 0;padding:10px 20px}
+.lv-h{display:flex;justify-content:space-between;gap:12px;align-items:baseline;margin-bottom:6px}
+.lv-h b{font-size:17px}.lv-h span{color:var(--muted);font-size:14px}
+.bar{height:12px;background:#ddd5c2;border-radius:6px;overflow:hidden}.bar i{display:block;height:100%;background:var(--accent);border-radius:6px}
+@media (max-width:720px){.row,.row.flip{grid-template-columns:1fr;gap:14px}.row.flip .row-fig{order:0}.voice li{grid-template-columns:1fr;gap:2px}}
 .quote{margin:0;padding:6px 0 6px 18px;border-left:3px solid var(--accent);max-width:70ch}
 .quote p{margin:0 0 6px}.quote cite{font-style:normal;color:var(--muted);font-size:14px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,210px),1fr));gap:14px}
@@ -63,7 +84,16 @@ footer{margin-top:72px;padding:24px 0 40px;border-top:1px solid var(--line);colo
 </div>
 <h2>基本情報</h2><dl class="facts"><dt>タイトル</dt><dd>Ostea(オステア)</dd><dt>ジャンル</dt><dd>3D骨格パズル(パズル/教育)</dd><dt>対応機種</dt><dd>iPhone/iPad(iOS 15.0 以降)</dd><dt>配信日</dt><dd>2026年11月25日</dd><dt>価格</dt><dd>無料(最初の5体)。ほかの4巻は買い切りで各480円、4巻セット1,500円。広告・定期購入なし</dd><dt>収録</dt><dd>骨格36体(5巻)、骨クイズ34体・49問</dd><dt>対応言語</dt><dd>日本語、英語、ドイツ語、フランス語、スペイン語、イタリア語、韓国語、ブラジルポルトガル語、簡体字中国語、繁体字中国語</dd><dt>開発</dt><dd>Hakumai Studio(個人開発)</dd><dt>App Store</dt><dd><a href="https://apps.apple.com/jp/app/id6822129347">https://apps.apple.com/jp/app/id6822129347</a></dd><dt>お問い合わせ</dt><dd><a href="mailto:contact@hakumai-studio.com">contact@hakumai-studio.com</a></dd></dl>
 <h2>Ostea について</h2><p class="wide"><strong>骨を1本ずつはめて恐竜や動物の骨格を組み立て、その形から暮らしを考える3Dパズルです。</strong></p><p class="wide">キリンの首の骨は、1個が25cmを超えることもあるのに、数はヒトと同じ7個です。ティラノサウルスの歯は、ナイフのように薄くはなく、バナナのように太くなっています。この太い歯で、何をしていたのでしょうか。</p><p class="wide">ばらばらに置かれた骨を指で動かし、体の正しい場所にはめていきます。最後の1本がはまると、骨格は博物館のホールに立ち、図鑑にその動物の図版が描かれます。</p><p class="wide">骨格の多くは、ピサ大学自然史博物館など、大学や博物館が収蔵する標本の3Dスキャンから作っています。収録は36体。最初の巻の5体(トリケラトプス、ネコ、ヒト、キリン、バンドウイルカ)は無料で、広告はありません。</p>
-<h3 style="margin:28px 0 12px">主な特徴</h3><div class="feats"><div class="feat"><h3>骨の形から暮らしを読み解く「骨クイズ」</h3><p>「この太い歯で、何をした?」(ティラノサウルス)、「この長い首、何のため?」(キリン)、「この長い牙、おもに何に使う?」(イッカク)。組み上げた骨格を見ながら答える3択のクイズが34体に49問。答えには解説と出典が付きます。</p></div><div class="feat"><h3>実物の標本のスキャンから作った骨格</h3><p>骨格の多くは、大学や博物館が収蔵する骨格標本の3Dスキャンがもとです。展示用の複製のスキャン、医療用CTから作った骨格、資料をもとにした復元モデルも含みます。標本ごとに成り立ちと出典を載せています。</p></div><div class="feat"><h3>音を手がかりに組み立てられる</h3><p>読み上げ機能 VoiceOver を入れると、骨ごとの手がかりを聞いて体のどこの骨かを当てるパズルになります。場所が違えば向きを伝え、合えば音と振動で骨がはまります。10言語すべてに対応しています。</p></div><div class="feat"><h3>骨を1本ずつ取り出して観察</h3><p>完成した骨格の骨をタップすると、名前が出ます。骨を1本だけ取り出して、ラテン語の名前と、その骨の特徴の説明を読めます。</p></div><div class="feat"><h3>博物館のホールと住みかの風景で眺める</h3><p>完成した骨格は好きな角度に回して観察できます。背景は博物館のホールのほか、森や水中など、その動物の住みかの風景に切り替えられます。対応端末では AR で実物大の骨格を部屋に置けます。</p></div><div class="feat"><h3>恐竜から海の動物まで36体</h3><p>はじまりの標本(5体・無料)、恐竜と古代の生き物(9体)、陸の動物(9体)、海の動物(6体)、森と草原の大型動物(7体)の5巻です。</p></div><div class="feat"><h3>難易度を選べる</h3><p>難易度は「かんたん」と「ふつう」。ヒトには、さらに「標本士」があります(選べる難易度は標本ごとに異なります)。タイマーは見たいときだけオンにできます。</p></div><div class="feat"><h3>買い切りで広告なし</h3><p>最初の巻は無料。ほかの4巻は買い切りで、1巻480円、4巻セットは1,500円です。広告と定期購入はありません。</p></div></div>
+<h2 id="features">主な特徴</h2><div class="rows">
+<section class="row"><figure class="row-fig"><img src="/assets/ostea/press/feat/ostea-ja-feature-1.jpg" alt="骨クイズ(キリン)。問いの骨が光ります" loading="lazy"><figcaption><span>骨クイズ(キリン)。問いの骨が光ります</span></figcaption></figure><div class="row-text"><h3>骨の形から暮らしを読み解く「骨クイズ」</h3><p>組み上げた骨格を見ながら答える3択のクイズです。34体に49問。答えには解説と、もとにした資料の出典が付きます。</p><ul class="qs"><li><b>この太い歯で、何をした?</b><span>ティラノサウルス</span></li><li><b>この長い首、何のため?</b><span>キリン</span></li><li><b>この長い牙、おもに何に使う?</b><span>イッカク</span></li></ul></div></section>
+<section class="row flip"><figure class="row-fig"><img src="/assets/ostea/press/feat/ostea-ja-feature-2.jpg" alt="キリン。ピサ大学自然史博物館の標本(収蔵番号 C 217)の3Dスキャン" loading="lazy"><figcaption><span>キリン。ピサ大学自然史博物館の標本(収蔵番号 C 217)の3Dスキャン</span></figcaption></figure><div class="row-text"><h3>実物の標本のスキャンから作った骨格</h3><p>骨格の多くは、大学や博物館が収蔵する骨格標本の3Dスキャンがもとです。展示用の複製のスキャン、医療用CTから作った骨格、資料をもとにした復元モデルも含みます。標本ごとに成り立ちと出典を載せています。</p></div></section>
+<section class="row"><figure class="row-fig"><img src="/assets/ostea/press/feat/ostea-ja-feature-3.jpg" alt="トリケラトプスの頭(図鑑の絵)" loading="lazy"><figcaption><span>トリケラトプスの頭(図鑑の絵)</span></figcaption></figure><div class="row-text"><h3>音を手がかりに組み立てられる</h3><p>読み上げ機能 VoiceOver を入れると、骨ごとの手がかりを聞いて、体のどこの骨かを当てるパズルになります。図鑑と骨クイズも読み上げで使えます。10言語すべてに対応しています。</p><ol class="voice"><li><span>手がかり</span><b>「3本の角と、大きく広がるえり飾りがあります。」</b></li><li><span>違う場所なら</span><b>「もっと尾のほうです」</b></li><li><span>合えば</span><b>音と振動で、骨がはまります</b></li></ol></div></section>
+<section class="row flip"><figure class="row-fig"><img src="/assets/ostea/press/feat/ostea-ja-feature-4.jpg" alt="ティラノサウルスの頭骨。「巨大な頭骨に、縁がぎざぎざした太い歯が並びます。」" loading="lazy"><figcaption><span>ティラノサウルスの頭骨。「巨大な頭骨に、縁がぎざぎざした太い歯が並びます。」</span></figcaption></figure><div class="row-text"><h3>骨を1本ずつ取り出して観察</h3><p>完成した骨格の骨をタップすると、名前が出ます。骨を1本だけ取り出して、ラテン語の名前と、その骨の特徴の説明を読めます。</p></div></section>
+<section class="row"><figure class="row-fig"><img src="/assets/ostea/press/feat/ostea-ja-feature-5.jpg" alt="水中の風景(バンドウイルカ)" loading="lazy"><figcaption><span>水中の風景(バンドウイルカ)</span></figcaption></figure><div class="row-text"><h3>博物館のホールと住みかの風景で眺める</h3><p>完成した骨格は、好きな角度に回して観察できます。背景は博物館のホールのほか、森や水中など、その動物の住みかの風景に切り替えられます。対応端末では AR で実物大の骨格を部屋に置けます。</p></div></section>
+<section class="row flip"><figure class="row-fig"><img src="/assets/ostea/press/feat/ostea-ja-feature-6.jpg" alt="図鑑の巻の一覧" loading="lazy"><figcaption><span>図鑑の巻の一覧</span></figcaption></figure><div class="row-text"><h3>恐竜から海の動物まで36体</h3><p>はじまりの標本(5体・無料)、恐竜と古代の生き物(9体)、陸の動物(9体)、海の動物(6体)、森と草原の大型動物(7体)の5巻です。組み上げるたびに、図鑑に図版が描かれていきます。</p></div></section>
+<section class="row"><figure class="row-fig levels"><div class="lv"><div class="lv-h"><b>かんたん</b><span>10片 · 約3〜5分</span></div><div class="bar"><i style="width:5%"></i></div></div><div class="lv"><div class="lv-h"><b>ふつう</b><span>27片 · 約10〜15分</span></div><div class="bar"><i style="width:15%"></i></div></div><div class="lv"><div class="lv-h"><b>標本士</b><span>183片 · 30分〜(途中保存あり)</span></div><div class="bar"><i style="width:100%"></i></div></div><figcaption><span>ヒトの場合。標本士の183片は、全身の骨を1本ずつ</span></figcaption></figure><div class="row-text"><h3>難易度を選べる</h3><p>難易度は「かんたん」と「ふつう」。ヒトには、さらに「標本士」があります(選べる難易度は標本ごとに異なります)。タイマーは見たいときだけオンにできます。</p></div></section>
+<section class="row flip plain"><div class="row-text"><h3>買い切りで広告なし</h3><p>最初の巻(5体)は無料。ほかの4巻は買い切りで、1巻480円、4巻セットは1,500円です。広告と定期購入はありません。</p></div></section>
+</div>
 <h2 id="comment">開発者コメント</h2><blockquote class="quote"><p>もともと恐竜が好きで、骨の特徴からその動物の生態が見えてくるのが面白いと思っていました。作っていて驚いたのは、たとえばティラノサウルスの腰です。恥骨が前へのび、その先が長靴の底のように大きく張り出していて、今の動物とはまるで違います。イッカクの長い角の正体は歯でした。メガロドンのようなサメには、かたい骨が1本もありません。子どもたちが楽しみながら、こういうことに考えを巡らせるきっかけにしてくれたら一番うれしいです。</p><cite>Hakumai Studio 開発者</cite></blockquote>
 <h2 id="screenshots">スクリーンショット</h2><p class="note">iPhone の画面そのまま(1320×2868)。英語の画面は英語のページにあります。App Store に載せている見出しつきの画像と iPad の画面は、ZIP に入っています。</p><div class="grid">
 <figure><a href="/assets/ostea/press/ja/ostea-ja-01-hall-mammoth.jpg" target="_blank"><img src="/assets/ostea/press/thumbs/ostea-ja-01-hall-mammoth.jpg" alt="完成した骨格(ケナガマンモス・博物館のホール)" loading="lazy" width="480" height="1043"></a><figcaption><span>完成した骨格(ケナガマンモス・博物館のホール)</span><a href="/assets/ostea/press/ja/ostea-ja-01-hall-mammoth.jpg" download>保存</a></figcaption></figure>
