@@ -1,0 +1,37 @@
+Ostea press kit
+
+Title: Ostea: 3D Skeleton Puzzle
+Genre: 3D skeleton puzzle (Puzzle / Education)
+Platforms: iPhone, iPad (iOS 15.0 or later)
+Release date: November 25, 2026
+Price: Free to download with 5 skeletons. 4 more volumes as one-time purchases. No ads, no subscriptions
+Content: 36 skeletons in 5 volumes; Bone quiz with 49 questions across 34 animals
+Languages: English, Japanese, German, French, Spanish, Italian, Korean, Brazilian Portuguese, Simplified Chinese, Traditional Chinese
+Developer: Hakumai Studio (solo developer)
+App Store: https://apps.apple.com/app/id6822129347
+Contact: contact@hakumai-studio.com
+
+About Ostea
+A 3D puzzle where you rebuild the skeletons of dinosaurs and other animals one bone at a time.
+
+The bones start out scattered. You drag each one to where it belongs on the body. When the last bone fits, the skeleton stands in a museum hall and the animal's plate is drawn into an illustrated encyclopedia.
+Most of the skeletons are made from 3D scans of specimens held by universities and museums, including the Natural History Museum of the University of Pisa. There are 36 skeletons. The 5 in the first volume (Triceratops, Cat, Human, Giraffe and Bottlenose dolphin) are free, and there are no ads.
+
+Features
+- Skeletons made from scans of real specimens: Most of the skeletons come from 3D scans of skeleton specimens in university and museum collections. Others come from scans of display replicas, from medical CT data, or from reconstructed models. Each specimen states how it was made and lists its sources.
+- A Bone quiz about how animals lived: "What did these thick teeth do?" (Tyrannosaurus). You answer three-choice questions while looking at the skeleton you just built: 49 questions across 34 animals, each answer with an explanation and a cited source.
+- Playable by ear with VoiceOver: With VoiceOver on, you hear a clue written for each bone and choose where on the body it belongs. A wrong answer tells you which way to go, and a right one snaps the bone in with a sound and a haptic. Available in all 10 languages.
+- A museum hall or a habitat scene: Turn a finished skeleton to study it from any angle, in the museum hall or in a scene of the animal's habitat, such as a forest or underwater. On supported devices, AR places it in your room at life size.
+- 36 skeletons, from dinosaurs to sea animals: Five volumes: First specimens (5, free), Dinosaurs and ancient creatures (9), Land animals (9), Sea animals (6), and Large animals of forests and grasslands (7).
+- One-time purchases, no ads: The first volume is free. The other 4 volumes are one-time purchases, sold individually or as a bundle. There are no ads and no subscriptions.
+
+From the developer
+"I have always loved dinosaurs, and what fascinated me was that the features of a bone show how the animal lived. I would be happiest if children enjoyed playing and it gave them a chance to think things through for themselves."
+(Developer, Hakumai Studio)
+
+How the skeletons and art were made
+Each specimen in the app states whether its 3D model comes from a scan of a real specimen, a scan of a display replica, medical CT data or a reconstructed model, and lists its sources. Many of the scans were shared under Creative Commons licences by the people who scanned the specimens.
+The encyclopedia illustrations and background art were made with AI image generation. Some launch screens use 19th-century natural history plates in the public domain.
+
+About Hakumai Studio
+Hakumai Studio is an independent studio in Japan run by one person, who made Ostea from concept through development.
